@@ -8,6 +8,8 @@
 
 Swift Persistence framework.
 
+(https://github.com/dkoster95/PelicanSwift/blob/master/pelicandiagram.png)
+
 
 
 ## Features
