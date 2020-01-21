@@ -1,45 +1,69 @@
-**Edit a file, create a new file, and clone from Bitbucket in under 2 minutes**
 
-When you're done, you can delete the content in this README and update the file with details for others getting started with your repository.
 
-*We recommend that you open this README in another tab as you perform the tasks below. You can [watch our video](https://youtu.be/0ocf7u76WSo) for a full demo of all the steps in this tutorial. Open the video in a new tab to avoid leaving Bitbucket.*
+## 🌐 Pelican 🌐
+- **Simple Way to manage your local storage**
+- **Persistence Module**
+- **Keep local storage simple**
+---
+
+Swift Persistence framework.
+
+
+
+## Features
+
+- **NetworkRequestFactory protocol**:
+	- [Keychain Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/GettingStarted.md)
+	- [UserDefaults Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/CodableExtensions.md)
+	- [CoreDataRepository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/ImageExtension.md)
 
 ---
 
-## Edit a file
+## Requirements
 
-You’ll start by editing this README file to learn how to edit a file in Bitbucket.
-
-1. Click **Source** on the left side.
-2. Click the README.md link from the list of files.
-3. Click the **Edit** button.
-4. Delete the following text: *Delete this line to make a change to the README from Bitbucket.*
-5. After making your change, click **Commit** and then **Commit** again in the dialog. The commit page will open and you’ll see the change you just made.
-6. Go back to the **Source** page.
+- iOS 11.0+ 
+- WatchOS 5.0+
+- TvOS 12.0+
+- MacOS 10.10+
+- Xcode 10.2+
+- Swift 5+
 
 ---
 
-## Create a file
+## Installation
+	### Carthage
 
-Next, you’ll add a new file to this repository.
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate QuickHatch into your Xcode project using Carthage, specify it in your `Cartfile`:
 
-1. Click the **New file** button at the top of the **Source** page.
-2. Give the file a filename of **contributors.txt**.
-3. Enter your name in the empty file space.
-4. Click **Commit** and then **Commit** again in the dialog.
-5. Go back to the **Source** page.
+```ogdl
+git "https://github.com/dkoster95/PelicanSwift.git" "1.0"
+```
 
-Before you move on, go ahead and explore the repository. You've already seen the **Source** page, but check out the **Commits**, **Branches**, and **Settings** pages.
+### Manually
 
+No Package manager? no problem, you can use QuickHatch as a git submodule
+
+#### Embedded Framework
+
+- Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
+
+  ```bash
+  $ git init
+  ```
+
+- Add Pelican as a git [submodule](https://git-scm.com/docs/git-submodule) by running the following command:
+
+  ```bash
+  $ git submodule add https://github.com/dkoster95/PelicanSwift.git
+  ```
+
+- Open the new `PelicanSwift` folder, and drag the `PelicanSwift.xcodeproj` into the Project Navigator of your application's Xcode project.
+
+    > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
+
+- Select the `PelicanSwift.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
+
+
+- And that's it!
 ---
 
-## Clone a repository
-
-Use these steps to clone from SourceTree, our client for using the repository command-line free. Cloning allows you to work on your files locally. If you don't yet have SourceTree, [download and install first](https://www.sourcetreeapp.com/). If you prefer to clone from the command line, see [Clone a repository](https://confluence.atlassian.com/x/4whODQ).
-
-1. You’ll see the clone button under the **Source** heading. Click that button.
-2. Now click **Check out in SourceTree**. You may need to create a SourceTree account or log in.
-3. When you see the **Clone New** dialog in SourceTree, update the destination path and name if you’d like to and then click **Clone**.
-4. Open the directory you just created to see your repository’s files.
-
-Now that you're more familiar with your Bitbucket repository, go ahead and add a new file locally. You can [push your change back to Bitbucket with SourceTree](https://confluence.atlassian.com/x/iqyBMg), or you can [add, commit,](https://confluence.atlassian.com/x/8QhODQ) and [push from the command line](https://confluence.atlassian.com/x/NQ0zDQ).
