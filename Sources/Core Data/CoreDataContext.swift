@@ -19,7 +19,7 @@ public class CoreDataContext {
         self.managedObjectModel = managedObjectModel
     }
     
-    lazy var persistentContainer: NSPersistentContainer = {
+    public lazy var persistentContainer: NSPersistentContainer = {
         let container: NSPersistentContainer
         if let managedObjectModel = self.managedObjectModel {
             container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
@@ -34,7 +34,7 @@ public class CoreDataContext {
         return container
     }()
     
-    func saveContext () throws {
+    public func saveContext () throws {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {

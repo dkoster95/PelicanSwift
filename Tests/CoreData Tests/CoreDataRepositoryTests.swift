@@ -8,6 +8,8 @@
 
 import XCTest
 @testable import Pelican
+@testable import TestApp
+import CoreData
 
 class CoreDataRepositoryTests: XCTestCase {
 
@@ -18,8 +20,10 @@ class CoreDataRepositoryTests: XCTestCase {
     }
     
     override func setUp() {
-        coreDataRepository = CoreDataRepository<Test>.init(entityName: "Test", context: context)
+        coreDataRepository = CoreDataRepository<Test>(entityName: "Test", context: context)
         coreDataRepository.empty()
     }
+    
+    
 
 }
