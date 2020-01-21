@@ -59,7 +59,7 @@ if you want your own repository implementation you just need to make your class 
 - iOS 11.0+ 
 - WatchOS 5.0+
 - TvOS 12.0+
-- MacOS 10.10+
+- MacOS 10.12+
 - Xcode 10.2+
 - Swift 5+
 
@@ -71,7 +71,7 @@ if you want your own repository implementation you just need to make your class 
 [Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate QuickHatch into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-git "https://github.com/dkoster95/PelicanSwift.git" "1.0"
+git "dkoster95/PelicanSwift" "1.0"
 ```
 
 ### Manually
