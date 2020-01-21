@@ -29,6 +29,10 @@
 		7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */; };
 		7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */; };
 		7F73C41123D757A10065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
+		7F73C42123D75B2E0065BA4A /* Test+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */; };
+		7F73C42223D75B2E0065BA4A /* Test+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */; };
+		7F73C42323D75CF60065BA4A /* Test.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7F73C41C23D75AFC0065BA4A /* Test.xcdatamodeld */; };
+		7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,6 +81,10 @@
 		7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainLayerTests.swift; sourceTree = "<group>"; };
 		7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLayerTests.swift; sourceTree = "<group>"; };
 		7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
+		7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Test.xcdatamodel; sourceTree = "<group>"; };
+		7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataClass.swift"; sourceTree = "<group>"; };
+		7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -143,10 +151,12 @@
 		7F6E7C8322FBB6F30083BD1D /* Tests */ = {
 			isa = PBXGroup;
 			children = (
+				7F73C42423D75D260065BA4A /* CoreData Tests */,
 				7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */,
 				7F6E7C8622FBB6F30083BD1D /* Info.plist */,
 				7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */,
 				7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */,
+				7F73C41C23D75AFC0065BA4A /* Test.xcdatamodeld */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -201,6 +211,16 @@
 				7F6E7CB522FBB75F0083BD1D /* TestApp.xcdatamodeld */,
 			);
 			path = TestApp;
+			sourceTree = "<group>";
+		};
+		7F73C42423D75D260065BA4A /* CoreData Tests */ = {
+			isa = PBXGroup;
+			children = (
+				7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */,
+				7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */,
+				7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */,
+			);
+			path = "CoreData Tests";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -331,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F73C42323D75CF60065BA4A /* Test.xcdatamodeld in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -370,7 +391,10 @@
 			files = (
 				7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */,
 				7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */,
+				7F73C42223D75B2E0065BA4A /* Test+CoreDataProperties.swift in Sources */,
 				7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */,
+				7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */,
+				7F73C42123D75B2E0065BA4A /* Test+CoreDataClass.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -724,6 +748,16 @@
 			);
 			currentVersion = 7F6E7CB622FBB75F0083BD1D /* TestApp.xcdatamodel */;
 			path = TestApp.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+		7F73C41C23D75AFC0065BA4A /* Test.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */,
+			);
+			currentVersion = 7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */;
+			path = Test.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};

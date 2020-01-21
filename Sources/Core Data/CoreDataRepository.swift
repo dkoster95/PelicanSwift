@@ -24,8 +24,8 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
             try context.saveContext()
             log.debug("💾CoreDataPersistenceLayer💾 - object saved")
             return true
-        } catch {
-            log.error("💾CoreDataPersistenceLayer💾 - failed to save object")
+        } catch let error {
+            log.error("💾CoreDataPersistenceLayer💾 - failed to save object \(error.localizedDescription)")
             return false
         }
     }
@@ -35,8 +35,8 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
             try context.saveContext()
             log.debug("💾CoreDataPersistenceLayer💾 - object saved")
             return true
-        } catch {
-            log.error("💾CoreDataPersistenceLayer💾 - failed to save object")
+        } catch let error {
+            log.error("💾CoreDataPersistenceLayer💾 - failed to save object \(error.localizedDescription)")
             return false
         }
     }
@@ -79,8 +79,8 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
         do {
             let results = try context.persistentContainer.viewContext.fetch(fetchRequest)
             return results
-        } catch {
-            log.debug("💾CoreDataPersistenceLayer💾 - No results")
+        } catch let error {
+            log.debug("💾CoreDataPersistenceLayer💾 - No results \(error.localizedDescription)")
             return []
         }
     }
