@@ -49,7 +49,7 @@ if you want your own repository implementation you just need to make your class 
 
 ## Repositories
 - [Keychain Repository](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/KeychainRepository.md)
-- [UserDefaults Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/CodableExtensions.md)
+- [UserDefaults Repository](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/UserDefaultsRepository.md)
 - [CoreDataRepository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/ImageExtension.md)
 
 ---
