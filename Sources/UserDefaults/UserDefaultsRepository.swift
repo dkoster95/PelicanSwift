@@ -8,18 +8,22 @@
 
 import Foundation
 
-public class UserDefaultsLayer<T: Codable>: PersistenceLayer<T> {
+public class UserDefaultsRepository<CodableObject: Codable>: PelicanRepository<CodableObject> {
     
     private var key: String
     private var userDefaultsSession: UserDefaults
+    private var jsonDecoder = JSONDecoder()
+    private var jsonEncoder = JSONEncoder()
     
-    public init(key: String, userDefaultsSession: UserDefaults) {
+    public init(key: String, userDefaultsSession: UserDefaults, jsonEncoder: JSONEncoder = JSONEncoder(), jsonDecoder: JSONDecoder = JSONDecoder()) {
         self.key = key
         self.userDefaultsSession = userDefaultsSession
+        self.jsonEncoder = jsonEncoder
+        self.jsonDecoder = jsonDecoder
     }
     
-    public override func save(object: T) -> Bool {
-        guard let encodedData = try? JSONEncoder().encode(object) else {
+    public override func save(object: CodableObject) -> Bool {
+        guard let encodedData = try? jsonEncoder.encode(object) else {
             log.error("📱UserDefaultsLayer📱 - failed to save object")
             return false
         }
@@ -27,24 +31,28 @@ public class UserDefaultsLayer<T: Codable>: PersistenceLayer<T> {
         return userDefaultsSession.synchronize()
     }
     
-    public override func delete(object: T) -> Bool {
+    public override func delete(object: CodableObject) -> Bool {
         userDefaultsSession.removeObject(forKey: key)
         return userDefaultsSession.object(forKey: key) == nil
     }
     
-    public override func retrieveFirst(query: ((T) -> Bool)?, completionHandler: (Result<T, Error>) -> Void) {
+    public override func retrieveFirst(query: ((CodableObject) -> Bool)?, completionHandler: (Result<CodableObject, Error>) -> Void) {
         if let object = userDefaultsSession.data(forKey: key),
-            let encodedObject = try? JSONDecoder().decode(T.self, from: object) {
+            let encodedObject = try? jsonDecoder.decode(CodableObject.self, from: object) {
+            if let query = query, !query(encodedObject)  {
+                completionHandler(.failure(PelicanRepositoryError.nonExistingData))
+                return
+            }
             completionHandler(.success(encodedObject))
             return
         }
         log.error("📱UserDefaultsLayer📱 - failed to retrieve object")
-        completionHandler(.failure(PersistenceLayerError.nonExistingData))
+        completionHandler(.failure(PelicanRepositoryError.nonExistingData))
     }
     
-    public override var fetchAll: [T] {
+    public override var fetchAll: [CodableObject] {
         if let object = userDefaultsSession.data(forKey: key),
-            let encodedObject = try? JSONDecoder().decode(T.self, from: object) {
+            let encodedObject = try? jsonDecoder.decode(CodableObject.self, from: object) {
             return [encodedObject]
         }
         log.debug("📱UserDefaultsLayer📱 - no results")

@@ -10,16 +10,15 @@
 		7F6E7C8022FBB6F30083BD1D /* Pelican.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E7C7622FBB6F30083BD1D /* Pelican.framework */; };
 		7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */; };
 		7F6E7C8722FBB6F30083BD1D /* Pelican.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E7C7922FBB6F30083BD1D /* Pelican.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F6E7C9E22FBB7180083BD1D /* PersistenceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PersistenceLayer.swift */; };
+		7F6E7C9E22FBB7180083BD1D /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
 		7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
-		7F6E7CA022FBB7180083BD1D /* CoreDataPersistenceLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataPersistenceLayer.swift */; };
-		7F6E7CA122FBB7180083BD1D /* PersistenceLayerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PersistenceLayerError.swift */; };
-		7F6E7CA222FBB7180083BD1D /* UserDefaultsLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9722FBB7180083BD1D /* UserDefaultsLayer.swift */; };
+		7F6E7CA022FBB7180083BD1D /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
+		7F6E7CA122FBB7180083BD1D /* PelicanRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */; };
 		7F6E7CA322FBB7180083BD1D /* LoggerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */; };
 		7F6E7CA422FBB7180083BD1D /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
 		7F6E7CA522FBB7180083BD1D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */; };
 		7F6E7CA622FBB7180083BD1D /* KeychainAccesibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */; };
-		7F6E7CA722FBB7180083BD1D /* KeychainLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9D22FBB7180083BD1D /* KeychainLayer.swift */; };
+		7F6E7CA722FBB7180083BD1D /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */; };
 		7F6E7CAF22FBB75F0083BD1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7CAE22FBB75F0083BD1D /* AppDelegate.swift */; };
 		7F6E7CB122FBB75F0083BD1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7CB022FBB75F0083BD1D /* ViewController.swift */; };
 		7F6E7CB422FBB75F0083BD1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7CB222FBB75F0083BD1D /* Main.storyboard */; };
@@ -27,6 +26,9 @@
 		7F6E7CB922FBB7600083BD1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7CB822FBB7600083BD1D /* Assets.xcassets */; };
 		7F6E7CBC22FBB7600083BD1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7CBA22FBB7600083BD1D /* LaunchScreen.storyboard */; };
 		7F6E7CC222FBB7740083BD1D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7CC122FBB7740083BD1D /* Person.swift */; };
+		7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */; };
+		7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */; };
+		7F73C41123D757A10065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,6 +39,13 @@
 			remoteGlobalIDString = 7F6E7C7522FBB6F30083BD1D;
 			remoteInfo = Pelican;
 		};
+		7F73C40E23D751960065BA4A /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7F6E7C6D22FBB6F30083BD1D /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 7F6E7CAB22FBB75F0083BD1D;
+			remoteInfo = TestApp;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -46,16 +55,15 @@
 		7F6E7C7F22FBB6F30083BD1D /* PelicanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PelicanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PelicanTests.swift; sourceTree = "<group>"; };
 		7F6E7C8622FBB6F30083BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F6E7C9022FBB7180083BD1D /* PersistenceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceLayer.swift; sourceTree = "<group>"; };
+		7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PelicanRepository.swift; sourceTree = "<group>"; };
 		7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
-		7F6E7C9322FBB7180083BD1D /* CoreDataPersistenceLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataPersistenceLayer.swift; sourceTree = "<group>"; };
-		7F6E7C9522FBB7180083BD1D /* PersistenceLayerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PersistenceLayerError.swift; sourceTree = "<group>"; };
-		7F6E7C9722FBB7180083BD1D /* UserDefaultsLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsLayer.swift; sourceTree = "<group>"; };
+		7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
+		7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PelicanRepositoryError.swift; sourceTree = "<group>"; };
 		7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerCustom.swift; sourceTree = "<group>"; };
 		7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainKeys.swift; sourceTree = "<group>"; };
 		7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
 		7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainAccesibility.swift; sourceTree = "<group>"; };
-		7F6E7C9D22FBB7180083BD1D /* KeychainLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainLayer.swift; sourceTree = "<group>"; };
+		7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		7F6E7CAC22FBB75F0083BD1D /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6E7CAE22FBB75F0083BD1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F6E7CB022FBB75F0083BD1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -66,6 +74,9 @@
 		7F6E7CBD22FBB7600083BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7F6E7CC122FBB7740083BD1D /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7F6E7CC322FBB7A60083BD1D /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
+		7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainLayerTests.swift; sourceTree = "<group>"; };
+		7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLayerTests.swift; sourceTree = "<group>"; };
+		7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,7 +132,7 @@
 				7F6E7C9422FBB7180083BD1D /* Errors */,
 				7F6E7C9922FBB7180083BD1D /* Keychain */,
 				7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */,
-				7F6E7C9022FBB7180083BD1D /* PersistenceLayer.swift */,
+				7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */,
 				7F6E7C9622FBB7180083BD1D /* UserDefaults */,
 				7F6E7C7922FBB6F30083BD1D /* Pelican.h */,
 				7F6E7C7A22FBB6F30083BD1D /* Info.plist */,
@@ -134,6 +145,8 @@
 			children = (
 				7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */,
 				7F6E7C8622FBB6F30083BD1D /* Info.plist */,
+				7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */,
+				7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -142,7 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */,
-				7F6E7C9322FBB7180083BD1D /* CoreDataPersistenceLayer.swift */,
+				7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */,
 			);
 			path = "Core Data";
 			sourceTree = "<group>";
@@ -150,7 +163,7 @@
 		7F6E7C9422FBB7180083BD1D /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E7C9522FBB7180083BD1D /* PersistenceLayerError.swift */,
+				7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */,
 			);
 			path = Errors;
 			sourceTree = "<group>";
@@ -158,7 +171,7 @@
 		7F6E7C9622FBB7180083BD1D /* UserDefaults */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E7C9722FBB7180083BD1D /* UserDefaultsLayer.swift */,
+				7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */,
 			);
 			path = UserDefaults;
 			sourceTree = "<group>";
@@ -169,7 +182,7 @@
 				7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */,
 				7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */,
 				7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */,
-				7F6E7C9D22FBB7180083BD1D /* KeychainLayer.swift */,
+				7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */,
 			);
 			path = Keychain;
 			sourceTree = "<group>";
@@ -234,6 +247,7 @@
 			);
 			dependencies = (
 				7F6E7C8222FBB6F30083BD1D /* PBXTargetDependency */,
+				7F73C40F23D751960065BA4A /* PBXTargetDependency */,
 			);
 			name = PelicanTests;
 			productName = PelicanTests;
@@ -273,6 +287,7 @@
 					};
 					7F6E7C7E22FBB6F30083BD1D = {
 						CreatedOnToolsVersion = 10.2.1;
+						TestTargetID = 7F6E7CAB22FBB75F0083BD1D;
 					};
 					7F6E7CAB22FBB75F0083BD1D = {
 						CreatedOnToolsVersion = 10.2.1;
@@ -337,15 +352,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F6E7CA322FBB7180083BD1D /* LoggerCustom.swift in Sources */,
+				7F73C41123D757A10065BA4A /* UserDefaultsRepository.swift in Sources */,
 				7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */,
 				7F6E7CA622FBB7180083BD1D /* KeychainAccesibility.swift in Sources */,
-				7F6E7CA022FBB7180083BD1D /* CoreDataPersistenceLayer.swift in Sources */,
-				7F6E7CA222FBB7180083BD1D /* UserDefaultsLayer.swift in Sources */,
-				7F6E7CA122FBB7180083BD1D /* PersistenceLayerError.swift in Sources */,
+				7F6E7CA022FBB7180083BD1D /* CoreDataRepository.swift in Sources */,
+				7F6E7CA122FBB7180083BD1D /* PelicanRepositoryError.swift in Sources */,
 				7F6E7CA522FBB7180083BD1D /* KeychainWrapper.swift in Sources */,
-				7F6E7C9E22FBB7180083BD1D /* PersistenceLayer.swift in Sources */,
+				7F6E7C9E22FBB7180083BD1D /* PelicanRepository.swift in Sources */,
 				7F6E7CA422FBB7180083BD1D /* KeychainKeys.swift in Sources */,
-				7F6E7CA722FBB7180083BD1D /* KeychainLayer.swift in Sources */,
+				7F6E7CA722FBB7180083BD1D /* KeychainRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -353,7 +368,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */,
 				7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */,
+				7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -375,6 +392,11 @@
 			isa = PBXTargetDependency;
 			target = 7F6E7C7522FBB6F30083BD1D /* Pelican */;
 			targetProxy = 7F6E7C8122FBB6F30083BD1D /* PBXContainerItemProxy */;
+		};
+		7F73C40F23D751960065BA4A /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 7F6E7CAB22FBB75F0083BD1D /* TestApp */;
+			targetProxy = 7F73C40E23D751960065BA4A /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -591,6 +613,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
 			};
 			name = Debug;
 		};
@@ -610,6 +633,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
 			};
 			name = Release;
 		};

@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-public class CoreDataPersistenceLayer<T: NSManagedObject>: PersistenceLayer<T> {
+public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
     
     private var entityName: String
     private var context: CoreDataContext
@@ -70,7 +70,7 @@ public class CoreDataPersistenceLayer<T: NSManagedObject>: PersistenceLayer<T> {
             completionHandler(.success(results))
         } catch {
             log.error("💾CoreDataPersistenceLayer💾 - No Error fetching")
-            completionHandler(Result.failure(PersistenceLayerError.serializationError))
+            completionHandler(Result.failure(PelicanRepositoryError.serializationError))
         }
     }
     

@@ -8,7 +8,7 @@
 
 import Foundation
 
-public enum PersistenceLayerError: Error {
+public enum PelicanRepositoryError: Error {
     case nonExistingData
     case serializationError
 }
