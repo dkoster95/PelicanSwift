@@ -10,14 +10,16 @@ Swift Persistence framework.
 
 ![](https://github.com/dkoster95/PelicanSwift/blob/master/pelicandiagram.png)
 
+Your app usually uses local storage to store tokens, offline data or user preferences.
+Pelican is a framework created to handle those requirements by using a repository pattern.
+There are 3 repository implementations Keychan, CoreData and UserDefaults.
+If you have diferent requirements or wanna use a diferent type of persistence you can create your own repository by extending **PelicanRepository** class!
+The framework also provides a **Keychain Wrapper** in case you dont want to use the repository.
 
-
-## Features
-
-- **NetworkRequestFactory protocol**:
-	- [Keychain Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/GettingStarted.md)
-	- [UserDefaults Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/CodableExtensions.md)
-	- [CoreDataRepository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/ImageExtension.md)
+## Repositories
+- [Keychain Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/GettingStarted.md)
+- [UserDefaults Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/CodableExtensions.md)
+- [CoreDataRepository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/ImageExtension.md)
 
 ---
 
