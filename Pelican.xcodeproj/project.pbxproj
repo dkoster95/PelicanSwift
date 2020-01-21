@@ -930,7 +930,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-MacOs";
 				PRODUCT_NAME = Pelican;
 				SDKROOT = macosx;
@@ -956,7 +956,7 @@
 					"@executable_path/../Frameworks",
 					"@loader_path/Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 10.10;
+				MACOSX_DEPLOYMENT_TARGET = 10.12;
 				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-MacOs";
 				PRODUCT_NAME = Pelican;
 				SDKROOT = macosx;
