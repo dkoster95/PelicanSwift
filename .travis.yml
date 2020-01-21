@@ -1,0 +1,11 @@
+osx_image: xcode11.2
+language: swift
+os: osx
+jobs:
+  include:
+    - script: xcodebuild clean build test -project Pelican.xcodeproj -scheme Pelican -destination "platform=iOS Simulator,name=iPhone 11,OS=13.2.2" CODE_SIGN_IDENTITY="" CODE_SIGNING_REQUIRED=NO ONLY_ACTIVE_ARCH=NO -enableCodeCoverage YES | xcpretty -c
+      after_script: bash <(curl -s https://codecov.io/bash) -t 71c8458c-2504-4fc3-8cc0-ae6f3f964b8f
+
+branches:
+  only: 
+    - master
