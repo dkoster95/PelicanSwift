@@ -16,6 +16,37 @@ There are 3 repository implementations Keychan, CoreData and UserDefaults.
 If you have diferent requirements or wanna use a diferent type of persistence you can create your own repository by extending **PelicanRepository** class!  
 The framework also provides a **Keychain Wrapper** in case you dont want to use the repository.
 
+---
+```swift
+open class PelicanRepository <PersistibleObject: Any> {
+    
+    open func empty() {}
+    
+    public init() {}
+    
+    open var fetchAll: [PersistibleObject] {
+        return []
+    }
+    
+    @discardableResult
+    open func save(object: PersistibleObject) -> Bool { return true }
+    
+    @discardableResult
+    open func save() -> Bool { return true }
+    
+    @discardableResult
+    open func delete(object: PersistibleObject) -> Bool { return true }
+    
+    open func retrieve(query: ((PersistibleObject) -> Bool)? = nil, completionHandler: (Result<[PersistibleObject], Error>) -> Void) {}
+    
+    open func retrieveFirst(query: ((PersistibleObject) -> Bool)? = nil, completionHandler: (Result<PersistibleObject, Error>) -> Void) {}
+}
+```
+Here you have the Pelican Repository class definition, It was made a class instead of a protocol because it uses a generic type and swift associatedTypes with protocols are not friendly :(.  
+Those are all the features a Repository should have: add, removing, empty, and the fetching options.  
+if you want your own repository implementation you just need to make your class extend this repository class and then override the methods you want!
+
+
 ## Repositories
 - [Keychain Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/GettingStarted.md)
 - [UserDefaults Repository](https://github.com/dkoster95/QuickHatchSwift/blob/master/Docs/CodableExtensions.md)
