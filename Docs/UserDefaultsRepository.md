@@ -1,6 +1,6 @@
 
 ## UserDefaults Repository
----
+
 Pelican provides a UserDefaults repository to handle your UserDefaults data flow.
 Keep in mind what the purpose of User Defaults is, store user preferences (dummy preferences) dont store important data of your app in user Defaults.
 
