@@ -20,13 +20,13 @@ The framework also provides a **Keychain Wrapper** in case you dont want to use 
 ```swift
 open class PelicanRepository <PersistibleObject: Any> {
     
-    open func empty() {}
-    
     public init() {}
     
     open var fetchAll: [PersistibleObject] {
         return []
     }
+    
+    open func empty() {}
     
     @discardableResult
     open func save(object: PersistibleObject) -> Bool { return true }
