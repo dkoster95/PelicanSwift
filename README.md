@@ -13,7 +13,7 @@ Swift Persistence framework.
 Your app usually uses local storage to store tokens, offline data or user preferences.
 Pelican is a framework created to handle those requirements by using a repository pattern.
 There are 3 repository implementations Keychan, CoreData and UserDefaults.
-If you have diferent requirements or wanna use a diferent type of persistence you can create your own repository by extending **PelicanRepository** class!
+If you have diferent requirements or wanna use a diferent type of persistence you can create your own repository by extending **PelicanRepository** class!.\n
 The framework also provides a **Keychain Wrapper** in case you dont want to use the repository.
 
 ## Repositories
