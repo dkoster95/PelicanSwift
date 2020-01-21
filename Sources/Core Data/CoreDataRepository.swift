@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
+public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanRepository<ManagedObject> {
     
     private var entityName: String
     private var context: CoreDataContext
@@ -19,7 +19,7 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
         self.context = context
     }
     
-    public override func save(object: T) -> Bool {
+    public override func save(object: ManagedObject) -> Bool {
         do {
             try context.saveContext()
             log.debug("💾CoreDataPersistenceLayer💾 - object saved")
@@ -41,7 +41,7 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
         }
     }
     
-    public override func delete(object: T) -> Bool {
+    public override func delete(object: ManagedObject) -> Bool {
         do {
             context.persistentContainer.viewContext.delete(object)
             try context.saveContext()
@@ -53,12 +53,12 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
         }
     }
     
-    public override func retrieve(query: ((T) -> Bool)?, completionHandler: (Result<[T], Error>) -> Void) {
-        let fetchRequest = NSFetchRequest<T>(entityName: entityName)
+    public override func retrieve(query: ((ManagedObject) -> Bool)?, completionHandler: (Result<[ManagedObject], Error>) -> Void) {
+        let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entityName)
         do {
             let results = try context.persistentContainer.viewContext.fetch(fetchRequest)
             if let queryForList = query {
-                var resultsFiltered: [T] = []
+                var resultsFiltered: [ManagedObject] = []
                 for result in results {
                     if queryForList(result) {
                         resultsFiltered.append(result)
@@ -74,8 +74,8 @@ public class CoreDataRepository<T: NSManagedObject>: PelicanRepository<T> {
         }
     }
     
-    override public var fetchAll: [T] {
-        let fetchRequest = NSFetchRequest<T>(entityName: entityName)
+    override public var fetchAll: [ManagedObject] {
+        let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entityName)
         do {
             let results = try context.persistentContainer.viewContext.fetch(fetchRequest)
             return results
