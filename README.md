@@ -1,6 +1,6 @@
 
 
-## 🌐 Pelican 🌐
+![](https://github.com/dkoster95/PelicanSwift/blob/master/logo.png)
 - **Simple Way to manage your local storage**
 - **Persistence Module**
 - **Keep local storage simple**
