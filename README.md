@@ -68,7 +68,7 @@ if you want your own repository implementation you just need to make your class 
 ## Installation
 	### Carthage
 
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate QuickHatch into your Xcode project using Carthage, specify it in your `Cartfile`:
+[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate Pelican into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
 git "https://github.com/dkoster95/PelicanSwift.git" "1.0"
@@ -78,7 +78,7 @@ Run `carthage update` to build the framework (you can specify the platform) and 
 
 ### Manually
 
-No Package manager? no problem, you can use QuickHatch as a git submodule
+No Package manager? no problem, you can use Pelican as a git submodule
 
 #### Embedded Framework
 
