@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "7F73C45C23D79B880065BA4A"
-               BuildableName = "Pelican_TvOS.framework"
+               BuildableName = "Pelican.framework"
                BlueprintName = "Pelican TvOS"
                ReferencedContainer = "container:Pelican.xcodeproj">
             </BuildableReference>
@@ -51,7 +51,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "7F73C45C23D79B880065BA4A"
-            BuildableName = "Pelican_TvOS.framework"
+            BuildableName = "Pelican.framework"
             BlueprintName = "Pelican TvOS"
             ReferencedContainer = "container:Pelican.xcodeproj">
          </BuildableReference>
