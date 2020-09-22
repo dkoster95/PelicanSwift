@@ -31,6 +31,13 @@ public class KeychainRepository<CodableObject: Codable>: PelicanRepository<Codab
         _ = keychainWrapper.delete(key: key)
     }
     
+    public override func update(object: CodableObject) -> Bool {
+        guard let encodedData = try? jsonEncoder.encode(object) else {
+            return false
+        }
+        return keychainWrapper.update(data: encodedData, key: key)
+    }
+    
     override public var fetchAll: [CodableObject] {
         let fetchFromKeychain = keychainWrapper.fetch(key: key)
         if let data = fetchFromKeychain,

@@ -10,7 +10,7 @@
 import Foundation
 import CoreData
 
-extension Test {
+extension TestEntity {
 
 //    @nonobjc public class func fetchRequest() -> NSFetchRequest<Test> {
 //        return NSFetchRequest<Test>(entityName: "Test")

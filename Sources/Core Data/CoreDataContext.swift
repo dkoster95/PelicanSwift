@@ -26,6 +26,10 @@ public class CoreDataContext {
         } else {
           container = NSPersistentContainer(name: modelName)
         }
+//        let description = NSPersistentStoreDescription()
+//        description.type = NSInMemoryStoreType
+//        description.shouldAddStoreAsynchronously = false
+//        container.persistentStoreDescriptions = [description]
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                log.error("Error with the persistent container: \(error)")

@@ -10,6 +10,6 @@
 import Foundation
 import CoreData
 
-public class Test: NSManagedObject {
+public class TestEntity: NSManagedObject {
 
 }

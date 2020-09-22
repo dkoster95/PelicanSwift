@@ -36,6 +36,15 @@ public class UserDefaultsRepository<CodableObject: Codable>: PelicanRepository<C
         return userDefaultsSession.object(forKey: key) == nil
     }
     
+    public override func update(object: CodableObject) -> Bool {
+        guard let encodedData = try? jsonEncoder.encode(object) else {
+            log.error("📱UserDefaultsLayer📱 - failed to save object")
+            return false
+        }
+        userDefaultsSession.set(encodedData, forKey: key)
+        return userDefaultsSession.synchronize()
+    }
+    
     public override var fetchAll: [CodableObject] {
         if let object = userDefaultsSession.data(forKey: key),
             let encodedObject = try? jsonDecoder.decode(CodableObject.self, from: object) {

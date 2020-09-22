@@ -31,7 +31,7 @@
 		7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */; };
 		7F73C42723D79A150065BA4A /* Test+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */; };
 		7F73C42823D79A150065BA4A /* Test+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */; };
-		7F73C42923D79A3D0065BA4A /* Test.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7F73C41C23D75AFC0065BA4A /* Test.xcdatamodeld */; };
+		7F73C42923D79A3D0065BA4A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */; };
 		7F73C43723D79AB70065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
 		7F73C43823D79AB70065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
 		7F73C43923D79AB70065BA4A /* PelicanRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */; };
@@ -62,6 +62,7 @@
 		7F73C46C23D79B910065BA4A /* LoggerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */; };
 		7F73C46D23D79B910065BA4A /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
 		7F73C46E23D79B910065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
+		7FC5F1F8251A8CCD00AF555C /* PelicanRespositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,6 +117,7 @@
 		7F73C42F23D79AAA0065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F73C44623D79B230065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F73C45D23D79B880065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PelicanRespositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -211,7 +213,7 @@
 				7F6E7C8622FBB6F30083BD1D /* Info.plist */,
 				7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */,
 				7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */,
-				7F73C41C23D75AFC0065BA4A /* Test.xcdatamodeld */,
+				7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -273,6 +275,7 @@
 				7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */,
 				7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */,
 				7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */,
+				7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */,
 			);
 			path = "CoreData Tests";
 			sourceTree = "<group>";
@@ -500,7 +503,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F73C42923D79A3D0065BA4A /* Test.xcdatamodeld in Resources */,
+				7F73C42923D79A3D0065BA4A /* TestModel.xcdatamodeld in Resources */,
 				7F6E7CBC22FBB7600083BD1D /* LaunchScreen.storyboard in Resources */,
 				7F6E7CB922FBB7600083BD1D /* Assets.xcassets in Resources */,
 				7F6E7CB422FBB75F0083BD1D /* Main.storyboard in Resources */,
@@ -574,6 +577,7 @@
 			files = (
 				7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */,
 				7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */,
+				7FC5F1F8251A8CCD00AF555C /* PelicanRespositoryTests.swift in Sources */,
 				7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */,
 				7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */,
 			);
@@ -1161,13 +1165,13 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		7F73C41C23D75AFC0065BA4A /* Test.xcdatamodeld */ = {
+		7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
 				7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */,
 			);
 			currentVersion = 7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */;
-			path = Test.xcdatamodeld;
+			path = TestModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
 		};
