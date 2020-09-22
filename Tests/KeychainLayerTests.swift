@@ -52,4 +52,19 @@ class KeychainLayerTests: XCTestCase {
         XCTAssertEqual(intPersistence.first, 1)
     }
     
+    func testFetchAllEmpty() {
+        XCTAssertTrue(intPersistence.isEmpty)
+        XCTAssertTrue(intPersistence.fetchAll.isEmpty)
+    }
+    
+    func testUpdateSuccess() {
+        XCTAssertTrue(intPersistence.save(object: 1))
+        XCTAssertTrue(intPersistence.update(object: 2))
+    }
+    
+    func testUpdateFailure() {
+        XCTAssertTrue(doublePersistence.save(object: 1))
+        XCTAssertFalse(doublePersistence.update(object: Double.infinity))
+    }
+    
 }

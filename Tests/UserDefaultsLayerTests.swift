@@ -47,6 +47,41 @@ class UserDefaultsLayerTests: XCTestCase {
         XCTAssertFalse(personPersistence.save(object: person))
     }
     
+    func testFilterEmptyResult() {
+        let person = Person(name: "", age: 23)
+        XCTAssertTrue(personPersistence.save(object: person))
+        XCTAssertNotNil(personPersistence.first)
+        XCTAssertFalse(personPersistence.isEmpty)
+        XCTAssertTrue(personPersistence.filter { $0.age < 21 }.isEmpty)
+    }
+    
+    func testFilterResult() {
+        let person = Person(name: "", age: 23)
+        XCTAssertTrue(personPersistence.save(object: person))
+        XCTAssertNotNil(personPersistence.first)
+        XCTAssertFalse(personPersistence.isEmpty)
+        XCTAssertFalse(personPersistence.filter { $0.age < 30 }.isEmpty)
+    }
+    
+    func testUpdate() {
+        let person = Person(name: "da person", age: 21)
+        XCTAssertTrue(personPersistence.save(object: person))
+        XCTAssertNotNil(personPersistence.first)
+        XCTAssertEqual(personPersistence.first?.name, "da person")
+        let personUpdated = Person(name: "updated", age: 21)
+        XCTAssertTrue(personPersistence.update(object: personUpdated))
+        XCTAssertEqual(personPersistence.first?.name, "updated")
+    }
+    
+    func testUpdateFailure() {
+        let person = Person(name: "da person", age: 21)
+        XCTAssertTrue(personPersistence.save(object: person))
+        XCTAssertNotNil(personPersistence.first)
+        XCTAssertEqual(personPersistence.first?.name, "da person")
+        let personUpdated = Person(name: "updated", age: Double.infinity)
+        XCTAssertFalse(personPersistence.update(object: personUpdated))
+    }
+    
 }
 
 private struct Person: Codable {

@@ -21,6 +21,9 @@ public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanReposito
     
     public override func save(object: ManagedObject) -> Bool {
         do {
+            guard self.context.persistentContainer.viewContext == object.managedObjectContext else {
+                return false
+            }
             try context.saveContext()
             log.debug("💾CoreDataPersistenceLayer💾 - object saved")
             return true
@@ -43,6 +46,9 @@ public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanReposito
     
     public override func delete(object: ManagedObject) -> Bool {
         do {
+            guard self.context.persistentContainer.viewContext == object.managedObjectContext else {
+                return false
+            }
             context.persistentContainer.viewContext.delete(object)
             try context.saveContext()
             log.debug("💾CoreDataPersistenceLayer💾 - object deleted")
@@ -61,6 +67,19 @@ public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanReposito
         } catch let error {
             log.debug("💾CoreDataPersistenceLayer💾 - No results \(error.localizedDescription)")
             return []
+        }
+    }
+    
+    public override func update(object: ManagedObject) -> Bool {
+        do {
+            guard self.context.persistentContainer.viewContext == object.managedObjectContext else {
+                return false
+            }
+            try context.saveContext()
+            return true
+        } catch let error {
+            log.debug("💾CoreDataPersistenceLayer💾 - No results \(error.localizedDescription)")
+            return false
         }
     }
     
