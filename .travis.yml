@@ -14,4 +14,4 @@ branches:
   only: 
     - master
 install:
-  - ./install_swiftlint.sh
+  - bash install_swiftlint.sh
