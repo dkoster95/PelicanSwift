@@ -23,7 +23,5 @@ class CoreDataRepositoryTests: XCTestCase {
         coreDataRepository = CoreDataRepository<Test>(entityName: "Test", context: context)
         coreDataRepository.empty()
     }
-    
-    
 
 }

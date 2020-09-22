@@ -53,27 +53,6 @@ public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanReposito
         }
     }
     
-    public override func retrieve(query: ((ManagedObject) -> Bool)?, completionHandler: (Result<[ManagedObject], Error>) -> Void) {
-        let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entityName)
-        do {
-            let results = try context.persistentContainer.viewContext.fetch(fetchRequest)
-            if let queryForList = query {
-                var resultsFiltered: [ManagedObject] = []
-                for result in results {
-                    if queryForList(result) {
-                        resultsFiltered.append(result)
-                    }
-                }
-                completionHandler(.success(resultsFiltered))
-                return
-            }
-            completionHandler(.success(results))
-        } catch {
-            log.error("💾CoreDataPersistenceLayer💾 - No Error fetching")
-            completionHandler(Result.failure(PelicanRepositoryError.serializationError))
-        }
-    }
-    
     override public var fetchAll: [ManagedObject] {
         let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entityName)
         do {
