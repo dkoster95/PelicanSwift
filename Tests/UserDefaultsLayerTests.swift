@@ -47,11 +47,6 @@ class UserDefaultsLayerTests: XCTestCase {
         XCTAssertFalse(personPersistence.save(object: person))
     }
     
-    func testFilter() {
-        
-    }
-    
-    
 }
 
 private struct Person: Codable {
