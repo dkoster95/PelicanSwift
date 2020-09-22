@@ -63,6 +63,8 @@
 		7F73C46D23D79B910065BA4A /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
 		7F73C46E23D79B910065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
 		7FC5F1F8251A8CCD00AF555C /* PelicanRespositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */; };
+		7FC5F200251A904200AF555C /* InMemoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */; };
+		7FC5F202251A917600AF555C /* InMemoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +120,8 @@
 		7F73C44623D79B230065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F73C45D23D79B880065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PelicanRespositoryTests.swift; sourceTree = "<group>"; };
+		7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepository.swift; sourceTree = "<group>"; };
+		7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -201,6 +205,7 @@
 				7F6E7C9622FBB7180083BD1D /* UserDefaults */,
 				7F6E7C7922FBB6F30083BD1D /* Pelican.h */,
 				7F6E7C7A22FBB6F30083BD1D /* Info.plist */,
+				7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -214,6 +219,7 @@
 				7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */,
 				7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */,
 				7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */,
+				7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -562,6 +568,7 @@
 				7F73C41123D757A10065BA4A /* UserDefaultsRepository.swift in Sources */,
 				7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */,
 				7F6E7CA622FBB7180083BD1D /* KeychainAccesibility.swift in Sources */,
+				7FC5F200251A904200AF555C /* InMemoryRepository.swift in Sources */,
 				7F6E7CA022FBB7180083BD1D /* CoreDataRepository.swift in Sources */,
 				7F6E7CA122FBB7180083BD1D /* PelicanRepositoryError.swift in Sources */,
 				7F6E7CA522FBB7180083BD1D /* KeychainWrapper.swift in Sources */,
@@ -578,6 +585,7 @@
 				7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */,
 				7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */,
 				7FC5F1F8251A8CCD00AF555C /* PelicanRespositoryTests.swift in Sources */,
+				7FC5F202251A917600AF555C /* InMemoryRepositoryTests.swift in Sources */,
 				7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */,
 				7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */,
 			);
