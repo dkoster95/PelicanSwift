@@ -25,102 +25,36 @@ class UserDefaultsLayerTests: XCTestCase {
     
     func testAddOne() {
         let value = 1
-        let expectation = XCTestExpectation()
-        intPersistence.retrieveFirst(query: nil) {
-            result in
-            switch result {
-            case .success(_ ):
-                XCTAssert(false)
-            case .failure(let error):
-                if let errorP = error as? PelicanRepositoryError {
-                    XCTAssertEqual(errorP, PelicanRepositoryError.nonExistingData)
-                }
-                XCTAssert(true)
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1.0)
-        XCTAssert(intPersistence.fetchAll.isEmpty)
+        XCTAssertNil(intPersistence.first)
+        XCTAssert(intPersistence.isEmpty)
         XCTAssert(intPersistence.save(object: value))
-        XCTAssert(!intPersistence.fetchAll.isEmpty)
-        XCTAssert(intPersistence.fetchAll[0] == 1)
+        XCTAssert(!intPersistence.isEmpty)
+        XCTAssertEqual(1,intPersistence.first)
     }
     
     func testRemoveOne() {
         let value = 1
-        XCTAssert(intPersistence.fetchAll.isEmpty)
+        XCTAssert(intPersistence.isEmpty)
         XCTAssert(intPersistence.save(object: value))
-        XCTAssert(!intPersistence.fetchAll.isEmpty)
-        XCTAssert(intPersistence.fetchAll[0] == 1)
+        XCTAssert(!intPersistence.isEmpty)
+        XCTAssertEqual(1,intPersistence.first)
         XCTAssert(intPersistence.delete(object: 1))
-        XCTAssert(intPersistence.fetchAll.isEmpty)
-    }
-    
-    func testRetrieve() {
-        let value = 1
-        XCTAssert(intPersistence.fetchAll.isEmpty)
-        XCTAssert(intPersistence.save(object: value))
-        XCTAssert(!intPersistence.fetchAll.isEmpty)
-        let expectation = XCTestExpectation()
-        intPersistence.retrieveFirst(query: nil) {
-            result in
-            switch result {
-            case .success(let int):
-                XCTAssertEqual(int,value)
-            case .failure(_ ):
-                XCTAssert(false)
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1.0)
-    }
-    func testRetrieveWithQueryError() {
-        let value = 1
-        XCTAssert(intPersistence.fetchAll.isEmpty)
-        XCTAssert(intPersistence.save(object: value))
-        XCTAssert(!intPersistence.fetchAll.isEmpty)
-        let expectation = XCTestExpectation()
-        intPersistence.retrieveFirst(query: { $0 == 2}) {
-            result in
-            switch result {
-            case .success(_ ):
-                XCTAssert(false)
-            case .failure(_ ):
-                XCTAssert(true)
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1.0)
-    }
-    
-    func testRetrieveWithQuery() {
-        let value = 1
-        XCTAssert(intPersistence.fetchAll.isEmpty)
-        XCTAssert(intPersistence.save(object: value))
-        XCTAssert(!intPersistence.fetchAll.isEmpty)
-        let expectation = XCTestExpectation()
-        intPersistence.retrieveFirst(query: { $0 == 1}) {
-            result in
-            switch result {
-            case .success(let int):
-                XCTAssertEqual(int, value)
-            case .failure(_ ):
-                XCTAssert(false)
-            }
-            expectation.fulfill()
-        }
-        wait(for: [expectation], timeout: 1.0)
+        XCTAssert(intPersistence.isEmpty)
     }
     
     func testSaveError() {
         let person = Person(name: "", age: Double.infinity)
         XCTAssertFalse(personPersistence.save(object: person))
     }
-
+    
+    func testFilter() {
+        
+    }
+    
+    
 }
 
 private struct Person: Codable {
     var name: String
     var age: Double
 }
-

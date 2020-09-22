@@ -16,16 +16,7 @@ class ViewController: UIViewController {
         
         let intPers = KeychainRepository<String>.init(keychainWrapper: .default, key: "key")
         intPers.save(object: "hey")
-        intPers.retrieveFirst(query: nil) {
-            (result: Result<String,Error>) in
-            switch result {
-            case .success(let int):
-                print(int)
-                break
-            case .failure( _):
-                break
-            }
-        }
+        print(intPers.first)
     }
 
 

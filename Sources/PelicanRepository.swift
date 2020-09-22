@@ -12,6 +12,8 @@ open class PelicanRepository <PersistibleObject: Any> {
     
     open func empty() {}
     
+    open var isEmpty: Bool { return fetchAll.isEmpty }
+    
     public init() {}
     
     open var fetchAll: [PersistibleObject] {
@@ -24,10 +26,13 @@ open class PelicanRepository <PersistibleObject: Any> {
     @discardableResult
     open func save() -> Bool { return true }
     
+    open func filter(query: (PersistibleObject) -> Bool) -> [PersistibleObject] { return fetchAll.filter { query($0) }
+    }
+    
     @discardableResult
     open func delete(object: PersistibleObject) -> Bool { return true }
     
-    open func retrieve(query: ((PersistibleObject) -> Bool)? = nil, completionHandler: (Result<[PersistibleObject], Error>) -> Void) {}
-    
-    open func retrieveFirst(query: ((PersistibleObject) -> Bool)? = nil, completionHandler: (Result<PersistibleObject, Error>) -> Void) {}
+    open var first: PersistibleObject? {
+        return fetchAll.first
+    }
 }

@@ -31,20 +31,6 @@ public class KeychainRepository<CodableObject: Codable>: PelicanRepository<Codab
         _ = keychainWrapper.delete(key: key)
     }
     
-    public override func retrieve(query: ((CodableObject) -> Bool)?, completionHandler: (Result<[CodableObject],Error>) -> Void) {
-        let fetchFromKeychain = keychainWrapper.fetch(key: key)
-        if let data = fetchFromKeychain,
-            let dataParsed = try? jsonDecoder.decode(CodableObject.self, from: data) {
-            if let filter = query, !filter(dataParsed) {
-                completionHandler(.failure(PelicanRepositoryError.nonExistingData))
-                return
-            }
-            completionHandler(.success([dataParsed]))
-        } else {
-            completionHandler(.failure(PelicanRepositoryError.nonExistingData))
-        }
-    }
-    
     override public var fetchAll: [CodableObject] {
         let fetchFromKeychain = keychainWrapper.fetch(key: key)
         if let data = fetchFromKeychain,
@@ -52,20 +38,6 @@ public class KeychainRepository<CodableObject: Codable>: PelicanRepository<Codab
             return [dataParsed]
         } else {
             return []
-        }
-    }
-    
-    public override func retrieveFirst(query: ((CodableObject) -> Bool)?, completionHandler: (Result<CodableObject, Error>) -> Void) {
-        let fetchFromKeychain = keychainWrapper.fetch(key: key)
-        if let data = fetchFromKeychain,
-            let dataParsed = try? jsonDecoder.decode(CodableObject.self, from: data) {
-            if let filter = query, !filter(dataParsed) {
-                completionHandler(.failure(PelicanRepositoryError.nonExistingData))
-                return
-            }
-            completionHandler(.success(dataParsed))
-        } else {
-            completionHandler(.failure(PelicanRepositoryError.nonExistingData))
         }
     }
     

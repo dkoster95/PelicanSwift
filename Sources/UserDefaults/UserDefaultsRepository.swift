@@ -36,20 +36,6 @@ public class UserDefaultsRepository<CodableObject: Codable>: PelicanRepository<C
         return userDefaultsSession.object(forKey: key) == nil
     }
     
-    public override func retrieveFirst(query: ((CodableObject) -> Bool)?, completionHandler: (Result<CodableObject, Error>) -> Void) {
-        if let object = userDefaultsSession.data(forKey: key),
-            let encodedObject = try? jsonDecoder.decode(CodableObject.self, from: object) {
-            if let query = query, !query(encodedObject)  {
-                completionHandler(.failure(PelicanRepositoryError.nonExistingData))
-                return
-            }
-            completionHandler(.success(encodedObject))
-            return
-        }
-        log.error("📱UserDefaultsLayer📱 - failed to retrieve object")
-        completionHandler(.failure(PelicanRepositoryError.nonExistingData))
-    }
-    
     public override var fetchAll: [CodableObject] {
         if let object = userDefaultsSession.data(forKey: key),
             let encodedObject = try? jsonDecoder.decode(CodableObject.self, from: object) {
