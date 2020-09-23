@@ -20,26 +20,38 @@ The framework also provides a **Keychain Wrapper** in case you dont want to use 
 ```swift
 open class PelicanRepository <PersistibleObject: Any> {
     
+    open func empty() {}
+    
+    open var isEmpty: Bool { return fetchAll.isEmpty }
+    
     public init() {}
     
     open var fetchAll: [PersistibleObject] {
         return []
     }
     
-    open func empty() {}
+    open func save(object: PersistibleObject) -> Bool {
+        return true
+    }
     
-    @discardableResult
-    open func save(object: PersistibleObject) -> Bool { return true }
+    open func update(object: PersistibleObject) -> Bool {
+        return true
+    }
     
-    @discardableResult
-    open func save() -> Bool { return true }
+    open func save() -> Bool {
+        return true
+    }
     
-    @discardableResult
-    open func delete(object: PersistibleObject) -> Bool { return true }
+    open func filter(query: (PersistibleObject) -> Bool) -> [PersistibleObject] { return fetchAll.filter { query($0) }
+    }
     
-    open func retrieve(query: ((PersistibleObject) -> Bool)? = nil, completionHandler: (Result<[PersistibleObject], Error>) -> Void) {}
+    open func delete(object: PersistibleObject) -> Bool {
+        return true
+    }
     
-    open func retrieveFirst(query: ((PersistibleObject) -> Bool)? = nil, completionHandler: (Result<PersistibleObject, Error>) -> Void) {}
+    open var first: PersistibleObject? {
+        return fetchAll.first
+    }
 }
 ```
 Here you have the Pelican Repository class definition, It was made a class instead of a protocol because it uses a generic type and swift associatedTypes with protocols are not friendly :(.  
