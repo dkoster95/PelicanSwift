@@ -12,9 +12,8 @@ public class UserDefaultsRepository<CodableObject: Codable>: PelicanRepository<C
 
     public override func save(object: CodableObject) -> Bool
     public override func empty()
-    public override func retrieve(query: ((CodableObject) -> Bool)?, completionHandler: (Result<[CodableObject],Error>) -> Void)
     override public var fetchAll: [CodableObject]
-    public override func retrieveFirst(query: ((CodableObject) -> Bool)?, completionHandler: (Result<CodableObject, Error>) -> Void)
+    public override func update(object: CodableObject) -> Bool
     public override func delete(object: CodableObject) -> Bool
 }
 ```
