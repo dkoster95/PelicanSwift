@@ -28,9 +28,8 @@ public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanReposito
 
     public override func save(object: ManagedObject) -> Bool
     public override func empty()
-    public override func retrieve(query: ((ManagedObject) -> Bool)?, completionHandler: (Result<[ManagedObject],Error>) -> Void)
     override public var fetchAll: [ManagedObject]
-    public override func retrieveFirst(query: ((ManagedObject) -> Bool)?, completionHandler: (Result<ManagedObject, Error>) -> Void)
+    public override func update(object: ManagedObject) -> Bool
     public override func delete(object: ManagedObject) -> Bool
 }
 ```
