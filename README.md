@@ -92,6 +92,10 @@ Run `carthage update` to build the framework (you can specify the platform) and 
 
 No Package manager? no problem, you can use Pelican as a git submodule
 
+## Swift Package Manager
+QuickHatch has support for SPM, you just need to go to Xcode in the menu File/Swift Packages/Add package dependency
+and you select the version of Pelican.
+
 #### Embedded Framework
 
 - Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
