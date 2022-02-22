@@ -1,5 +1,3 @@
-
-
 import Foundation
 
 public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
