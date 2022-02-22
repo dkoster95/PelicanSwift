@@ -1,10 +1,4 @@
-//
-//  Logger.swift
-//  FordPass
-//
-//  Created by Daniel Koster on 9/18/17.
-//  Copyright © 2017 Daniel Koster. All rights reserved.
-//
+
 
 import Foundation
 

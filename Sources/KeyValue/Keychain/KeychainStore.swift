@@ -1,10 +1,4 @@
-//
-//  KeychainWrapper.swift
-//  Watch-iOS
-//
-//  Created by common on 9/13/18.
-//  Copyright © 2018 Ford Motor Company. All rights reserved.
-//
+
 
 import Foundation
 

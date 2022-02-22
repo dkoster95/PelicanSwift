@@ -1,10 +1,4 @@
-//
-//  InMemoryRepository.swift
-//  Pelican
-//
-//  Created by Daniel Koster on 9/22/20.
-//  Copyright © 2020 Daniel Koster. All rights reserved.
-//
+
 
 import Foundation
 

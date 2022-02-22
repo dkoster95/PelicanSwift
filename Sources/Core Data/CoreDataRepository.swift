@@ -1,10 +1,4 @@
-//
-//  CoreDataPersistenceLayer.swift
-//  Watch
-//
-//  Created by fordpass on 04/02/2019.
-//  Copyright © 2019 Ford Motor Company. All rights reserved.
-//
+
 
 import Foundation
 import CoreData
