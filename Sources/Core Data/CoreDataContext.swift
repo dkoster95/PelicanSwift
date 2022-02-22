@@ -24,15 +24,15 @@ public class CoreDataContext {
         if let managedObjectModel = self.managedObjectModel {
             container = NSPersistentContainer(name: modelName, managedObjectModel: managedObjectModel)
         } else {
-          container = NSPersistentContainer(name: modelName)
+            container = NSPersistentContainer(name: modelName)
         }
-//        let description = NSPersistentStoreDescription()
-//        description.type = NSInMemoryStoreType
-//        description.shouldAddStoreAsynchronously = false
-//        container.persistentStoreDescriptions = [description]
+        let description = NSPersistentStoreDescription()
+        description.type = NSInMemoryStoreType
+        //        description.shouldAddStoreAsynchronously = false
+        container.persistentStoreDescriptions = [description]
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
-               log.error("Error with the persistent container: \(error)")
+                //log.error("Error with the persistent container: \(error)")
             }
         })
         return container
@@ -45,7 +45,7 @@ public class CoreDataContext {
                 try context.save()
             } catch {
                 let nserror = error as NSError
-                log.error("Error while saving context: \(nserror.localizedDescription)")
+                //log.error("Error while saving context: \(nserror.localizedDescription)")
                 throw nserror
             }
         }

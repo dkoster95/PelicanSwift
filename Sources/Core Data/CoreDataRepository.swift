@@ -9,92 +9,122 @@
 import Foundation
 import CoreData
 
-public class CoreDataRepository<ManagedObject: NSManagedObject>: PelicanRepository<ManagedObject> {
+public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
+    public typealias Element = PersistibleElement
+    private let entityName: String
+    private let persistenceContainer: NSPersistentContainer
     
-    private var entityName: String
-    private var context: CoreDataContext
-    
-    public init(entityName: String, context: CoreDataContext) {
+    public init(entityName: String, persistenceContainer: NSPersistentContainer) {
         self.entityName = entityName
-        self.context = context
+        self.persistenceContainer = persistenceContainer
     }
     
-    public override func save(object: ManagedObject) -> Bool {
-        do {
-            guard self.context.persistentContainer.viewContext == object.managedObjectContext else {
-                return false
+    private func saveContext () throws {
+        let context = persistenceContainer.viewContext
+        if context.hasChanges {
+            do {
+                try context.save()
+            } catch {
+                throw error
             }
-            try context.saveContext()
-            log.debug("💾CoreDataPersistenceLayer💾 - object saved")
-            return true
-        } catch let error {
-            log.error("💾CoreDataPersistenceLayer💾 - failed to save object \(error.localizedDescription)")
-            return false
         }
     }
     
-    public override func save() -> Bool {
-        do {
-            try context.saveContext()
-            log.debug("💾CoreDataPersistenceLayer💾 - object saved")
-            return true
-        } catch let error {
-            log.error("💾CoreDataPersistenceLayer💾 - failed to save object \(error.localizedDescription)")
-            return false
-        }
+    public func save(element: PersistibleElement) throws -> PersistibleElement {
+        guard !contains(element: element) else { throw RepositoryError.duplicatedData }
+        _ = try element.asManagedObject(entityName: entityName, with: persistenceContainer.viewContext)
+        try saveContext()
+        return element
     }
     
-    public override func delete(object: ManagedObject) -> Bool {
+    public func update(element: PersistibleElement) throws -> PersistibleElement {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
+        let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+        guard let first = results.first else { throw RepositoryError.nonExistingData }
+        element.merge(into: first)
+        try saveContext()
+        guard let elementSaved = self.first else { throw RepositoryError.transactionError }
+        return elementSaved
+    }
+    
+    public func delete(element: PersistibleElement) {
         do {
-            guard self.context.persistentContainer.viewContext == object.managedObjectContext else {
-                return false
-            }
-            context.persistentContainer.viewContext.delete(object)
-            try context.saveContext()
-            log.debug("💾CoreDataPersistenceLayer💾 - object deleted")
-            return true
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
+            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            guard let first = results.first else { return }
+            persistenceContainer.viewContext.delete(first)
+            try saveContext()
         } catch {
-            log.error("💾CoreDataPersistenceLayer💾 - failed to delete object")
-            return false
+            print(error)
         }
     }
     
-    override public var fetchAll: [ManagedObject] {
-        let fetchRequest = NSFetchRequest<ManagedObject>(entityName: entityName)
+    public var getAll: [PersistibleElement] {
         do {
-            let results = try context.persistentContainer.viewContext.fetch(fetchRequest)
-            return results
-        } catch let error {
-            log.debug("💾CoreDataPersistenceLayer💾 - No results \(error.localizedDescription)")
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            return try results.map { try PersistibleElement(fromManagedObject: $0) }
+        } catch {
             return []
         }
     }
     
-    public override func update(object: ManagedObject) -> Bool {
+    public func filter(query: (PersistibleElement) -> Bool) -> [PersistibleElement] {
+        return getAll.filter(query)
+    }
+    
+    public func first(where: (PersistibleElement) -> Bool) -> PersistibleElement? {
         do {
-            guard self.context.persistentContainer.viewContext == object.managedObjectContext else {
-                return false
-            }
-            try context.saveContext()
-            return true
-        } catch let error {
-            log.debug("💾CoreDataPersistenceLayer💾 - No results \(error.localizedDescription)")
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            let result = try persistenceContainer.viewContext.fetch(fetchRequest)
+                .map { try PersistibleElement(fromManagedObject: $0) }
+                .first(where: `where`)
+            return result
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    public var first: PersistibleElement? {
+        do {
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            guard let firstResult = results.first else { return nil }
+            return try PersistibleElement(fromManagedObject: firstResult)
+        } catch {
+            print(error)
+            return nil
+        }
+    }
+    
+    public func contains(condition: (PersistibleElement) -> Bool) -> Bool {
+        return first(where: condition) != nil
+    }
+    
+    public func contains(element: PersistibleElement) -> Bool {
+        do {
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
+            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            return !results.isEmpty
+        } catch {
             return false
         }
     }
     
-    public override func empty() {
-        let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entityName)
-        fetchRequest.returnsObjectsAsFaults = false
+    public var isEmpty: Bool { first == nil }
+    
+    public func empty() {
         do {
-            let results = try context.persistentContainer.viewContext.fetch(fetchRequest)
-            for object in results {
-                guard let objectData = object as? NSManagedObject else { continue }
-                context.persistentContainer.viewContext.delete(objectData)
-            }
-            try context.saveContext()
-        } catch let error {
-            log.error("💾CoreDataPersistenceLayer💾 - Error loading: \(error)")
+            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            results.forEach { persistenceContainer.viewContext.delete($0) }
+            try saveContext()
+        } catch {
+            print(error)
         }
     }
 }

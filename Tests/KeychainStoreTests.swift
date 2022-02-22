@@ -7,27 +7,81 @@
 //
 
 import XCTest
+import Pelican
 
 class KeychainStoreTests: XCTestCase {
+    
+    private let sut = KeychainStore(service: "",
+                                    groupId: nil,
+                                    accesibility: .afterFirstUnlock,
+                                    securityClass: .genericPassword,
+                                    logger: Log())
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+    private let jsonEncoder = JSONEncoder()
+    private let jsonDecoder = JSONDecoder()
+    
+    func test_save_whenDataNotExists_expectDataSaved() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        
+        let result = sut.save(data: encodedValue, key: "test")
+        
+        XCTAssertTrue(result)
+        XCTAssertTrue(sut.delete(key: "test"))
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+    
+    func test_save_whenDataExists_expectDataUpdated() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        let encodedNewValue = try jsonEncoder.encode(3)
+        
+        _ = sut.save(data: encodedValue, key: "test")
+        let result = sut.save(data: encodedNewValue, key: "test")
+        let fetchResult = try jsonDecoder.decode(Int.self, from: sut.fetch(key: "test") ?? Data())
+        
+        XCTAssertTrue(result)
+        XCTAssertEqual(3, fetchResult)
+        XCTAssertTrue(sut.delete(key: "test"))
     }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
+    
+    func test_delete_whenDataExists_expectDataDeleted() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        
+        _ = sut.save(data: encodedValue, key: "test")
+        let result = sut.delete(key: "test")
+        
+        XCTAssertTrue(result)
+        XCTAssertNil(sut.fetch(key: "test"))
     }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        self.measure {
-            // Put the code you want to measure the time of here.
-        }
+    
+    func test_delete_whenDataNotExists_expectDataNotDeleted() throws {        
+        let result = sut.delete(key: "test")
+        
+        XCTAssertFalse(result)
+    }
+    
+    func test_update_whenValueNotExists_expectDataNotSavedSaved() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        
+        let result = sut.update(data: encodedValue, key: "test")
+        
+        XCTAssertFalse(result)
+    }
+    
+    func test_update_whenDataExists_expectDataUpdated() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        let encodedNewValue = try jsonEncoder.encode(3)
+        
+        _ = sut.save(data: encodedValue, key: "test")
+        let result = sut.update(data: encodedNewValue, key: "test")
+        let fetchResult = try jsonDecoder.decode(Int.self, from: sut.fetch(key: "test") ?? Data())
+        
+        XCTAssertTrue(result)
+        XCTAssertEqual(3, fetchResult)
+        XCTAssertTrue(sut.delete(key: "test"))
     }
 
 }

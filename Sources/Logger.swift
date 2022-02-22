@@ -8,8 +8,6 @@
 
 import Foundation
 
-let log = Log()
-
 public protocol Logger {
     func debug(_ msg: String)
     func error(_ msg: String)
@@ -17,6 +15,7 @@ public protocol Logger {
 }
 
 public class Log: Logger {
+    public init() {}
     public func debug(_ msg: String) {
         #if DEBUG
         NSLog("Persistence: \(thread) ✅ DEBUG -- \(msg)")

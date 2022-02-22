@@ -14,30 +14,31 @@ class InMemoryRepositoryTests: XCTestCase {
         subject.empty()
     }
 
-    func testSave() {
-        XCTAssertTrue(subject.save(object: 2))
+    func test_save() throws {
+        XCTAssertEqual(2, try subject.save(element: 2))
         XCTAssertEqual(subject.first, 2)
         XCTAssertFalse(subject.isEmpty)
     }
     
-    func testDelete() {
-        XCTAssertTrue(subject.save(object: 2))
+    func test_getAll() throws {
+        XCTAssertEqual(2, try subject.save(element: 2))
+        XCTAssertEqual(subject.getAll[0], 2)
+        XCTAssertFalse(subject.isEmpty)
+    }
+    
+    func test_delete() throws {
+        XCTAssertEqual(2, try subject.save(element: 2))
         XCTAssertEqual(subject.first, 2)
         XCTAssertFalse(subject.isEmpty)
-        XCTAssertTrue(subject.delete(object: 2))
+        subject.delete(element: 2)
         XCTAssertTrue(subject.isEmpty)
     }
     
-    func testUpdate() {
-        XCTAssertTrue(subject.save(object: 2))
+    func test_update() throws {
+        XCTAssertEqual(2, try subject.save(element: 2))
         XCTAssertEqual(subject.first, 2)
         XCTAssertFalse(subject.isEmpty)
-        XCTAssertTrue(subject.update(object: 2))
-        XCTAssertFalse(subject.isEmpty)
+        XCTAssertEqual(3, try subject.update(element: 3))
     }
     
-    func testFetch() {
-        XCTAssertTrue(subject.save(object: 2))
-        XCTAssertEqual(subject.fetchAll, [2])
-    }
 }

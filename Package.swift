@@ -5,7 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "Pelican",
-    platforms: [.iOS(.v11),
+    platforms: [.iOS(.v13),
                 .watchOS(.v5),
                 .macOS(.v10_12),
                 .tvOS(.v12)],

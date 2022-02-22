@@ -8,31 +8,56 @@
 
 import Foundation
 
-public class InMemoryRepository<PersistibleObject: Equatable>: PelicanRepository<PersistibleObject> {
-    private var objects: [PersistibleObject] = []
+public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
+    public typealias Element = PersistibleObject
     
-    public override init() {}
+    private var elements: [PersistibleObject] = []
     
-    public override func save(object: PersistibleObject) -> Bool {
-        objects.append(object)
-        return true
+    public init() {}
+    
+    public var getAll: [PersistibleObject] {
+        return elements
     }
     
-    public override func delete(object: PersistibleObject) -> Bool {
-        objects.removeAll { $0 == object }
-        return true
+    public func save(element: PersistibleObject) throws -> PersistibleObject {
+        guard !contains(element: element) else { throw RepositoryError.duplicatedData }
+        elements.append(element)
+        return element
     }
     
-    public override func update(object: PersistibleObject) -> Bool {
-        return delete(object: object) && save(object: object)
+    public func update(element: PersistibleObject) throws -> PersistibleObject {
+        guard let index = elements.firstIndex(of: element) else { return try save(element: element) }
+        elements[index] = element
+        return elements[index]
     }
     
-    public override func empty() {
-        objects.removeAll()
+    public func delete(element: PersistibleObject) {
+        guard let index = elements.firstIndex(of: element) else { return }
+        elements.remove(at: index)
     }
     
-    public override var fetchAll: [PersistibleObject] {
-        return objects
+    public func filter(query: (PersistibleObject) -> Bool) -> [PersistibleObject] {
+        elements.filter(query)
     }
+    
+    public func first(where: (PersistibleObject) -> Bool) -> PersistibleObject? {
+        elements.first(where: `where`)
+    }
+    
+    public var first: PersistibleObject? { elements.first }
+    
+    public func contains(condition: (PersistibleObject) -> Bool) -> Bool {
+        return elements.contains(where: condition)
+    }
+    
+    public func contains(element: PersistibleObject) -> Bool {
+        return elements.contains(element)
+    }
+    
+    public func empty() {
+        elements.removeAll()
+    }
+    
+    public var isEmpty: Bool { elements.isEmpty }
     
 }

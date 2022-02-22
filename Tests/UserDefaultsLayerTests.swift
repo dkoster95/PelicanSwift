@@ -11,14 +11,11 @@ import Pelican
 
 class UserDefaultsStoreTests: XCTestCase {
     
-    private var sut: UserDefaultsStore!
+    private let sut = UserDefaultsStore(userDefaults: .standard)
     private let jsonEncoder = JSONEncoder()
     private let jsonDecoder = JSONDecoder()
-    private let log = Log()
     
     override func setUp() {
-        sut = UserDefaultsStore(userDefaults: .standard,
-                                logger: log)
         _ = sut.delete(key: "test")
     }
     
@@ -32,7 +29,7 @@ class UserDefaultsStoreTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_delete_whenValueExists_expectElementDeleted() throws {
+    func test_delete_whenValue_expectElementDeleted() throws {
         let value = 1
         XCTAssertNil(sut.fetch(key: "test"))
         let encodedValue = try jsonEncoder.encode(value)
@@ -44,15 +41,6 @@ class UserDefaultsStoreTests: XCTestCase {
         
         XCTAssertTrue(resultSave)
         XCTAssertNotNil(resultFetchSaved)
-        XCTAssertTrue(resultDelete)
-        XCTAssertNil(resultFetch)
-    }
-    
-    func test_delete_whenValueDoesNotExists_expectElementDeleted() throws {
-        
-        let resultDelete = sut.delete(key: "test")
-        let resultFetch = sut.fetch(key: "test")
-        
         XCTAssertTrue(resultDelete)
         XCTAssertNil(resultFetch)
     }

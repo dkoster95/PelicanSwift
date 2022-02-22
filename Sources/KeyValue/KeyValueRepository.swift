@@ -8,12 +8,13 @@
 
 import Foundation
 
-public class KeyValueRepository<CodableObject: Codable>: PelicanRepository<CodableObject> {
+public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository {
     
-    private var key: String
-    private var store: KeyValueStore
-    private var jsonDecoder = JSONDecoder()
-    private var jsonEncoder = JSONEncoder()
+    public typealias Element = CodableEntity
+    private let key: String
+    private let store: KeyValueStore
+    private let jsonDecoder: JSONDecoder
+    private let jsonEncoder: JSONEncoder
     
     public init(key: String,
                 store: KeyValueStore,
@@ -25,38 +26,87 @@ public class KeyValueRepository<CodableObject: Codable>: PelicanRepository<Codab
         self.jsonDecoder = jsonDecoder
     }
     
-    public override func save(object: CodableObject) -> Bool {
-        guard let encodedData = try? jsonEncoder.encode(object) else {
-            log.error("Store - failed to save object")
-            return false
+    public var getAll: [CodableEntity] {
+        guard let storeData = store.fetch(key: key) else { return [] }
+        if let decodedArray = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
+            return decodedArray
         }
-        return store.save(data: encodedData, key: key)
+        guard let decodedObject = try? jsonDecoder.decode(CodableEntity.self, from: storeData) else { return [] }
+        return [decodedObject]
     }
     
-    public override func delete(object: CodableObject) -> Bool {
-        return store.delete(key: key)
-    }
-    
-    public override func update(object: CodableObject) -> Bool {
-        guard let encodedData = try? jsonEncoder.encode(object) else {
-            log.error("Store - failed to save object")
-            return false
+    public func save(element: CodableEntity) throws -> CodableEntity {
+        guard let encodedData = try? jsonEncoder.encode(element) else {
+            throw RepositoryError.serializationError
         }
-        return store.update(data: encodedData, key: key)
+        _ = store.save(data: encodedData, key: key)
+        return element
     }
     
-    public override var fetchAll: [CodableObject] {
-        if let object = store.fetch(key: key),
-            let encodedObject = try? jsonDecoder.decode(CodableObject.self, from: object) {
-            return [encodedObject]
+    public func update(element: CodableEntity) throws -> CodableEntity {
+        guard let encodedData = try? jsonEncoder.encode(element) else {
+            throw RepositoryError.serializationError
         }
-        log.debug("Store - no results")
-        return []
+        guard store.update(data: encodedData, key: key) else { throw RepositoryError.transactionError }
+        guard let storeData = store.fetch(key: key),
+              let updatedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) else { throw RepositoryError.nonExistingData }
+        return updatedData
     }
     
-    public override func empty() {
-        log.debug("Store - deleting results")
+    public func delete(element: CodableEntity) {
         _ = store.delete(key: key)
     }
     
+    public func filter(query: (CodableEntity) -> Bool) -> [CodableEntity] {
+        guard let storeData = store.fetch(key: key) else { return [] }
+        guard let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) else { return [] }
+        return decodedData.filter(query)
+    }
+    
+    public func first(where: (CodableEntity) -> Bool) -> CodableEntity? {
+        guard let storeData = store.fetch(key: key) else { return nil }
+        guard let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) else { return nil }
+        return decodedData.first(where: `where`)
+    }
+    
+    public var first: CodableEntity? {
+        guard let storeData = store.fetch(key: key) else { return nil }
+        if let decodedArrayData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
+            return decodedArrayData.first
+        }
+        if let decodedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) {
+            return decodedData
+        }
+        return nil
+    }
+    
+    public func contains(condition: (CodableEntity) -> Bool) -> Bool {
+        guard let storeData = store.fetch(key: key) else { return false }
+        if let decodedArrayData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
+            return decodedArrayData.contains(where: condition)
+        }
+        if let decodedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) {
+            return condition(decodedData)
+        }
+        return false
+    }
+    
+    public func contains(element: CodableEntity) -> Bool {
+        guard let storeData = store.fetch(key: key) else { return false }
+        if let decodedArrayData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
+            return decodedArrayData.contains(element)
+        }
+        if let decodedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) {
+            return element == decodedData
+        }
+        return false
+    }
+    
+    public var isEmpty: Bool {
+        return store.fetch(key: key) != nil
+    }
+    
+    public func empty() {
+        _ = store.delete(key: key)
+    }
 }

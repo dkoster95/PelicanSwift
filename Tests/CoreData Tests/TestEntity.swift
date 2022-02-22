@@ -11,7 +11,7 @@ import Foundation
 import CoreData
 import Pelican
 
-public struct Test: PersistibleEntity {
+public struct TestEntity: PersistibleEntity {
     public func merge(into: NSManagedObject) {
         into.setValue(name, forKey: "name")
         into.setValue(age, forKey: "age")
@@ -39,7 +39,7 @@ public struct Test: PersistibleEntity {
         name = fromManagedObject.value(forKey: "name") as? String ?? ""
         age = fromManagedObject.value(forKey: "age") as? Double ?? -1
     }
-    public static func == (lhs: Test, rhs: Test) -> Bool {
+    public static func == (lhs: TestEntity, rhs: TestEntity) -> Bool {
         return lhs.name == rhs.name
     }
 }
