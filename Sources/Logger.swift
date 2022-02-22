@@ -8,9 +8,15 @@
 
 import Foundation
 
-public let log = Log()
+let log = Log()
 
-public class Log {
+public protocol Logger {
+    func debug(_ msg: String)
+    func error(_ msg: String)
+    func info(_ msg: String)
+}
+
+public class Log: Logger {
     public func debug(_ msg: String) {
         #if DEBUG
         NSLog("Persistence: \(thread) ✅ DEBUG -- \(msg)")

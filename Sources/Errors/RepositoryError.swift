@@ -8,7 +8,9 @@
 
 import Foundation
 
-public enum PelicanRepositoryError: Error {
+public enum RepositoryError: Error {
     case nonExistingData
     case serializationError
+    case duplicatedData
+    case transactionError
 }

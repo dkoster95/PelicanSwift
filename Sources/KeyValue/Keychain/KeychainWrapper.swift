@@ -13,31 +13,35 @@ private extension KeychainAccesibility {
         switch self {
         case .whenUnlocked: return kSecAttrAccessibleWhenUnlocked
         case .afterFirstUnlock: return kSecAttrAccessibleAfterFirstUnlock
-        case .always: return kSecAttrAccessibleAlways
         case .whenPasscodeSetThisDeviceOnly: return kSecAttrAccessibleWhenPasscodeSetThisDeviceOnly
         case .whenUnlockedThisDeviceOnly: return kSecAttrAccessibleWhenUnlockedThisDeviceOnly
         case .afterFirstUnlockThisDeviceOnly: return kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
-        case .alwaysThisDeviceOnly: return kSecAttrAccessibleAlwaysThisDeviceOnly
         }
     }
 }
 
-open class KeychainWrapper {
+public struct KeychainStore: KeyValueStore {
     
-    public static let `default` = KeychainWrapper()
-    private var service: String
-    private var groupId: String?
-    private var accesibility: KeychainAccesibility
+    private let service: String
+    private let groupId: String?
+    private let accesibility: KeychainAccesibility
+    private let securityClass: CFString
     
-    private init() {
-        service = Bundle.main.bundleIdentifier ?? ""
-        accesibility = .afterFirstUnlock
+    public init() {
+        self.init(service: Bundle.main.bundleIdentifier ?? "",
+                  groupId: nil,
+                  accesibility: .afterFirstUnlock,
+                  securityClass: kSecClassGenericPassword)
     }
     
-    public init(service: String? = Bundle.main.bundleIdentifier, groupId: String? = nil, accesibility: KeychainAccesibility) {
+    public init(service: String? = Bundle.main.bundleIdentifier,
+                groupId: String? = nil,
+                accesibility: KeychainAccesibility,
+                securityClass: CFString) {
         self.service = service ?? ""
         self.groupId = groupId
         self.accesibility = accesibility
+        self.securityClass = securityClass
     }
     
     public func save(data: Data, key: String) -> Bool {
@@ -101,7 +105,7 @@ open class KeychainWrapper {
     private func keychainQueryDictionary(key: String) -> [String: Any] {
         guard let key = key.data(using: .utf8) else { return [:] }
         var dictionary: [String: Any] = [
-            KeychainKeys.SecClass: kSecClassGenericPassword,
+            KeychainKeys.SecClass: securityClass,
             KeychainKeys.SecAttrAccount: key,
             KeychainKeys.SecAttrGeneric: key,
             KeychainKeys.SecAttrService: service,
