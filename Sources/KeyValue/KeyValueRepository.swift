@@ -51,14 +51,24 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
     
     public func filter(query: (CodableEntity) -> Bool) -> [CodableEntity] {
         guard let storeData = store.fetch(key: key) else { return [] }
-        guard let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) else { return [] }
-        return decodedData.filter(query)
+        if let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
+            return decodedData.filter(query)
+        }
+        if let decodedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) {
+            return query(decodedData) ? [decodedData] : []
+        }
+        return []
     }
     
     public func first(where: (CodableEntity) -> Bool) -> CodableEntity? {
         guard let storeData = store.fetch(key: key) else { return nil }
-        guard let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) else { return nil }
-        return decodedData.first(where: `where`)
+        if let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
+            return decodedData.first(where: `where`)
+        }
+        if let decodedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) {
+            return `where`(decodedData) ? decodedData : nil
+        }
+        return nil
     }
     
     public var first: CodableEntity? {
@@ -95,7 +105,7 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
     }
     
     public var isEmpty: Bool {
-        return store.fetch(key: key) != nil
+        return store.fetch(key: key) == nil
     }
     
     public func empty() {

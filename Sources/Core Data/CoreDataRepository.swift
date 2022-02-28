@@ -1,18 +1,17 @@
 import Foundation
 import CoreData
 
-public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
+public struct CoreDataRepository<PersistibleElement: PersistibleEntity>: Repository {
     public typealias Element = PersistibleElement
     private let entityName: String
-    private let persistenceContainer: NSPersistentContainer
+    private let context: NSManagedObjectContext
     
-    public init(entityName: String, persistenceContainer: NSPersistentContainer) {
+    public init(entityName: String, context: NSManagedObjectContext) {
         self.entityName = entityName
-        self.persistenceContainer = persistenceContainer
+        self.context = context
     }
     
     private func saveContext () throws {
-        let context = persistenceContainer.viewContext
         if context.hasChanges {
             do {
                 try context.save()
@@ -24,7 +23,7 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
     
     public func save(element: PersistibleElement) throws -> PersistibleElement {
         guard !contains(element: element) else { throw RepositoryError.duplicatedData }
-        _ = try element.asManagedObject(entityName: entityName, with: persistenceContainer.viewContext)
+        _ = try element.asManagedObject(entityName: entityName, with: context)
         try saveContext()
         return element
     }
@@ -32,7 +31,7 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
     public func update(element: PersistibleElement) throws -> PersistibleElement {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
-        let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+        let results = try context.fetch(fetchRequest)
         guard let first = results.first else { throw RepositoryError.nonExistingData }
         element.merge(into: first)
         try saveContext()
@@ -44,9 +43,9 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
             fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
-            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            let results = try context.fetch(fetchRequest)
             guard let first = results.first else { return }
-            persistenceContainer.viewContext.delete(first)
+            context.delete(first)
             try saveContext()
         } catch {
             print(error)
@@ -56,7 +55,7 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
     public var getAll: [PersistibleElement] {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            let results = try context.fetch(fetchRequest)
             return try results.map { try PersistibleElement(fromManagedObject: $0) }
         } catch {
             return []
@@ -70,7 +69,7 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
     public func first(where: (PersistibleElement) -> Bool) -> PersistibleElement? {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            let result = try persistenceContainer.viewContext.fetch(fetchRequest)
+            let result = try context.fetch(fetchRequest)
                 .map { try PersistibleElement(fromManagedObject: $0) }
                 .first(where: `where`)
             return result
@@ -83,7 +82,7 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
     public var first: PersistibleElement? {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            let results = try context.fetch(fetchRequest)
             guard let firstResult = results.first else { return nil }
             return try PersistibleElement(fromManagedObject: firstResult)
         } catch {
@@ -100,7 +99,7 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
             fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
-            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
+            let results = try context.fetch(fetchRequest)
             return !results.isEmpty
         } catch {
             return false
@@ -112,8 +111,8 @@ public struct CDRepository<PersistibleElement: PersistibleEntity>: Repository {
     public func empty() {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            let results = try persistenceContainer.viewContext.fetch(fetchRequest)
-            results.forEach { persistenceContainer.viewContext.delete($0) }
+            let results = try context.fetch(fetchRequest)
+            results.forEach { context.delete($0) }
             try saveContext()
         } catch {
             print(error)

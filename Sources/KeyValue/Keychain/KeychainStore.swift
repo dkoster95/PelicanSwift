@@ -13,7 +13,6 @@ private extension KeychainAccesibility {
 }
 
 public struct KeychainStore: KeyValueStore {
-    
     private let service: String
     private let groupId: String?
     private let accesibility: KeychainAccesibility

@@ -10,7 +10,6 @@
 		7F6E7C8022FBB6F30083BD1D /* Pelican.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E7C7622FBB6F30083BD1D /* Pelican.framework */; };
 		7F6E7C8722FBB6F30083BD1D /* Pelican.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E7C7922FBB6F30083BD1D /* Pelican.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		7F6E7C9E22FBB7180083BD1D /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* Repository.swift */; };
-		7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
 		7F6E7CA022FBB7180083BD1D /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
 		7F6E7CA122FBB7180083BD1D /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* RepositoryError.swift */; };
 		7F6E7CA322FBB7180083BD1D /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* Logger.swift */; };
@@ -28,7 +27,6 @@
 		7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */; };
 		7F73C42823D79A150065BA4A /* TestEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42023D75B2E0065BA4A /* TestEntity.swift */; };
 		7F73C42923D79A3D0065BA4A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */; };
-		7F73C43723D79AB70065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
 		7F73C43823D79AB70065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
 		7F73C43923D79AB70065BA4A /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* RepositoryError.swift */; };
 		7F73C43A23D79AB70065BA4A /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
@@ -37,7 +35,6 @@
 		7F73C43E23D79AB70065BA4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* Logger.swift */; };
 		7F73C43F23D79AB70065BA4A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* Repository.swift */; };
 		7F73C44023D79AB70065BA4A /* KeyValueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* KeyValueRepository.swift */; };
-		7F73C44E23D79B720065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
 		7F73C44F23D79B720065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
 		7F73C45023D79B720065BA4A /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* RepositoryError.swift */; };
 		7F73C45123D79B720065BA4A /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
@@ -46,7 +43,6 @@
 		7F73C45523D79B720065BA4A /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* Logger.swift */; };
 		7F73C45623D79B720065BA4A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* Repository.swift */; };
 		7F73C45723D79B720065BA4A /* KeyValueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* KeyValueRepository.swift */; };
-		7F73C46523D79B910065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
 		7F73C46623D79B910065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
 		7F73C46723D79B910065BA4A /* RepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* RepositoryError.swift */; };
 		7F73C46823D79B910065BA4A /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
@@ -56,6 +52,8 @@
 		7F73C46D23D79B910065BA4A /* Repository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* Repository.swift */; };
 		7F73C46E23D79B910065BA4A /* KeyValueRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* KeyValueRepository.swift */; };
 		7F83999727C2E3D100F82216 /* KeychainStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F83999627C2E3D100F82216 /* KeychainStoreTests.swift */; };
+		7F89DD6027CCF70A002AA7D9 /* AnyRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD5F27CCF70A002AA7D9 /* AnyRepositoryTests.swift */; };
+		7F89DD7C27CD4F3E002AA7D9 /* Mocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F89DD7B27CD4F3E002AA7D9 /* Mocks.swift */; };
 		7F95D15F27C1585000A9E586 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95D15E27C1585000A9E586 /* KeyValueStore.swift */; };
 		7F95D16027C1585000A9E586 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95D15E27C1585000A9E586 /* KeyValueStore.swift */; };
 		7F95D16127C1585000A9E586 /* KeyValueStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F95D15E27C1585000A9E586 /* KeyValueStore.swift */; };
@@ -68,6 +66,11 @@
 		7FBF0F1227C4016C008DD9AB /* PersistibleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F1027C4016C008DD9AB /* PersistibleEntity.swift */; };
 		7FBF0F1327C4016C008DD9AB /* PersistibleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F1027C4016C008DD9AB /* PersistibleEntity.swift */; };
 		7FBF0F1427C4016C008DD9AB /* PersistibleEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F1027C4016C008DD9AB /* PersistibleEntity.swift */; };
+		7FBF0F5927CABB69008DD9AB /* AnyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F5827CABB69008DD9AB /* AnyRepository.swift */; };
+		7FBF0F5A27CABB69008DD9AB /* AnyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F5827CABB69008DD9AB /* AnyRepository.swift */; };
+		7FBF0F5B27CABB69008DD9AB /* AnyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F5827CABB69008DD9AB /* AnyRepository.swift */; };
+		7FBF0F5C27CABB69008DD9AB /* AnyRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FBF0F5827CABB69008DD9AB /* AnyRepository.swift */; };
+		7FBF0F6E27CAC1D8008DD9AB /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
 		7FC5F200251A904200AF555C /* InMemoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */; };
 		7FC5F202251A917600AF555C /* InMemoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */; };
 /* End PBXBuildFile section */
@@ -121,9 +124,12 @@
 		7F73C44623D79B230065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F73C45D23D79B880065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F83999627C2E3D100F82216 /* KeychainStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainStoreTests.swift; sourceTree = "<group>"; };
+		7F89DD5F27CCF70A002AA7D9 /* AnyRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRepositoryTests.swift; sourceTree = "<group>"; };
+		7F89DD7B27CD4F3E002AA7D9 /* Mocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mocks.swift; sourceTree = "<group>"; };
 		7F95D15E27C1585000A9E586 /* KeyValueStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyValueStore.swift; sourceTree = "<group>"; };
 		7F95D16F27C15A0B00A9E586 /* UserDefaultsStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsStore.swift; sourceTree = "<group>"; };
 		7FBF0F1027C4016C008DD9AB /* PersistibleEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistibleEntity.swift; sourceTree = "<group>"; };
+		7FBF0F5827CABB69008DD9AB /* AnyRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnyRepository.swift; sourceTree = "<group>"; };
 		7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepository.swift; sourceTree = "<group>"; };
 		7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -201,14 +207,15 @@
 		7F6E7C7822FBB6F30083BD1D /* Sources */ = {
 			isa = PBXGroup;
 			children = (
-				7FCB01E327C3FA6C00BADD23 /* KeyValue */,
 				7F6E7C9122FBB7180083BD1D /* Core Data */,
+				7FBF0F5727CABB5C008DD9AB /* Erasure */,
 				7F6E7C9422FBB7180083BD1D /* Errors */,
-				7F6E7C9822FBB7180083BD1D /* Logger.swift */,
-				7F6E7C9022FBB7180083BD1D /* Repository.swift */,
-				7F6E7C7922FBB6F30083BD1D /* Pelican.h */,
 				7F6E7C7A22FBB6F30083BD1D /* Info.plist */,
 				7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */,
+				7FCB01E327C3FA6C00BADD23 /* KeyValue */,
+				7F6E7C9822FBB7180083BD1D /* Logger.swift */,
+				7F6E7C7922FBB6F30083BD1D /* Pelican.h */,
+				7F6E7C9022FBB7180083BD1D /* Repository.swift */,
 			);
 			path = Sources;
 			sourceTree = "<group>";
@@ -223,6 +230,8 @@
 				7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */,
 				7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */,
 				7F83999627C2E3D100F82216 /* KeychainStoreTests.swift */,
+				7F89DD5F27CCF70A002AA7D9 /* AnyRepositoryTests.swift */,
+				7F89DD7B27CD4F3E002AA7D9 /* Mocks.swift */,
 			);
 			path = Tests;
 			sourceTree = "<group>";
@@ -230,7 +239,6 @@
 		7F6E7C9122FBB7180083BD1D /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */,
 				7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */,
 				7FBF0F1027C4016C008DD9AB /* PersistibleEntity.swift */,
 			);
@@ -280,19 +288,28 @@
 		7F73C42423D75D260065BA4A /* CoreData Tests */ = {
 			isa = PBXGroup;
 			children = (
+				7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */,
 				7F73C42023D75B2E0065BA4A /* TestEntity.swift */,
 				7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */,
 			);
 			path = "CoreData Tests";
 			sourceTree = "<group>";
 		};
+		7FBF0F5727CABB5C008DD9AB /* Erasure */ = {
+			isa = PBXGroup;
+			children = (
+				7FBF0F5827CABB69008DD9AB /* AnyRepository.swift */,
+			);
+			path = Erasure;
+			sourceTree = "<group>";
+		};
 		7FCB01E327C3FA6C00BADD23 /* KeyValue */ = {
 			isa = PBXGroup;
 			children = (
+				7F6E7C9922FBB7180083BD1D /* Keychain */,
 				7F73C41023D757A10065BA4A /* KeyValueRepository.swift */,
 				7F95D15E27C1585000A9E586 /* KeyValueStore.swift */,
 				7F6E7C9622FBB7180083BD1D /* UserDefaults */,
-				7F6E7C9922FBB7180083BD1D /* Keychain */,
 			);
 			path = KeyValue;
 			sourceTree = "<group>";
@@ -578,7 +595,7 @@
 				7F95D17027C15A0B00A9E586 /* UserDefaultsStore.swift in Sources */,
 				7F6E7CA322FBB7180083BD1D /* Logger.swift in Sources */,
 				7F73C41123D757A10065BA4A /* KeyValueRepository.swift in Sources */,
-				7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */,
+				7FBF0F5927CABB69008DD9AB /* AnyRepository.swift in Sources */,
 				7F6E7CA622FBB7180083BD1D /* KeychainAccesibility.swift in Sources */,
 				7FBF0F1127C4016C008DD9AB /* PersistibleEntity.swift in Sources */,
 				7FC5F200251A904200AF555C /* InMemoryRepository.swift in Sources */,
@@ -598,7 +615,10 @@
 				7F73C40D23D748860065BA4A /* UserDefaultsStoreTests.swift in Sources */,
 				7F83999727C2E3D100F82216 /* KeychainStoreTests.swift in Sources */,
 				7FC5F202251A917600AF555C /* InMemoryRepositoryTests.swift in Sources */,
+				7F89DD7C27CD4F3E002AA7D9 /* Mocks.swift in Sources */,
 				7F73C40B23D748710065BA4A /* KeyValueRepositoryTests.swift in Sources */,
+				7FBF0F6E27CAC1D8008DD9AB /* CoreDataContext.swift in Sources */,
+				7F89DD6027CCF70A002AA7D9 /* AnyRepositoryTests.swift in Sources */,
 				7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,7 +638,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F95D16027C1585000A9E586 /* KeyValueStore.swift in Sources */,
-				7F73C43723D79AB70065BA4A /* CoreDataContext.swift in Sources */,
 				7F95D17127C15A0B00A9E586 /* UserDefaultsStore.swift in Sources */,
 				7F73C43823D79AB70065BA4A /* CoreDataRepository.swift in Sources */,
 				7F73C43923D79AB70065BA4A /* RepositoryError.swift in Sources */,
@@ -627,6 +646,7 @@
 				7F73C43C23D79AB70065BA4A /* KeychainAccesibility.swift in Sources */,
 				7F73C43E23D79AB70065BA4A /* Logger.swift in Sources */,
 				7FBF0F1227C4016C008DD9AB /* PersistibleEntity.swift in Sources */,
+				7FBF0F5A27CABB69008DD9AB /* AnyRepository.swift in Sources */,
 				7F73C43F23D79AB70065BA4A /* Repository.swift in Sources */,
 				7F73C44023D79AB70065BA4A /* KeyValueRepository.swift in Sources */,
 			);
@@ -637,7 +657,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F95D16127C1585000A9E586 /* KeyValueStore.swift in Sources */,
-				7F73C44E23D79B720065BA4A /* CoreDataContext.swift in Sources */,
 				7F95D17227C15A0B00A9E586 /* UserDefaultsStore.swift in Sources */,
 				7F73C44F23D79B720065BA4A /* CoreDataRepository.swift in Sources */,
 				7F73C45023D79B720065BA4A /* RepositoryError.swift in Sources */,
@@ -646,6 +665,7 @@
 				7F73C45323D79B720065BA4A /* KeychainAccesibility.swift in Sources */,
 				7F73C45523D79B720065BA4A /* Logger.swift in Sources */,
 				7FBF0F1327C4016C008DD9AB /* PersistibleEntity.swift in Sources */,
+				7FBF0F5B27CABB69008DD9AB /* AnyRepository.swift in Sources */,
 				7F73C45623D79B720065BA4A /* Repository.swift in Sources */,
 				7F73C45723D79B720065BA4A /* KeyValueRepository.swift in Sources */,
 			);
@@ -656,7 +676,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				7F95D16227C1585000A9E586 /* KeyValueStore.swift in Sources */,
-				7F73C46523D79B910065BA4A /* CoreDataContext.swift in Sources */,
 				7F95D17327C15A0B00A9E586 /* UserDefaultsStore.swift in Sources */,
 				7F73C46623D79B910065BA4A /* CoreDataRepository.swift in Sources */,
 				7F73C46723D79B910065BA4A /* RepositoryError.swift in Sources */,
@@ -665,6 +684,7 @@
 				7F73C46A23D79B910065BA4A /* KeychainAccesibility.swift in Sources */,
 				7F73C46C23D79B910065BA4A /* Logger.swift in Sources */,
 				7FBF0F1427C4016C008DD9AB /* PersistibleEntity.swift in Sources */,
+				7FBF0F5C27CABB69008DD9AB /* AnyRepository.swift in Sources */,
 				7F73C46D23D79B910065BA4A /* Repository.swift in Sources */,
 				7F73C46E23D79B910065BA4A /* KeyValueRepository.swift in Sources */,
 			);

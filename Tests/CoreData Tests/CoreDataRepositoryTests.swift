@@ -15,10 +15,10 @@ class CoreDataRepositoryTests: XCTestCase {
     
     private var context: CoreDataContext = CoreDataContext(modelName: "TestModel")
     
-    private var sut: CDRepository<TestEntity>!
+    private var sut: CoreDataRepository<TestEntity>!
     
     override func setUp() {
-        sut = CDRepository<TestEntity>(entityName: "TestEntity", persistenceContainer: context.persistentContainer)
+        sut = CoreDataRepository<TestEntity>(entityName: "TestEntity", context: context.persistentContainer.viewContext)
     }
     
     func testIsEmpty() {

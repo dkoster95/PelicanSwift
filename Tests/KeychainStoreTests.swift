@@ -11,7 +11,7 @@ import Pelican
 
 class KeychainStoreTests: XCTestCase {
     
-    private let sut = KeychainStore(service: "",
+    private var sut = KeychainStore(service: "",
                                     groupId: nil,
                                     accesibility: .afterFirstUnlock,
                                     securityClass: .genericPassword,
@@ -28,6 +28,29 @@ class KeychainStoreTests: XCTestCase {
         
         XCTAssertTrue(result)
         XCTAssertTrue(sut.delete(key: "test"))
+    }
+    
+    func test_subscriptSave_whenNoValue_expectValueCreated() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        
+        sut["test"] = encodedValue
+        let result = sut["test"]
+        
+        XCTAssertNotNil(result)
+    }
+    
+    func test_subscriptSave_whenSettingNil_expectValueRemoved() throws {
+        let value = 2
+        let encodedValue = try jsonEncoder.encode(value)
+        
+        sut["test"] = encodedValue
+        let result = sut["test"]
+        sut["test"] = nil
+        let deletedResult = sut["test"]
+        
+        XCTAssertNotNil(result)
+        XCTAssertNil(deletedResult)
     }
     
     func test_save_whenDataExists_expectDataUpdated() throws {
