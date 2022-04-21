@@ -1,11 +1,3 @@
-//
-//  KeychainLayerTests.swift
-//  PelicanTests
-//
-//  Created by Daniel Koster on 1/21/20.
-//  Copyright © 2020 Daniel Koster. All rights reserved.
-//
-
 import XCTest
 import PelicanRepositories
 

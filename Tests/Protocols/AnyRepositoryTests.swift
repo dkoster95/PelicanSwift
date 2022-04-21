@@ -1,11 +1,3 @@
-//
-//  AnyRepositoryTests.swift
-//  PelicanTests
-//
-//  Created by Daniel Koster on 2/28/22.
-//  Copyright © 2022 Daniel Koster. All rights reserved.
-//
-
 import XCTest
 import PelicanProtocols
 

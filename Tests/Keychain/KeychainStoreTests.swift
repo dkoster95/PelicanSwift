@@ -1,11 +1,3 @@
-//
-//  KeychainStoreTests.swift
-//  PelicanTests
-//
-//  Created by Daniel Koster on 2/20/22.
-//  Copyright © 2022 Daniel Koster. All rights reserved.
-//
-
 import XCTest
 import PelicanKeychain
 import PelicanProtocols

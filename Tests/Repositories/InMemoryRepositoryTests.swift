@@ -1,11 +1,3 @@
-//
-//  InMemoryRepositoryTests.swift
-//  PelicanTests
-//
-//  Created by Daniel Koster on 9/22/20.
-//  Copyright © 2020 Daniel Koster. All rights reserved.
-//
-
 import XCTest
 import PelicanRepositories
 class InMemoryRepositoryTests: XCTestCase {

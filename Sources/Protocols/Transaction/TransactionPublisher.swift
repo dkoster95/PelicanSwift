@@ -8,9 +8,11 @@ public struct TransactionPublisher<Result>: Publisher {
             _ = subscriber.receive(result)
             subscriber.receive(completion: Subscribers.Completion<RepositoryError>.finished)
         }
-        catch {
-            subscriber.receive(completion: Subscribers.Completion<RepositoryError>.failure(RepositoryError.transactionError))
-            subscriber.receive(completion: Subscribers.Completion<RepositoryError>.finished)
+        catch let error as RepositoryError {
+            subscriber.receive(completion: Subscribers.Completion<RepositoryError>.failure(error))
+        }
+        catch let error {
+            subscriber.receive(completion: Subscribers.Completion<RepositoryError>.failure(RepositoryError.unknownError(error: error)))
         }
     }
     
