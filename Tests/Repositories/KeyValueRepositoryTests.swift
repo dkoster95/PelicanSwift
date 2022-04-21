@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import Pelican
+import PelicanRepositories
 
 class KeyValueRepositoryTests: XCTestCase {
     
@@ -24,7 +24,7 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_save_whenEncodingFails_expectErrorThrown() {
         let testEntity = MockEntity(parameter: "param", number: Double.infinity)
         
-        XCTAssertThrowsError(try sut.save(element: testEntity))
+        XCTAssertThrowsError(try sut.add(element: testEntity))
     }
     
     func test_isEmpty() {
@@ -34,7 +34,7 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_save_whenDataIsSaved_expectRetured() throws {
         let testEntity = MockEntity(parameter: "param", number: 12)
         
-        let result = try sut.save(element: testEntity)
+        let result = try sut.add(element: testEntity)
         
         XCTAssertEqual(testEntity, result)
     }
@@ -110,8 +110,8 @@ class KeyValueRepositoryTests: XCTestCase {
         XCTAssertFalse(result)
     }
     
-    func test_empty() {
-        sut.empty()
+    func test_empty() throws {
+        try sut.deleteAll()
         
         XCTAssertTrue(mockStore.didDelete)
     }
@@ -143,35 +143,6 @@ class KeyValueRepositoryTests: XCTestCase {
         let result = sut.contains { $0.parameter == "param" }
         
         XCTAssertFalse(result)
-    }
-    
-    func test_first_whenValue_expectNotNil() throws {
-        let value = MockEntity(parameter: "param", number: 2)
-        mockStore.data = try JSONEncoder().encode(value)
-        let result = sut.first
-        
-        XCTAssertEqual(value, result)
-    }
-    
-    func test_first_whenArrayValue_expectNotNil() throws {
-        let value = MockEntity(parameter: "param", number: 2)
-        mockStore.data = try JSONEncoder().encode([value])
-        let result = sut.first
-        
-        XCTAssertEqual(value, result)
-    }
-    
-    func test_first_whenValue_expectNNil() throws {
-        let result = sut.first
-        
-        XCTAssertNil(result)
-    }
-    
-    func test_first_whenCorruptedData_expectNNil() throws {
-        mockStore.data = Data()
-        let result = sut.first
-        
-        XCTAssertNil(result)
     }
     
     func test_firstWithCondition_whenValue_expectNotNil() throws {

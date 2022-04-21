@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import Pelican
+import PelicanProtocols
 
 struct MockEntity: Codable, Equatable {
     let parameter: String

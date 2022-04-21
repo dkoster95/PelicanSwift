@@ -9,9 +9,9 @@
 
 import Foundation
 import CoreData
-import Pelican
+import PelicanProtocols
 
-public struct TestEntity: PersistibleEntity {
+public struct TestModelEntity: CoreDataEntity {
     public func merge(into: NSManagedObject) {
         into.setValue(name, forKey: "name")
         into.setValue(age, forKey: "age")
@@ -39,7 +39,7 @@ public struct TestEntity: PersistibleEntity {
         name = fromManagedObject.value(forKey: "name") as? String ?? ""
         age = fromManagedObject.value(forKey: "age") as? Double ?? -1
     }
-    public static func == (lhs: TestEntity, rhs: TestEntity) -> Bool {
+    public static func == (lhs: TestModelEntity, rhs: TestModelEntity) -> Bool {
         return lhs.name == rhs.name
     }
 }

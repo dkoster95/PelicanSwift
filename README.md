@@ -4,6 +4,7 @@
 - **Simple Way to manage your local storage**
 - **Persistence Module**
 - **Keep local storage simple**
+- **Storage Pluggable**
 ---
 
 Swift Persistence framework.
@@ -13,50 +14,69 @@ Swift Persistence framework.
 Your app usually uses local storage to store tokens, offline data or user preferences.
 Pelican is a framework created to handle those requirements by using a repository pattern.
 There are 3 repository implementations Keychain, CoreData and UserDefaults.
-If you have diferent requirements or wanna use a diferent type of persistence you can create your own repository by extending **PelicanRepository** class!  
-The framework also provides a **Keychain Wrapper** in case you dont want to use the repository pattern.
+If you have diferent requirements or wanna use a diferent type of persistence you can create your own repository by implementing **Repository** protocol!  
+The framework also provides a **Keychain Store** in case you dont want to use the repository pattern.
+
+# Scope
+---
+## Expected Use ?
+
+So when you want to use a module you are trying to solve a problem and each module has it benefits and limitations, Its super important to understand the scope of the framework to prevent errors from happening.
+
+Here is a list of what features you expect out of Pelican
+- **Keychain store to be used**
+- **UserDefaults store to be used**
+- **Generic Repository protocol defined**
+- **Portability: MacoS, iOS, WatchOS and TVOS compatible** 
+- **Entities: Definition and Condiguration independence**
+- **Core Data repository implementation**
+- **In Memory Repository Implementation**
+- **Integration with Codable & Equatable**
+---
+## What not included ?
+
+- **Parameter checks (inejections,etc)**
+- **BufferOverflows check**
+- **Context Configuration not included, must be injected**
+- **Data Encryption not included**
+
 
 ---
+
+# Why use a persistence module ?
+---
+**SRP principle**: Having one responsibility (storing data) makes it easier to maintain, develop, scale and monitor.
+**OCP principle**: Pluggable architecture makes the app using it change-friendly by injecting repositories and stores rather than coupling to a concrete implementation.
+**DIP Principle**: Storage frameworks are low-level frameworks and our apps should be independent from frameworks, database engines or any external actor, our business entities should not depend on some storage framework to work, instead we should have a separate configuration of the entity so we can integrate it with the framework we are using.
+**low coupling**: Core Data is an old objc framework that is outdated if you compare it with other ORM's so, it makes sense that Apple could launch a new ORM soon, or a new Keychain Implentation, you dont want your app to be coupled to any of this when that happens.
+---
 ```swift
-open class PelicanRepository <PersistibleObject: Any> {
-    
-    open func empty() {}
-    
-    open var isEmpty: Bool { return fetchAll.isEmpty }
-    
-    public init() {}
-    
-    open var fetchAll: [PersistibleObject] {
-        return []
-    }
-    
-    open func save(object: PersistibleObject) -> Bool {
-        return true
-    }
-    
-    open func update(object: PersistibleObject) -> Bool {
-        return true
-    }
-    
-    open func save() -> Bool {
-        return true
-    }
-    
-    open func filter(query: (PersistibleObject) -> Bool) -> [PersistibleObject] { return fetchAll.filter { query($0) }
-    }
-    
-    open func delete(object: PersistibleObject) -> Bool {
-        return true
-    }
-    
-    open var first: PersistibleObject? {
-        return fetchAll.first
+public protocol Repository {
+    associatedtype Element: Equatable
+    func save(element: Element) throws -> Element
+    func update(element: Element) throws -> Element
+    func delete(element: Element)
+    func filter(query: (Element) -> Bool) -> [Element]
+    func first(where: (Element) -> Bool) -> Element?
+    var first: Element? { get }
+    func contains(condition: (Element) -> Bool) -> Bool
+    func contains(element: Element) -> Bool
+    var isEmpty: Bool { get }
+    var getAll: [Element] { get }
+    func empty()
+}
+```
+Here you have the Repository protocol definition, yeah I know generic protocols are not easy to handle in Swift but there is also a Erasure Type to make it easier to operate.
+---
+```swift 
+public extension Repository {
+    func eraseToAnyRepository() -> AnyRepository<Element> {
+        return AnyRepository<Element>(storage: self)
     }
 }
 ```
-Here you have the Pelican Repository class definition, It was made a class instead of a protocol because it uses a generic type and swift associatedTypes with protocols are not friendly :(.  
 Those are all the features a Repository should have: add, removing, empty, and the fetching options.  
-if you want your own repository implementation you just need to make your class extend this repository class and then override the methods you want!
+if you want your own repository implementation you just need to make your class implement this repository protocol!
 
 
 ## Repositories
@@ -68,9 +88,9 @@ if you want your own repository implementation you just need to make your class 
 
 ## Requirements
 
-- iOS 11.0+ 
-- WatchOS 5.0+
-- TvOS 12.0+
+- iOS 13.0+ 
+- WatchOS 6.0+
+- TvOS 13.0+
 - MacOS 10.12+
 - Xcode 10.2+
 - Swift 5+

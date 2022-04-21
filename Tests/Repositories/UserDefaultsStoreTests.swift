@@ -7,7 +7,8 @@
 //
 
 import XCTest
-import Pelican
+import PelicanRepositories
+import PelicanProtocols
 
 class UserDefaultsStoreTests: XCTestCase {
     

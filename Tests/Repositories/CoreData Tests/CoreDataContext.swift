@@ -29,18 +29,4 @@ public class CoreDataContext {
         })
         return container
     }()
-    
-    public func saveContext () throws {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
-            do {
-                try context.save()
-            } catch {
-                let nserror = error as NSError
-                //log.error("Error while saving context: \(nserror.localizedDescription)")
-                throw nserror
-            }
-        }
-    }
-    
 }

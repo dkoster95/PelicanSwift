@@ -1,4 +1,5 @@
 import Foundation
+import PelicanProtocols
 
 public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository {
     
@@ -27,7 +28,7 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
         return [decodedObject]
     }
     
-    public func save(element: CodableEntity) throws -> CodableEntity {
+    public func add(element: CodableEntity) throws -> CodableEntity {
         guard let encodedData = try? jsonEncoder.encode(element) else {
             throw RepositoryError.serializationError
         }
@@ -71,17 +72,6 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
         return nil
     }
     
-    public var first: CodableEntity? {
-        guard let storeData = store.fetch(key: key) else { return nil }
-        if let decodedArrayData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
-            return decodedArrayData.first
-        }
-        if let decodedData = try? jsonDecoder.decode(CodableEntity.self, from: storeData) {
-            return decodedData
-        }
-        return nil
-    }
-    
     public func contains(condition: (CodableEntity) -> Bool) -> Bool {
         guard let storeData = store.fetch(key: key) else { return false }
         if let decodedArrayData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
@@ -108,7 +98,7 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
         return store.fetch(key: key) == nil
     }
     
-    public func empty() {
+    public func deleteAll() throws {
         _ = store.delete(key: key)
     }
 }

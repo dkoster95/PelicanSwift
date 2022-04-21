@@ -1,7 +1,8 @@
 import Foundation
 import CoreData
+import PelicanProtocols
 
-public struct CoreDataRepository<PersistibleElement: PersistibleEntity>: Repository {
+public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository {
     public typealias Element = PersistibleElement
     private let entityName: String
     private let context: NSManagedObjectContext
@@ -21,7 +22,7 @@ public struct CoreDataRepository<PersistibleElement: PersistibleEntity>: Reposit
         }
     }
     
-    public func save(element: PersistibleElement) throws -> PersistibleElement {
+    public func add(element: PersistibleElement) throws -> PersistibleElement {
         guard !contains(element: element) else { throw RepositoryError.duplicatedData }
         _ = try element.asManagedObject(entityName: entityName, with: context)
         try saveContext()
@@ -35,8 +36,7 @@ public struct CoreDataRepository<PersistibleElement: PersistibleEntity>: Reposit
         guard let first = results.first else { throw RepositoryError.nonExistingData }
         element.merge(into: first)
         try saveContext()
-        guard let elementSaved = self.first else { throw RepositoryError.transactionError }
-        return elementSaved
+        return element
     }
     
     public func delete(element: PersistibleElement) {
@@ -79,18 +79,6 @@ public struct CoreDataRepository<PersistibleElement: PersistibleEntity>: Reposit
         }
     }
     
-    public var first: PersistibleElement? {
-        do {
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            let results = try context.fetch(fetchRequest)
-            guard let firstResult = results.first else { return nil }
-            return try PersistibleElement(fromManagedObject: firstResult)
-        } catch {
-            print(error)
-            return nil
-        }
-    }
-    
     public func contains(condition: (PersistibleElement) -> Bool) -> Bool {
         return first(where: condition) != nil
     }
@@ -106,16 +94,13 @@ public struct CoreDataRepository<PersistibleElement: PersistibleEntity>: Reposit
         }
     }
     
-    public var isEmpty: Bool { first == nil }
+    public var isEmpty: Bool { getAll.isEmpty }
     
-    public func empty() {
-        do {
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            let results = try context.fetch(fetchRequest)
-            results.forEach { context.delete($0) }
-            try saveContext()
-        } catch {
-            print(error)
-        }
+    public func deleteAll() throws {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        let results = try context.fetch(fetchRequest)
+        results.forEach { context.delete($0) }
+        try saveContext()
+        
     }
 }

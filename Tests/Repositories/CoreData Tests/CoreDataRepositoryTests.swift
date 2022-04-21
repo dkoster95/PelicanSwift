@@ -1,24 +1,15 @@
-//
-//  CoreDataRepositoryTests.swift
-//  PelicanTests
-//
-//  Created by Daniel Koster on 1/21/20.
-//  Copyright © 2020 Daniel Koster. All rights reserved.
-//
-
 import XCTest
-@testable import Pelican
-@testable import TestApp
+@testable import PelicanRepositories
 import CoreData
 
-class CoreDataRepositoryTests: XCTestCase {
+final class CoreDataRepositoryTests: XCTestCase {
     
-    private var context: CoreDataContext = CoreDataContext(modelName: "TestModel")
-    
-    private var sut: CoreDataRepository<TestEntity>!
+    private var sut: CoreDataRepository<TestModelEntity>!
     
     override func setUp() {
-        sut = CoreDataRepository<TestEntity>(entityName: "TestEntity", context: context.persistentContainer.viewContext)
+        let model = NSManagedObjectModel.mergedModel(from: [Bundle.module])
+        let context: CoreDataContext = CoreDataContext(modelName: "TestModel", managedObjectModel: model)
+        sut = CoreDataRepository<TestModelEntity>(entityName: "TestEntity", context: context.persistentContainer.viewContext)
     }
     
     func testIsEmpty() {
@@ -26,10 +17,10 @@ class CoreDataRepositoryTests: XCTestCase {
     }
     
     func test_save_whenRecordNotExists_expectDataSaved() throws {
-        let test = TestEntity(name: "name", age: 21)
+        let test = TestModelEntity(name: "name", age: 21)
         
-        let result = try sut.save(element: test)
-        let savedResult = sut.first
+        let result = try sut.add(element: test)
+        let savedResult = sut.getAll[0]
         
         XCTAssertNotNil(savedResult)
         XCTAssertEqual(test, savedResult)
@@ -37,48 +28,48 @@ class CoreDataRepositoryTests: XCTestCase {
     }
     
     func test_save_whenRecordExists_expectErrorThrown() {
-        let test = TestEntity(name: "name", age: 21)
+        let test = TestModelEntity(name: "name", age: 21)
         
-        XCTAssertNoThrow(try sut.save(element: test))
-        XCTAssertThrowsError(try sut.save(element: test))
+        XCTAssertNoThrow(try sut.add(element: test))
+        XCTAssertThrowsError(try sut.add(element: test))
     }
     
     func test_update_whenRecordDontExists_expectErrorThrown() {
-        let test = TestEntity(name: "name", age: 21)
+        let test = TestModelEntity(name: "name", age: 21)
         
         XCTAssertThrowsError(try sut.update(element: test))
     }
     
     func test_update_whenRecordExists_expectRecordUpdated() throws {
-        let test = TestEntity(name: "name", age: 21)
-        let savedResult = try sut.save(element: test)
-        let updatedRecord = TestEntity(name: "name", age: 24)
+        let test = TestModelEntity(name: "name", age: 21)
+        let savedResult = try sut.add(element: test)
+        let updatedRecord = TestModelEntity(name: "name", age: 24)
         
         let resultTransaction = try sut.update(element: updatedRecord)
-        let result = sut.first
+        let result = sut.getAll[0]
         
-        XCTAssertEqual(24, result?.age)
+        XCTAssertEqual(24, result.age)
         XCTAssertNotEqual(savedResult.age, resultTransaction.age)
     }
     
     func test_delete_whenRecordNotExists_expectNoResult() {
-        let test = TestEntity(name: "name", age: 21)
+        let test = TestModelEntity(name: "name", age: 21)
         sut.delete(element: test)
-        let result = sut.first
+        let result = sut.isEmpty
         
-        XCTAssertNil(result)
+        XCTAssertTrue(result)
     }
     
     func test_delete_whenRecordExists_expectRecordDeleted() throws {
-        let test = TestEntity(name: "name", age: 21)
-        _ = try sut.save(element: test)
+        let test = TestModelEntity(name: "name", age: 21)
+        _ = try sut.add(element: test)
         
-        let recordSaved = sut.first
+        let recordSaved = sut.getAll[0]
         sut.delete(element: test)
-        let result = sut.first
+        let result = sut.isEmpty
         
         XCTAssertEqual(test, recordSaved)
-        XCTAssertNil(result)
+        XCTAssertTrue(result)
     }
     
     func test_getAll_whenNoRecords_expectEmpty() {
@@ -132,7 +123,7 @@ class CoreDataRepositoryTests: XCTestCase {
     }
     
     func test_contains_whenNoValueExists_expectFalse() {
-        let test = TestEntity(name: "record1", age: 1)
+        let test = TestModelEntity(name: "record1", age: 1)
         
         let result = sut.contains(element: test)
         
@@ -141,7 +132,7 @@ class CoreDataRepositoryTests: XCTestCase {
     
     func test_contains_whenValueExists_expectTrue() throws {
         try loadRecords()
-        let test = TestEntity(name: "record1", age: 1)
+        let test = TestModelEntity(name: "record1", age: 1)
         
         let result = sut.contains(element: test)
         
@@ -152,7 +143,7 @@ class CoreDataRepositoryTests: XCTestCase {
         try loadRecords()
         
         let recordsLoaded = sut.isEmpty
-        sut.empty()
+        try sut.deleteAll()
         let result = sut.isEmpty
         
         XCTAssertFalse(recordsLoaded)
@@ -160,14 +151,14 @@ class CoreDataRepositoryTests: XCTestCase {
     }
     
     private func loadRecords() throws {
-        let record1 = TestEntity(name: "record1", age: 1)
-        let record2 = TestEntity(name: "record2", age: 12)
-        let record3 = TestEntity(name: "record3", age: 14)
-        let record4 = TestEntity(name: "record4", age: 17)
-        _ = try sut.save(element: record1)
-        _ = try sut.save(element: record2)
-        _ = try sut.save(element: record3)
-        _ = try sut.save(element: record4)
+        let record1 = TestModelEntity(name: "record1", age: 1)
+        let record2 = TestModelEntity(name: "record2", age: 12)
+        let record3 = TestModelEntity(name: "record3", age: 14)
+        let record4 = TestModelEntity(name: "record4", age: 17)
+        _ = try sut.add(element: record1)
+        _ = try sut.add(element: record2)
+        _ = try sut.add(element: record3)
+        _ = try sut.add(element: record4)
     }
     
 }

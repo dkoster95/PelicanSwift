@@ -1,4 +1,5 @@
 import Foundation
+import PelicanProtocols
 
 private extension KeychainAccesibility {
     var parseValue: CFString {

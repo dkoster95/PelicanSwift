@@ -1,4 +1,5 @@
 import Foundation
+import PelicanProtocols
 
 public struct UserDefaultsStore: KeyValueStore {
     private let userDefaults: UserDefaults

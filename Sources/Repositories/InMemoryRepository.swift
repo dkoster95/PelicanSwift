@@ -1,4 +1,5 @@
 import Foundation
+import PelicanProtocols
 
 public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
     public typealias Element = PersistibleObject
@@ -11,14 +12,14 @@ public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
         return elements
     }
     
-    public func save(element: PersistibleObject) throws -> PersistibleObject {
+    public func add(element: PersistibleObject) throws -> PersistibleObject {
         guard !contains(element: element) else { throw RepositoryError.duplicatedData }
         elements.append(element)
         return element
     }
     
     public func update(element: PersistibleObject) throws -> PersistibleObject {
-        guard let index = elements.firstIndex(of: element) else { return try save(element: element) }
+        guard let index = elements.firstIndex(of: element) else { return try add(element: element) }
         elements[index] = element
         return elements[index]
     }
@@ -36,8 +37,6 @@ public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
         elements.first(where: `where`)
     }
     
-    public var first: PersistibleObject? { elements.first }
-    
     public func contains(condition: (PersistibleObject) -> Bool) -> Bool {
         return elements.contains(where: condition)
     }
@@ -46,7 +45,7 @@ public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
         return elements.contains(element)
     }
     
-    public func empty() {
+    public func deleteAll() throws {
         elements.removeAll()
     }
     
