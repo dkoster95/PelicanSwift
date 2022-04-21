@@ -32,6 +32,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     public func update(element: PersistibleElement) throws -> PersistibleElement {
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
         fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
+        fetchRequest.fetchLimit = 1
         let results = try context.fetch(fetchRequest)
         guard let first = results.first else { throw RepositoryError.nonExistingData }
         element.merge(into: first)
@@ -42,6 +43,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     public func delete(element: PersistibleElement) {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            fetchRequest.fetchLimit = 1
             fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
             let results = try context.fetch(fetchRequest)
             guard let first = results.first else { return }
@@ -69,6 +71,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     public func first(where: (PersistibleElement) -> Bool) -> PersistibleElement? {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            fetchRequest.fetchLimit = 1
             let result = try context.fetch(fetchRequest)
                 .map { try PersistibleElement(fromManagedObject: $0) }
                 .first(where: `where`)
@@ -86,6 +89,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     public func contains(element: PersistibleElement) -> Bool {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+            fetchRequest.fetchLimit = 1
             fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
             let results = try context.fetch(fetchRequest)
             return !results.isEmpty

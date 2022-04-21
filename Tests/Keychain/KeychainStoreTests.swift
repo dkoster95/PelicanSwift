@@ -7,7 +7,7 @@
 //
 
 import XCTest
-import PelicanRepositories
+import PelicanKeychain
 import PelicanProtocols
 
 class KeychainStoreTests: XCTestCase {
