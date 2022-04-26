@@ -32,6 +32,8 @@ Here is a list of what features you expect out of Pelican
 - **Core Data repository implementation**
 - **In Memory Repository Implementation**
 - **Integration with Codable & Equatable**
+- **Integration with combine**
+- **Integration with Swift Concurrency**
 ---
 ## What not included ?
 
@@ -45,7 +47,7 @@ Here is a list of what features you expect out of Pelican
 
 # Why use a persistence module ?
 ---
-**SRP principle**: Having one responsibility (storing data) makes it easier to maintain, develop, scale and monitor.
+**SRP principle**: Having one responsibility and one reason to change (storing data) makes it easier to maintain, develop, scale and monitor.
 **OCP principle**: Pluggable architecture makes the app using it change-friendly by injecting repositories and stores rather than coupling to a concrete implementation.
 **DIP Principle**: Storage frameworks are low-level frameworks and our apps should be independent from frameworks, database engines or any external actor, our business entities should not depend on some storage framework to work, instead we should have a separate configuration of the entity so we can integrate it with the framework we are using.
 **low coupling**: Core Data is an old objc framework that is outdated if you compare it with other ORM's so, it makes sense that Apple could launch a new ORM soon, or a new Keychain Implentation, you dont want your app to be coupled to any of this when that happens.
@@ -53,20 +55,19 @@ Here is a list of what features you expect out of Pelican
 ```swift
 public protocol Repository {
     associatedtype Element: Equatable
-    func save(element: Element) throws -> Element
+    func add(element: Element) throws -> Element
     func update(element: Element) throws -> Element
-    func delete(element: Element)
+    func delete(element: Element) throws
     func filter(query: (Element) -> Bool) -> [Element]
-    func first(where: (Element) -> Bool) -> Element?
-    var first: Element? { get }
+    func first(where: @escaping (Element) -> Bool) -> Element?
     func contains(condition: (Element) -> Bool) -> Bool
     func contains(element: Element) -> Bool
     var isEmpty: Bool { get }
     var getAll: [Element] { get }
-    func empty()
+    func deleteAll() throws
 }
 ```
-Here you have the Repository protocol definition, yeah I know generic protocols are not easy to handle in Swift but there is also a Erasure Type to make it easier to operate.
+Here you have the Repository protocol definition, yeah I know generic protocols are not easy to handle in Swift but there is also an Erasure Type to make it easier to operate.
 ---
 ```swift 
 public extension Repository {
@@ -91,22 +92,13 @@ if you want your own repository implementation you just need to make your class 
 - iOS 13.0+ 
 - WatchOS 6.0+
 - TvOS 13.0+
-- MacOS 10.12+
+- MacOS 12.0+
 - Xcode 10.2+
 - Swift 5+
 
 ---
 
 ## Installation
-	### Carthage
-
-[Carthage](https://github.com/Carthage/Carthage) is a decentralized dependency manager that builds your dependencies and provides you with binary frameworks. To integrate Pelican into your Xcode project using Carthage, specify it in your `Cartfile`:
-
-```ogdl
-git "https://github.com/dkoster95/PelicanSwift.git" "1.0"
-```
-
-Run `carthage update` to build the framework (you can specify the platform) and then drag the executable `Pelican.framework` into your Xcode project.
 
 ### Manually
 

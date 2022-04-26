@@ -11,8 +11,10 @@ final class CoreDataRepositoryTests: XCTestCase {
     
     override func setUp() {
         let model = NSManagedObjectModel.mergedModel(from: [Bundle.module])
-        let context: CoreDataContext = CoreDataContext(modelName: "TestModel", managedObjectModel: model)
-        sut = CoreDataRepository<TestModelEntity>(entityName: "TestEntity", context: context.createNewBackgroundContext())
+        let cdContext: CoreDataContext = CoreDataContext(modelName: "TestModel", managedObjectModel: model)
+        let context = CDContext(context: cdContext.createNewBackgroundContext())
+        sut = CoreDataRepository<TestModelEntity>(entityName: "TestEntity",
+                                                  context: context)
     }
     
     func testIsEmpty() {

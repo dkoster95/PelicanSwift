@@ -22,7 +22,7 @@ public struct TestModelEntity: CoreDataEntity {
         self.age = age
     }
     
-    public var id: (key: String, value: CustomStringConvertible) { (key: "name", value: name) }
+    public var id: (key: String, value: NSObject) { (key: "name", value: name as NSObject) }
     
     let name: String
     let age: Double

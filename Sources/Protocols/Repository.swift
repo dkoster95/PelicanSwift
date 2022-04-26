@@ -8,7 +8,7 @@ public protocol Repository {
     func update(element: Element) throws -> Element
     func delete(element: Element) throws
     func filter(query: (Element) -> Bool) -> [Element]
-    func first(where: (Element) -> Bool) -> Element?
+    func first(where: @escaping (Element) -> Bool) -> Element?
     func contains(condition: (Element) -> Bool) -> Bool
     func contains(element: Element) -> Bool
     var isEmpty: Bool { get }

@@ -20,12 +20,12 @@ public struct KeychainStore: KeyValueStore {
     private let securityClass: KeychainSecurityClass
     private let logger: Logger
     
-    public init() {
+    public init(logger: Logger) {
         self.init(service: Bundle.main.bundleIdentifier ?? "",
                   groupId: nil,
                   accesibility: .afterFirstUnlock,
                   securityClass: .genericPassword,
-                  logger: Log())
+                  logger: logger)
     }
     
     public init(service: String? = Bundle.main.bundleIdentifier,

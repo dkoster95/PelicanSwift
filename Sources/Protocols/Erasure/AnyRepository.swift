@@ -47,8 +47,8 @@ public struct AnyRepository<Entity: Equatable>: Repository {
         return filterClosure(query)
     }
     
-    private let firstClosure: ((Entity) -> Bool) -> Entity?
-    public func first(where: (Entity) -> Bool) -> Entity? {
+    private let firstClosure: (@escaping (Entity) -> Bool) -> Entity?
+    public func first(where: @escaping (Entity) -> Bool) -> Entity? {
         return firstClosure(`where`)
     }
     
