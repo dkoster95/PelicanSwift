@@ -22,6 +22,7 @@ public class CoreDataContext {
         description.type = NSInMemoryStoreType
         //        description.shouldAddStoreAsynchronously = false
         container.persistentStoreDescriptions = [description]
+        container.newBackgroundContext()
         container.loadPersistentStores(completionHandler: { (_, error) in
             if let error = error as NSError? {
                 //log.error("Error with the persistent container: \(error)")
@@ -29,4 +30,10 @@ public class CoreDataContext {
         })
         return container
     }()
+    
+    func createNewBackgroundContext() -> NSManagedObjectContext {
+        let context = persistentContainer.newBackgroundContext()
+        context.automaticallyMergesChangesFromParent = true
+        return context
+    }
 }

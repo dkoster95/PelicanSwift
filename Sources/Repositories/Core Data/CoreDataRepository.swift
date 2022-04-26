@@ -23,10 +23,13 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     }
     
     public func add(element: PersistibleElement) throws -> PersistibleElement {
-        guard !contains(element: element) else { throw RepositoryError.duplicatedData }
-        _ = try element.asManagedObject(entityName: entityName, with: context)
-        try saveContext()
-        return element
+//        let cdcontext = CDContext(context: context)
+//        return try cdcontext.performAndWait { () -> PersistibleElement in
+            guard !contains(element: element) else { throw RepositoryError.duplicatedData }
+            _ = try element.asManagedObject(entityName: entityName, with: context)
+            try saveContext()
+            return element
+        //}
     }
     
     public func update(element: PersistibleElement) throws -> PersistibleElement {
