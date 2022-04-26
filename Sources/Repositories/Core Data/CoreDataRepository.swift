@@ -34,7 +34,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     public func update(element: PersistibleElement) throws -> PersistibleElement {
         return try context.performAndWait {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value)
+            fetchRequest.predicate = NSPredicate(format: "\(element.identifier.key) = %@", element.identifier.value)
             fetchRequest.fetchLimit = 1
             let results = try context.fetch(fetchRequest)
             guard let first = results.first else { throw RepositoryError.nonExistingData }
@@ -48,7 +48,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
         try context.performAndWait {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
             fetchRequest.fetchLimit = 1
-            fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value)
+            fetchRequest.predicate = NSPredicate(format: "\(element.identifier.key) = %@", element.identifier.value)
             let results = try context.fetch(fetchRequest)
             guard let first = results.first else { return }
             try context.delete(first)
@@ -96,7 +96,7 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
             do {
                 let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
                 fetchRequest.fetchLimit = 1
-                fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
+                fetchRequest.predicate = NSPredicate(format: "\(element.identifier.key) = %@", element.identifier.value.description)
                 let results = try context.fetch(fetchRequest)
                 return !results.isEmpty
             } catch {

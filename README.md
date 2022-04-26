@@ -28,12 +28,16 @@ Here is a list of what features you expect out of Pelican
 - **UserDefaults store to be used**
 - **Generic Repository protocol defined**
 - **Portability: MacoS, iOS, WatchOS and TVOS compatible** 
-- **Entities: Definition and Condiguration independence**
+- **Swift Package Manager Integration**
+- **Entities: Definition and Configuration independence (From NSManagedObject)**
+- **Independence from Repository to Context Configuration**
+- **Perform Sync and Async Transactions**
 - **Core Data repository implementation**
 - **In Memory Repository Implementation**
 - **Integration with Codable & Equatable**
-- **Integration with combine**
+- **Integration with Combine**
 - **Integration with Swift Concurrency**
+- **Package responsibilites split, Protocols, Repositories and Keychain libraries**
 ---
 ## What not included ?
 
@@ -41,12 +45,23 @@ Here is a list of what features you expect out of Pelican
 - **BufferOverflows check**
 - **Context Configuration not included, must be injected**
 - **Data Encryption not included**
+- **Batch Transactions not included in CoreData Repository**
+- **NSPredicate not supported by Repository as of now**
 
+---
+## When to expect a change ?
+
+- **New Repository implementation**
+- **New Repository Operation**
+- **Keychain update**
 
 ---
 
 # Why use a persistence module ?
 ---
+As a software architect, developer, engineer or however you wanna call yourself you have certain responsibilities when it comes to the code, its not just about writing code and unit tests without making sense.
+You NEED to think about some concepts or pillars in software engineering like Maintainability, Testability, Reliability, Scalability, Security, performance, traceability and the hability to monitor changes and behavior in your code.
+
 **SRP principle**: Having one responsibility and one reason to change (storing data) makes it easier to maintain, develop, scale and monitor.
 **OCP principle**: Pluggable architecture makes the app using it change-friendly by injecting repositories and stores rather than coupling to a concrete implementation.
 **DIP Principle**: Storage frameworks are low-level frameworks and our apps should be independent from frameworks, database engines or any external actor, our business entities should not depend on some storage framework to work, instead we should have a separate configuration of the entity so we can integrate it with the framework we are using.

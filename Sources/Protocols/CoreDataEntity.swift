@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 
 public protocol CDEntityIdentifiable {
-    var id: (key: String, value: NSObject) { get }
+    var identifier: (key: String, value: NSObject) { get }
 }
 
 public protocol CoreDataEntity: Equatable, CDEntityIdentifiable {

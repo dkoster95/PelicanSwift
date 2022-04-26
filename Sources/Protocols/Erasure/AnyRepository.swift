@@ -1,11 +1,3 @@
-//
-//  AnyRepository.swift
-//  Pelican
-//
-//  Created by Daniel Koster on 2/26/22.
-//  Copyright © 2022 Daniel Koster. All rights reserved.
-//
-
 import Foundation
 
 public struct AnyRepository<Entity: Equatable>: Repository {
