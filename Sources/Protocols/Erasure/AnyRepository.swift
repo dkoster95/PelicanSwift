@@ -37,9 +37,9 @@ public struct AnyRepository<Entity: Equatable>: Repository {
         return try updateClosure(element)
     }
     
-    private let deleteClosure: (Entity) -> Void
-    public func delete(element: Entity) {
-        deleteClosure(element)
+    private let deleteClosure: (Entity) throws -> Void
+    public func delete(element: Entity) throws {
+        try deleteClosure(element)
     }
     
     private let filterClosure: ((Entity) -> Bool) -> [Entity]

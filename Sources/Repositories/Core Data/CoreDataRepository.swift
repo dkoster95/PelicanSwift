@@ -40,18 +40,14 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
         return element
     }
     
-    public func delete(element: PersistibleElement) {
-        do {
-            let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            fetchRequest.fetchLimit = 1
-            fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
-            let results = try context.fetch(fetchRequest)
-            guard let first = results.first else { return }
-            context.delete(first)
-            try saveContext()
-        } catch {
-            print(error)
-        }
+    public func delete(element: PersistibleElement) throws {
+        let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
+        fetchRequest.fetchLimit = 1
+        fetchRequest.predicate = NSPredicate(format: "\(element.id.key) = %@", element.id.value.description)
+        let results = try context.fetch(fetchRequest)
+        guard let first = results.first else { return }
+        context.delete(first)
+        try saveContext()
     }
     
     public var getAll: [PersistibleElement] {
@@ -71,7 +67,6 @@ public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: Repository
     public func first(where: (PersistibleElement) -> Bool) -> PersistibleElement? {
         do {
             let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: entityName)
-            fetchRequest.fetchLimit = 1
             let result = try context.fetch(fetchRequest)
                 .map { try PersistibleElement(fromManagedObject: $0) }
                 .first(where: `where`)

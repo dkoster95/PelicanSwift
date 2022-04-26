@@ -25,7 +25,7 @@ class AnyRepositoryTests: XCTestCase {
     }
     
     func test_delete() throws {
-        sut.delete(element: 1)
+        try sut.delete(element: 1)
         
         XCTAssertTrue(mockRepository.deleteCalled)
     }

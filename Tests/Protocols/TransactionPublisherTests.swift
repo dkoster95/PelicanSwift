@@ -70,5 +70,5 @@ final class TransactionPublisherTests: XCTestCase {
     }
 }
 
-private struct AnyError: Error {
+struct AnyError: Error {
 }

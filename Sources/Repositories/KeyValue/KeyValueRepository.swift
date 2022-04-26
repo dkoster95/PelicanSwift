@@ -46,7 +46,7 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
         return updatedData
     }
     
-    public func delete(element: CodableEntity) {
+    public func delete(element: CodableEntity) throws {
         _ = store.delete(key: key)
     }
     

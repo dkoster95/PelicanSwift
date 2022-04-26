@@ -67,8 +67,8 @@ class KeyValueRepositoryTests: XCTestCase {
         XCTAssertEqual([], result)
     }
     
-    func test_delete() {
-        sut.delete(element: MockEntity(parameter: "12", number: 1))
+    func test_delete() throws {
+        try sut.delete(element: MockEntity(parameter: "12", number: 1))
         
         XCTAssertTrue(mockStore.didDelete)
     }

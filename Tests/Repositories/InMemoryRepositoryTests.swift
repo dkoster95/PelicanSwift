@@ -22,7 +22,7 @@ class InMemoryRepositoryTests: XCTestCase {
         XCTAssertEqual(2, try subject.add(element: 2))
         XCTAssertEqual(subject.getAll[0], 2)
         XCTAssertFalse(subject.isEmpty)
-        subject.delete(element: 2)
+        try subject.delete(element: 2)
         XCTAssertTrue(subject.isEmpty)
     }
     

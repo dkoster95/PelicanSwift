@@ -24,7 +24,7 @@ public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
         return elements[index]
     }
     
-    public func delete(element: PersistibleObject) {
+    public func delete(element: PersistibleObject) throws {
         guard let index = elements.firstIndex(of: element) else { return }
         elements.remove(at: index)
     }

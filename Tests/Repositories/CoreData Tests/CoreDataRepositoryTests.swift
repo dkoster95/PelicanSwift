@@ -1,10 +1,13 @@
 import XCTest
 @testable import PelicanRepositories
+import PelicanProtocols
 import CoreData
+import Combine
 
 final class CoreDataRepositoryTests: XCTestCase {
     
     private var sut: CoreDataRepository<TestModelEntity>!
+    private var disposeBag = Set<AnyCancellable>()
     
     override func setUp() {
         let model = NSManagedObjectModel.mergedModel(from: [Bundle.module])
@@ -52,9 +55,9 @@ final class CoreDataRepositoryTests: XCTestCase {
         XCTAssertNotEqual(savedResult.age, resultTransaction.age)
     }
     
-    func test_delete_whenRecordNotExists_expectNoResult() {
+    func test_delete_whenRecordNotExists_expectNoResult() throws {
         let test = TestModelEntity(name: "name", age: 21)
-        sut.delete(element: test)
+        try sut.delete(element: test)
         let result = sut.isEmpty
         
         XCTAssertTrue(result)
@@ -65,7 +68,7 @@ final class CoreDataRepositoryTests: XCTestCase {
         _ = try sut.add(element: test)
         
         let recordSaved = sut.getAll[0]
-        sut.delete(element: test)
+        try sut.delete(element: test)
         let result = sut.isEmpty
         
         XCTAssertEqual(test, recordSaved)
@@ -148,6 +151,146 @@ final class CoreDataRepositoryTests: XCTestCase {
         
         XCTAssertFalse(recordsLoaded)
         XCTAssertTrue(result)
+    }
+    
+    /// Transaction function test methods
+
+    func test_addTransaction_whenNoRepetead_expectTransactionToBePerformedCorrectly() throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.add(model)
+        let transactionResult = try transaction.perform()
+        
+        XCTAssertEqual(model, transactionResult)
+        
+    }
+    
+    func test_addTransaction_whenRepetead_expectTransactionToBePerformedCorrectly() throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        _ = try sut.add(element: model)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.add(model)
+        XCTAssertThrowsError(try transaction.perform())
+    }
+    
+    func test_addAsyncTransaction_whenNoRepetead_expectTransactionToBePerformedCorrectly() async throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.add(model)
+        let result = try await transaction.performAsync()
+        
+        XCTAssertEqual(model, result)
+    }
+    
+    func test_addTransactionPublisher_whenNoRepetead_expectTransactionToBePerformedCorrectly() throws {
+        let expectation = XCTestExpectation()
+        let model = TestModelEntity(name: "name", age: 12)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.add(model)
+        transaction.publisher.sink(receiveCompletion: { completion in
+            switch completion {
+            case .finished: expectation.fulfill()
+            case .failure(_ ): XCTAssertFalse(true)
+            }
+        }, receiveValue: { value in
+            XCTAssertEqual(model, value)
+            
+        }).store(in: &disposeBag)
+        wait(for: [expectation], timeout: 1)
+    }
+    
+    func test_updateTransaction_whenNoRepetead_expectTransactionToBePerformedWithError() throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        _ = try sut.add(element: model)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.update(model)
+        let transactionResult = try transaction.perform()
+        
+        XCTAssertEqual(model, transactionResult)
+        
+    }
+    
+    func test_updateTransaction_whenRepetead_expectTransactionToBePerformedCorrectly() throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.update(model)
+        XCTAssertThrowsError(try transaction.perform())
+    }
+    
+    func test_updateAsyncTransaction_whenNoRepetead_expectTransactionToBePerformedCorrectly() async throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        _ = try sut.add(element: model)
+        
+        let transaction: AnyTransaction<TestModelEntity> = try sut.update(model)
+        let result = try await transaction.performAsync()
+        
+        XCTAssertEqual(model, result)
+    }
+    
+    func test_deleteTransaction_whenNoRepetead_expectTransactionToBePerformedWithError() throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        _ = try sut.add(element: model)
+        
+        let transaction: AnyTransaction<Void> = try sut.delete(model)
+        try transaction.perform()
+        
+        XCTAssertTrue(sut.isEmpty)
+        
+    }
+    
+    func test_deleteTransaction_whenNoElement_expectTransactionToBePerformedCorrectly() throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        
+        let transaction: AnyTransaction<Void> = try sut.delete(model)
+        try transaction.perform()
+        
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_deleteAsyncTransaction_whenNoRepetead_expectTransactionToBePerformedCorrectly() async throws {
+        let model = TestModelEntity(name: "name", age: 12)
+        _ = try sut.add(element: model)
+        
+        let transaction: AnyTransaction<Void> = try sut.delete(model)
+        try await transaction.performAsync()
+        
+        XCTAssertTrue(sut.isEmpty)
+    }
+    
+    func test_fetchWithTransaction_whenRecordsMatchQuery_expectTransactionToReturnCorrectResults() throws {
+        try loadRecords()
+        
+        let transaction: AnyTransaction<[TestModelEntity]> = try sut.fetch { $0.name == "record3" }
+        let result = try transaction.perform()
+        
+        XCTAssertEqual([TestModelEntity(name: "record3", age: 14)], result)
+    }
+    
+    func test_fetchWithTransaction_whenNoRecordsMatchQuery_expectTransactionToReturnEmptyResults() throws {
+        try loadRecords()
+        
+        let transaction: AnyTransaction<[TestModelEntity]> = try sut.fetch { $0.name == "record6" }
+        let result = try transaction.perform()
+        
+        XCTAssertTrue(result.isEmpty)
+    }
+    
+    func test_firstWithTransaction_whenRecordsMatchQuery_expectTransactionToReturnNilResults() throws {
+        try loadRecords()
+        
+        let transaction: AnyTransaction<TestModelEntity?> = try sut.first { $0.name == "record6" }
+        let result = try transaction.perform()
+        
+        XCTAssertNil(result)
+    }
+    
+    func test_firstWithTransaction_whenRecordsMatchQuery_expectTransactionToReturnCorrectResult() throws {
+        try loadRecords()
+        
+        let transaction: AnyTransaction<TestModelEntity?> = try sut.first { $0.name == "record1" }
+        let result = try transaction.perform()
+        
+        XCTAssertNotNil(result)
     }
     
     private func loadRecords() throws {
