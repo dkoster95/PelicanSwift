@@ -7,99 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		7F6E7C8022FBB6F30083BD1D /* Pelican.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7F6E7C7622FBB6F30083BD1D /* Pelican.framework */; };
-		7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */; };
-		7F6E7C8722FBB6F30083BD1D /* Pelican.h in Headers */ = {isa = PBXBuildFile; fileRef = 7F6E7C7922FBB6F30083BD1D /* Pelican.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		7F6E7C9E22FBB7180083BD1D /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
-		7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
-		7F6E7CA022FBB7180083BD1D /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
-		7F6E7CA122FBB7180083BD1D /* PelicanRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */; };
-		7F6E7CA322FBB7180083BD1D /* LoggerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */; };
-		7F6E7CA422FBB7180083BD1D /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
-		7F6E7CA522FBB7180083BD1D /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */; };
-		7F6E7CA622FBB7180083BD1D /* KeychainAccesibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */; };
-		7F6E7CA722FBB7180083BD1D /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */; };
 		7F6E7CAF22FBB75F0083BD1D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7CAE22FBB75F0083BD1D /* AppDelegate.swift */; };
 		7F6E7CB122FBB75F0083BD1D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7CB022FBB75F0083BD1D /* ViewController.swift */; };
 		7F6E7CB422FBB75F0083BD1D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7CB222FBB75F0083BD1D /* Main.storyboard */; };
 		7F6E7CB922FBB7600083BD1D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7CB822FBB7600083BD1D /* Assets.xcassets */; };
 		7F6E7CBC22FBB7600083BD1D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7F6E7CBA22FBB7600083BD1D /* LaunchScreen.storyboard */; };
-		7F6E7CC222FBB7740083BD1D /* Person.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7CC122FBB7740083BD1D /* Person.swift */; };
-		7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */; };
-		7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */; };
-		7F73C41123D757A10065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
-		7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */; };
-		7F73C42723D79A150065BA4A /* Test+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */; };
-		7F73C42823D79A150065BA4A /* Test+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */; };
-		7F73C42923D79A3D0065BA4A /* TestModel.xcdatamodeld in Resources */ = {isa = PBXBuildFile; fileRef = 7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */; };
-		7F73C43723D79AB70065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
-		7F73C43823D79AB70065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
-		7F73C43923D79AB70065BA4A /* PelicanRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */; };
-		7F73C43A23D79AB70065BA4A /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
-		7F73C43B23D79AB70065BA4A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */; };
-		7F73C43C23D79AB70065BA4A /* KeychainAccesibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */; };
-		7F73C43D23D79AB70065BA4A /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */; };
-		7F73C43E23D79AB70065BA4A /* LoggerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */; };
-		7F73C43F23D79AB70065BA4A /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
-		7F73C44023D79AB70065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
-		7F73C44E23D79B720065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
-		7F73C44F23D79B720065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
-		7F73C45023D79B720065BA4A /* PelicanRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */; };
-		7F73C45123D79B720065BA4A /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
-		7F73C45223D79B720065BA4A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */; };
-		7F73C45323D79B720065BA4A /* KeychainAccesibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */; };
-		7F73C45423D79B720065BA4A /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */; };
-		7F73C45523D79B720065BA4A /* LoggerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */; };
-		7F73C45623D79B720065BA4A /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
-		7F73C45723D79B720065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
-		7F73C46523D79B910065BA4A /* CoreDataContext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */; };
-		7F73C46623D79B910065BA4A /* CoreDataRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */; };
-		7F73C46723D79B910065BA4A /* PelicanRepositoryError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */; };
-		7F73C46823D79B910065BA4A /* KeychainKeys.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */; };
-		7F73C46923D79B910065BA4A /* KeychainWrapper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */; };
-		7F73C46A23D79B910065BA4A /* KeychainAccesibility.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */; };
-		7F73C46B23D79B910065BA4A /* KeychainRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */; };
-		7F73C46C23D79B910065BA4A /* LoggerCustom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */; };
-		7F73C46D23D79B910065BA4A /* PelicanRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */; };
-		7F73C46E23D79B910065BA4A /* UserDefaultsRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */; };
-		7FC5F1F8251A8CCD00AF555C /* PelicanRespositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */; };
-		7FC5F200251A904200AF555C /* InMemoryRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */; };
-		7FC5F202251A917600AF555C /* InMemoryRepositoryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		7F6E7C8122FBB6F30083BD1D /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F6E7C6D22FBB6F30083BD1D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7F6E7C7522FBB6F30083BD1D;
-			remoteInfo = Pelican;
-		};
-		7F73C40E23D751960065BA4A /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 7F6E7C6D22FBB6F30083BD1D /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 7F6E7CAB22FBB75F0083BD1D;
-			remoteInfo = TestApp;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
-		7F6E7C7622FBB6F30083BD1D /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F6E7C7922FBB6F30083BD1D /* Pelican.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Pelican.h; sourceTree = "<group>"; };
-		7F6E7C7A22FBB6F30083BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F6E7C7F22FBB6F30083BD1D /* PelicanTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PelicanTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PelicanTests.swift; sourceTree = "<group>"; };
-		7F6E7C8622FBB6F30083BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PelicanRepository.swift; sourceTree = "<group>"; };
-		7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataContext.swift; sourceTree = "<group>"; };
-		7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataRepository.swift; sourceTree = "<group>"; };
-		7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PelicanRepositoryError.swift; sourceTree = "<group>"; };
-		7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerCustom.swift; sourceTree = "<group>"; };
-		7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainKeys.swift; sourceTree = "<group>"; };
-		7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainWrapper.swift; sourceTree = "<group>"; };
-		7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainAccesibility.swift; sourceTree = "<group>"; };
-		7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KeychainRepository.swift; sourceTree = "<group>"; };
 		7F6E7CAC22FBB75F0083BD1D /* TestApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TestApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		7F6E7CAE22FBB75F0083BD1D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		7F6E7CB022FBB75F0083BD1D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -107,61 +22,11 @@
 		7F6E7CB822FBB7600083BD1D /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7F6E7CBB22FBB7600083BD1D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7F6E7CBD22FBB7600083BD1D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		7F6E7CC122FBB7740083BD1D /* Person.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Person.swift; sourceTree = "<group>"; };
 		7F6E7CC322FBB7A60083BD1D /* TestApp.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = TestApp.entitlements; sourceTree = "<group>"; };
-		7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainLayerTests.swift; sourceTree = "<group>"; };
-		7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultsLayerTests.swift; sourceTree = "<group>"; };
-		7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDefaultsRepository.swift; sourceTree = "<group>"; };
-		7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Test.xcdatamodel; sourceTree = "<group>"; };
-		7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataClass.swift"; sourceTree = "<group>"; };
-		7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Test+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataRepositoryTests.swift; sourceTree = "<group>"; };
-		7F73C42F23D79AAA0065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F73C44623D79B230065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7F73C45D23D79B880065BA4A /* Pelican.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pelican.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PelicanRespositoryTests.swift; sourceTree = "<group>"; };
-		7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepository.swift; sourceTree = "<group>"; };
-		7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InMemoryRepositoryTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		7F6E7C7322FBB6F30083BD1D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F6E7C7C22FBB6F30083BD1D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F6E7C8022FBB6F30083BD1D /* Pelican.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7F6E7CA922FBB75F0083BD1D /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C42C23D79AAA0065BA4A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C44323D79B230065BA4A /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C45A23D79B880065BA4A /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -174,8 +39,6 @@
 		7F6E7C6C22FBB6F30083BD1D = {
 			isa = PBXGroup;
 			children = (
-				7F6E7C7822FBB6F30083BD1D /* Sources */,
-				7F6E7C8322FBB6F30083BD1D /* Tests */,
 				7F6E7CAD22FBB75F0083BD1D /* TestApp */,
 				7F6E7C7722FBB6F30083BD1D /* Products */,
 			);
@@ -184,80 +47,9 @@
 		7F6E7C7722FBB6F30083BD1D /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				7F6E7C7622FBB6F30083BD1D /* Pelican.framework */,
-				7F6E7C7F22FBB6F30083BD1D /* PelicanTests.xctest */,
 				7F6E7CAC22FBB75F0083BD1D /* TestApp.app */,
-				7F73C42F23D79AAA0065BA4A /* Pelican.framework */,
-				7F73C44623D79B230065BA4A /* Pelican.framework */,
-				7F73C45D23D79B880065BA4A /* Pelican.framework */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		7F6E7C7822FBB6F30083BD1D /* Sources */ = {
-			isa = PBXGroup;
-			children = (
-				7F6E7C9122FBB7180083BD1D /* Core Data */,
-				7F6E7C9422FBB7180083BD1D /* Errors */,
-				7F6E7C9922FBB7180083BD1D /* Keychain */,
-				7F6E7C9822FBB7180083BD1D /* LoggerCustom.swift */,
-				7F6E7C9022FBB7180083BD1D /* PelicanRepository.swift */,
-				7F6E7C9622FBB7180083BD1D /* UserDefaults */,
-				7F6E7C7922FBB6F30083BD1D /* Pelican.h */,
-				7F6E7C7A22FBB6F30083BD1D /* Info.plist */,
-				7FC5F1FF251A904200AF555C /* InMemoryRepository.swift */,
-			);
-			path = Sources;
-			sourceTree = "<group>";
-		};
-		7F6E7C8322FBB6F30083BD1D /* Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7F73C42423D75D260065BA4A /* CoreData Tests */,
-				7F6E7C8422FBB6F30083BD1D /* PelicanTests.swift */,
-				7F6E7C8622FBB6F30083BD1D /* Info.plist */,
-				7F73C40A23D748710065BA4A /* KeychainLayerTests.swift */,
-				7F73C40C23D748860065BA4A /* UserDefaultsLayerTests.swift */,
-				7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */,
-				7FC5F201251A917600AF555C /* InMemoryRepositoryTests.swift */,
-			);
-			path = Tests;
-			sourceTree = "<group>";
-		};
-		7F6E7C9122FBB7180083BD1D /* Core Data */ = {
-			isa = PBXGroup;
-			children = (
-				7F6E7C9222FBB7180083BD1D /* CoreDataContext.swift */,
-				7F6E7C9322FBB7180083BD1D /* CoreDataRepository.swift */,
-			);
-			path = "Core Data";
-			sourceTree = "<group>";
-		};
-		7F6E7C9422FBB7180083BD1D /* Errors */ = {
-			isa = PBXGroup;
-			children = (
-				7F6E7C9522FBB7180083BD1D /* PelicanRepositoryError.swift */,
-			);
-			path = Errors;
-			sourceTree = "<group>";
-		};
-		7F6E7C9622FBB7180083BD1D /* UserDefaults */ = {
-			isa = PBXGroup;
-			children = (
-				7F73C41023D757A10065BA4A /* UserDefaultsRepository.swift */,
-			);
-			path = UserDefaults;
-			sourceTree = "<group>";
-		};
-		7F6E7C9922FBB7180083BD1D /* Keychain */ = {
-			isa = PBXGroup;
-			children = (
-				7F6E7C9A22FBB7180083BD1D /* KeychainKeys.swift */,
-				7F6E7C9B22FBB7180083BD1D /* KeychainWrapper.swift */,
-				7F6E7C9C22FBB7180083BD1D /* KeychainAccesibility.swift */,
-				7F6E7C9D22FBB7180083BD1D /* KeychainRepository.swift */,
-			);
-			path = Keychain;
 			sourceTree = "<group>";
 		};
 		7F6E7CAD22FBB75F0083BD1D /* TestApp */ = {
@@ -270,95 +62,13 @@
 				7F6E7CB822FBB7600083BD1D /* Assets.xcassets */,
 				7F6E7CBA22FBB7600083BD1D /* LaunchScreen.storyboard */,
 				7F6E7CBD22FBB7600083BD1D /* Info.plist */,
-				7F6E7CC122FBB7740083BD1D /* Person.swift */,
 			);
 			path = TestApp;
 			sourceTree = "<group>";
 		};
-		7F73C42423D75D260065BA4A /* CoreData Tests */ = {
-			isa = PBXGroup;
-			children = (
-				7F73C41F23D75B2E0065BA4A /* Test+CoreDataClass.swift */,
-				7F73C42023D75B2E0065BA4A /* Test+CoreDataProperties.swift */,
-				7F73C42523D75D3D0065BA4A /* CoreDataRepositoryTests.swift */,
-				7FC5F1F7251A8CCD00AF555C /* PelicanRespositoryTests.swift */,
-			);
-			path = "CoreData Tests";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
-/* Begin PBXHeadersBuildPhase section */
-		7F6E7C7122FBB6F30083BD1D /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F6E7C8722FBB6F30083BD1D /* Pelican.h in Headers */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C42A23D79AAA0065BA4A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C44123D79B230065BA4A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C45823D79B880065BA4A /* Headers */ = {
-			isa = PBXHeadersBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-/* End PBXHeadersBuildPhase section */
-
 /* Begin PBXNativeTarget section */
-		7F6E7C7522FBB6F30083BD1D /* Pelican */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F6E7C8A22FBB6F30083BD1D /* Build configuration list for PBXNativeTarget "Pelican" */;
-			buildPhases = (
-				7F6E7C7122FBB6F30083BD1D /* Headers */,
-				7F6E7C7222FBB6F30083BD1D /* Sources */,
-				7F6E7C7322FBB6F30083BD1D /* Frameworks */,
-				7F6E7C7422FBB6F30083BD1D /* Resources */,
-				7FC5F1F22519801300AF555C /* ShellScript */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = Pelican;
-			productName = Pelican;
-			productReference = 7F6E7C7622FBB6F30083BD1D /* Pelican.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7F6E7C7E22FBB6F30083BD1D /* PelicanTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F6E7C8D22FBB6F30083BD1D /* Build configuration list for PBXNativeTarget "PelicanTests" */;
-			buildPhases = (
-				7F6E7C7B22FBB6F30083BD1D /* Sources */,
-				7F6E7C7C22FBB6F30083BD1D /* Frameworks */,
-				7F6E7C7D22FBB6F30083BD1D /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				7F6E7C8222FBB6F30083BD1D /* PBXTargetDependency */,
-				7F73C40F23D751960065BA4A /* PBXTargetDependency */,
-			);
-			name = PelicanTests;
-			productName = PelicanTests;
-			productReference = 7F6E7C7F22FBB6F30083BD1D /* PelicanTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 		7F6E7CAB22FBB75F0083BD1D /* TestApp */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 7F6E7CBE22FBB7610083BD1D /* Build configuration list for PBXNativeTarget "TestApp" */;
@@ -376,60 +86,6 @@
 			productReference = 7F6E7CAC22FBB75F0083BD1D /* TestApp.app */;
 			productType = "com.apple.product-type.application";
 		};
-		7F73C42E23D79AAA0065BA4A /* Pelican MacOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F73C43423D79AAA0065BA4A /* Build configuration list for PBXNativeTarget "Pelican MacOS" */;
-			buildPhases = (
-				7F73C42A23D79AAA0065BA4A /* Headers */,
-				7F73C42B23D79AAA0065BA4A /* Sources */,
-				7F73C42C23D79AAA0065BA4A /* Frameworks */,
-				7F73C42D23D79AAA0065BA4A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pelican MacOS";
-			productName = "Pelican MacOs";
-			productReference = 7F73C42F23D79AAA0065BA4A /* Pelican.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7F73C44523D79B230065BA4A /* Pelican WatchOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F73C44B23D79B230065BA4A /* Build configuration list for PBXNativeTarget "Pelican WatchOS" */;
-			buildPhases = (
-				7F73C44123D79B230065BA4A /* Headers */,
-				7F73C44223D79B230065BA4A /* Sources */,
-				7F73C44323D79B230065BA4A /* Frameworks */,
-				7F73C44423D79B230065BA4A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pelican WatchOS";
-			productName = "Pelican WatchOS";
-			productReference = 7F73C44623D79B230065BA4A /* Pelican.framework */;
-			productType = "com.apple.product-type.framework";
-		};
-		7F73C45C23D79B880065BA4A /* Pelican TvOS */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 7F73C46223D79B880065BA4A /* Build configuration list for PBXNativeTarget "Pelican TvOS" */;
-			buildPhases = (
-				7F73C45823D79B880065BA4A /* Headers */,
-				7F73C45923D79B880065BA4A /* Sources */,
-				7F73C45A23D79B880065BA4A /* Frameworks */,
-				7F73C45B23D79B880065BA4A /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-			);
-			name = "Pelican TvOS";
-			productName = "Pelican TvOS";
-			productReference = 7F73C45D23D79B880065BA4A /* Pelican.framework */;
-			productType = "com.apple.product-type.framework";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -437,17 +93,9 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1020;
-				LastUpgradeCheck = 1020;
+				LastUpgradeCheck = 1200;
 				ORGANIZATIONNAME = "Daniel Koster";
 				TargetAttributes = {
-					7F6E7C7522FBB6F30083BD1D = {
-						CreatedOnToolsVersion = 10.2.1;
-						LastSwiftMigration = 1020;
-					};
-					7F6E7C7E22FBB6F30083BD1D = {
-						CreatedOnToolsVersion = 10.2.1;
-						TestTargetID = 7F6E7CAB22FBB75F0083BD1D;
-					};
 					7F6E7CAB22FBB75F0083BD1D = {
 						CreatedOnToolsVersion = 10.2.1;
 						SystemCapabilities = {
@@ -455,15 +103,6 @@
 								enabled = 1;
 							};
 						};
-					};
-					7F73C42E23D79AAA0065BA4A = {
-						CreatedOnToolsVersion = 11.1;
-					};
-					7F73C44523D79B230065BA4A = {
-						CreatedOnToolsVersion = 11.1;
-					};
-					7F73C45C23D79B880065BA4A = {
-						CreatedOnToolsVersion = 11.1;
 					};
 				};
 			};
@@ -480,194 +119,35 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				7F6E7C7522FBB6F30083BD1D /* Pelican */,
-				7F6E7C7E22FBB6F30083BD1D /* PelicanTests */,
 				7F6E7CAB22FBB75F0083BD1D /* TestApp */,
-				7F73C42E23D79AAA0065BA4A /* Pelican MacOS */,
-				7F73C44523D79B230065BA4A /* Pelican WatchOS */,
-				7F73C45C23D79B880065BA4A /* Pelican TvOS */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		7F6E7C7422FBB6F30083BD1D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F6E7C7D22FBB6F30083BD1D /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7F6E7CAA22FBB75F0083BD1D /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				7F73C42923D79A3D0065BA4A /* TestModel.xcdatamodeld in Resources */,
 				7F6E7CBC22FBB7600083BD1D /* LaunchScreen.storyboard in Resources */,
 				7F6E7CB922FBB7600083BD1D /* Assets.xcassets in Resources */,
 				7F6E7CB422FBB75F0083BD1D /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		7F73C42D23D79AAA0065BA4A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C44423D79B230065BA4A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C45B23D79B880065BA4A /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXResourcesBuildPhase section */
 
-/* Begin PBXShellScriptBuildPhase section */
-		7FC5F1F22519801300AF555C /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if which swiftlint >/dev/null; then\n  swiftlint\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
-
 /* Begin PBXSourcesBuildPhase section */
-		7F6E7C7222FBB6F30083BD1D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F6E7CA322FBB7180083BD1D /* LoggerCustom.swift in Sources */,
-				7F73C41123D757A10065BA4A /* UserDefaultsRepository.swift in Sources */,
-				7F6E7C9F22FBB7180083BD1D /* CoreDataContext.swift in Sources */,
-				7F6E7CA622FBB7180083BD1D /* KeychainAccesibility.swift in Sources */,
-				7FC5F200251A904200AF555C /* InMemoryRepository.swift in Sources */,
-				7F6E7CA022FBB7180083BD1D /* CoreDataRepository.swift in Sources */,
-				7F6E7CA122FBB7180083BD1D /* PelicanRepositoryError.swift in Sources */,
-				7F6E7CA522FBB7180083BD1D /* KeychainWrapper.swift in Sources */,
-				7F6E7C9E22FBB7180083BD1D /* PelicanRepository.swift in Sources */,
-				7F6E7CA422FBB7180083BD1D /* KeychainKeys.swift in Sources */,
-				7F6E7CA722FBB7180083BD1D /* KeychainRepository.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F6E7C7B22FBB6F30083BD1D /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F73C40D23D748860065BA4A /* UserDefaultsLayerTests.swift in Sources */,
-				7F6E7C8522FBB6F30083BD1D /* PelicanTests.swift in Sources */,
-				7FC5F1F8251A8CCD00AF555C /* PelicanRespositoryTests.swift in Sources */,
-				7FC5F202251A917600AF555C /* InMemoryRepositoryTests.swift in Sources */,
-				7F73C40B23D748710065BA4A /* KeychainLayerTests.swift in Sources */,
-				7F73C42623D75D3D0065BA4A /* CoreDataRepositoryTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		7F6E7CA822FBB75F0083BD1D /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 				7F6E7CB122FBB75F0083BD1D /* ViewController.swift in Sources */,
-				7F6E7CC222FBB7740083BD1D /* Person.swift in Sources */,
 				7F6E7CAF22FBB75F0083BD1D /* AppDelegate.swift in Sources */,
-				7F73C42723D79A150065BA4A /* Test+CoreDataClass.swift in Sources */,
-				7F73C42823D79A150065BA4A /* Test+CoreDataProperties.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C42B23D79AAA0065BA4A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F73C43723D79AB70065BA4A /* CoreDataContext.swift in Sources */,
-				7F73C43823D79AB70065BA4A /* CoreDataRepository.swift in Sources */,
-				7F73C43923D79AB70065BA4A /* PelicanRepositoryError.swift in Sources */,
-				7F73C43A23D79AB70065BA4A /* KeychainKeys.swift in Sources */,
-				7F73C43B23D79AB70065BA4A /* KeychainWrapper.swift in Sources */,
-				7F73C43C23D79AB70065BA4A /* KeychainAccesibility.swift in Sources */,
-				7F73C43D23D79AB70065BA4A /* KeychainRepository.swift in Sources */,
-				7F73C43E23D79AB70065BA4A /* LoggerCustom.swift in Sources */,
-				7F73C43F23D79AB70065BA4A /* PelicanRepository.swift in Sources */,
-				7F73C44023D79AB70065BA4A /* UserDefaultsRepository.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C44223D79B230065BA4A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F73C44E23D79B720065BA4A /* CoreDataContext.swift in Sources */,
-				7F73C44F23D79B720065BA4A /* CoreDataRepository.swift in Sources */,
-				7F73C45023D79B720065BA4A /* PelicanRepositoryError.swift in Sources */,
-				7F73C45123D79B720065BA4A /* KeychainKeys.swift in Sources */,
-				7F73C45223D79B720065BA4A /* KeychainWrapper.swift in Sources */,
-				7F73C45323D79B720065BA4A /* KeychainAccesibility.swift in Sources */,
-				7F73C45423D79B720065BA4A /* KeychainRepository.swift in Sources */,
-				7F73C45523D79B720065BA4A /* LoggerCustom.swift in Sources */,
-				7F73C45623D79B720065BA4A /* PelicanRepository.swift in Sources */,
-				7F73C45723D79B720065BA4A /* UserDefaultsRepository.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		7F73C45923D79B880065BA4A /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				7F73C46523D79B910065BA4A /* CoreDataContext.swift in Sources */,
-				7F73C46623D79B910065BA4A /* CoreDataRepository.swift in Sources */,
-				7F73C46723D79B910065BA4A /* PelicanRepositoryError.swift in Sources */,
-				7F73C46823D79B910065BA4A /* KeychainKeys.swift in Sources */,
-				7F73C46923D79B910065BA4A /* KeychainWrapper.swift in Sources */,
-				7F73C46A23D79B910065BA4A /* KeychainAccesibility.swift in Sources */,
-				7F73C46B23D79B910065BA4A /* KeychainRepository.swift in Sources */,
-				7F73C46C23D79B910065BA4A /* LoggerCustom.swift in Sources */,
-				7F73C46D23D79B910065BA4A /* PelicanRepository.swift in Sources */,
-				7F73C46E23D79B910065BA4A /* UserDefaultsRepository.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		7F6E7C8222FBB6F30083BD1D /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7F6E7C7522FBB6F30083BD1D /* Pelican */;
-			targetProxy = 7F6E7C8122FBB6F30083BD1D /* PBXContainerItemProxy */;
-		};
-		7F73C40F23D751960065BA4A /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 7F6E7CAB22FBB75F0083BD1D /* TestApp */;
-			targetProxy = 7F73C40E23D751960065BA4A /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		7F6E7CB222FBB75F0083BD1D /* Main.storyboard */ = {
@@ -715,6 +195,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -741,7 +222,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -779,6 +260,7 @@
 				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
@@ -799,7 +281,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 12.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -808,103 +290,6 @@
 				VALIDATE_PRODUCT = YES;
 				VERSIONING_SYSTEM = "apple-generic";
 				VERSION_INFO_PREFIX = "";
-			};
-			name = Release;
-		};
-		7F6E7C8B22FBB6F30083BD1D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = DKO.Pelican;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Debug;
-		};
-		7F6E7C8C22FBB6F30083BD1D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "";
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = DKO.Pelican;
-				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-			};
-			name = Release;
-		};
-		7F6E7C8E22FBB6F30083BD1D /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = DKO.PelicanTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
-			};
-			name = Debug;
-		};
-		7F6E7C8F22FBB6F30083BD1D /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				INFOPLIST_FILE = Tests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = DKO.PelicanTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/TestApp.app/TestApp";
 			};
 			name = Release;
 		};
@@ -946,164 +331,6 @@
 			};
 			name = Release;
 		};
-		7F73C43523D79AAA0065BA4A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-MacOs";
-				PRODUCT_NAME = Pelican;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Debug;
-		};
-		7F73C43623D79AAA0065BA4A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/../Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MACOSX_DEPLOYMENT_TARGET = 10.12;
-				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-MacOs";
-				PRODUCT_NAME = Pelican;
-				SDKROOT = macosx;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-			};
-			name = Release;
-		};
-		7F73C44C23D79B230065BA4A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-WatchOS";
-				PRODUCT_NAME = Pelican;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Debug;
-		};
-		7F73C44D23D79B230065BA4A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				APPLICATION_EXTENSION_API_ONLY = YES;
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-WatchOS";
-				PRODUCT_NAME = Pelican;
-				SDKROOT = watchos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 4;
-				WATCHOS_DEPLOYMENT_TARGET = 5.0;
-			};
-			name = Release;
-		};
-		7F73C46323D79B880065BA4A /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-TvOS";
-				PRODUCT_NAME = Pelican;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
-			};
-			name = Debug;
-		};
-		7F73C46423D79B880065BA4A /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				CODE_SIGN_STYLE = Automatic;
-				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = 6PEDY2NQHX;
-				DYLIB_COMPATIBILITY_VERSION = 1;
-				DYLIB_CURRENT_VERSION = 1;
-				DYLIB_INSTALL_NAME_BASE = "@rpath";
-				INFOPLIST_FILE = Sources/Info.plist;
-				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = "DKO.Pelican-TvOS";
-				PRODUCT_NAME = Pelican;
-				SDKROOT = appletvos;
-				SKIP_INSTALL = YES;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = 3;
-				TVOS_DEPLOYMENT_TARGET = 12.0;
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -1112,24 +339,6 @@
 			buildConfigurations = (
 				7F6E7C8822FBB6F30083BD1D /* Debug */,
 				7F6E7C8922FBB6F30083BD1D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F6E7C8A22FBB6F30083BD1D /* Build configuration list for PBXNativeTarget "Pelican" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F6E7C8B22FBB6F30083BD1D /* Debug */,
-				7F6E7C8C22FBB6F30083BD1D /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F6E7C8D22FBB6F30083BD1D /* Build configuration list for PBXNativeTarget "PelicanTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F6E7C8E22FBB6F30083BD1D /* Debug */,
-				7F6E7C8F22FBB6F30083BD1D /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -1143,47 +352,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		7F73C43423D79AAA0065BA4A /* Build configuration list for PBXNativeTarget "Pelican MacOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F73C43523D79AAA0065BA4A /* Debug */,
-				7F73C43623D79AAA0065BA4A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F73C44B23D79B230065BA4A /* Build configuration list for PBXNativeTarget "Pelican WatchOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F73C44C23D79B230065BA4A /* Debug */,
-				7F73C44D23D79B230065BA4A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		7F73C46223D79B880065BA4A /* Build configuration list for PBXNativeTarget "Pelican TvOS" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				7F73C46323D79B880065BA4A /* Debug */,
-				7F73C46423D79B880065BA4A /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
 /* End XCConfigurationList section */
-
-/* Begin XCVersionGroup section */
-		7F73C41C23D75AFC0065BA4A /* TestModel.xcdatamodeld */ = {
-			isa = XCVersionGroup;
-			children = (
-				7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */,
-			);
-			currentVersion = 7F73C41D23D75AFC0065BA4A /* Test.xcdatamodel */;
-			path = TestModel.xcdatamodeld;
-			sourceTree = "<group>";
-			versionGroupType = wrapper.xcdatamodel;
-		};
-/* End XCVersionGroup section */
 	};
 	rootObject = 7F6E7C6D22FBB6F30083BD1D /* Project object */;
 }
