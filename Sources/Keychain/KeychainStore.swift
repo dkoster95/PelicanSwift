@@ -18,9 +18,9 @@ public struct KeychainStore: KeyValueStore {
     private let groupId: String?
     private let accesibility: KeychainAccesibility
     private let securityClass: KeychainSecurityClass
-    private let logger: Logger
+    private let logger: Logger?
     
-    public init(logger: Logger) {
+    public init(logger: Logger? = nil) {
         self.init(service: Bundle.main.bundleIdentifier ?? "",
                   groupId: nil,
                   accesibility: .afterFirstUnlock,
@@ -32,7 +32,7 @@ public struct KeychainStore: KeyValueStore {
                 groupId: String? = nil,
                 accesibility: KeychainAccesibility,
                 securityClass: KeychainSecurityClass,
-                logger: Logger) {
+                logger: Logger?) {
         self.service = service ?? ""
         self.groupId = groupId
         self.accesibility = accesibility
@@ -45,14 +45,14 @@ public struct KeychainStore: KeyValueStore {
         queryAdd[KeychainKeys.SecValueData] = data
         let resultCode = SecItemAdd(queryAdd as CFDictionary, nil)
         if resultCode != noErr {
-            logger.error("🔐 KeychainStore 🔐 - Error saving to Keychain: \(resultCode)")
+            logger?.error("🔐 KeychainStore 🔐 - Error saving to Keychain: \(resultCode)")
             if resultCode == errSecDuplicateItem {
-                logger.debug("🔐 KeychainStore 🔐 - Updating Item")
+                logger?.debug("🔐 KeychainStore 🔐 - Updating Item")
                 return update(data: data, key: key)
             }
             return false
         }
-        logger.debug("🔐 KeychainStore 🔐 - Saved Item")
+        logger?.debug("🔐 KeychainStore 🔐 - Saved Item")
         return true
     }
     
@@ -61,10 +61,10 @@ public struct KeychainStore: KeyValueStore {
         let updateDictionary = [KeychainKeys.SecValueData: data]
         let resultCode = SecItemUpdate(queryAdd as CFDictionary, updateDictionary as CFDictionary)
         if resultCode != noErr {
-            logger.error("🔐 KeychainStore 🔐 - Error saving to Keychain: \(resultCode)")
+            logger?.error("🔐 KeychainStore 🔐 - Error saving to Keychain: \(resultCode)")
             return false
         }
-        logger.debug("🔐 KeychainStore 🔐 - Item Updated")
+        logger?.debug("🔐 KeychainStore 🔐 - Item Updated")
         return true
     }
     
@@ -72,10 +72,10 @@ public struct KeychainStore: KeyValueStore {
         let queryDelete = keychainQueryDictionary(key: key)
         let resultCodeDelete = SecItemDelete(queryDelete as CFDictionary)
         if resultCodeDelete != noErr {
-            logger.error("🔐 KeychainStore 🔐 - Error deleting from Keychain: \(resultCodeDelete)")
+            logger?.error("🔐 KeychainStore 🔐 - Error deleting from Keychain: \(resultCodeDelete)")
             return false
         }
-        logger.debug("🔐 KeychainStore 🔐 - Item Deleted")
+        logger?.debug("🔐 KeychainStore 🔐 - Item Deleted")
         return true
     }
     
@@ -93,7 +93,7 @@ public struct KeychainStore: KeyValueStore {
                 return result
             }
         } else {
-            logger.error("🔐 KeychainStore 🔐 - Error loading from Keychain: \(resultCodeLoad)")
+            logger?.error("🔐 KeychainStore 🔐 - Error loading from Keychain: \(resultCodeLoad)")
         }
         return nil
     }

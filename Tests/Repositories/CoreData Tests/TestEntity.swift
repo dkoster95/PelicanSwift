@@ -1,12 +1,3 @@
-//
-//  Test+CoreDataProperties.swift
-//  PelicanTests
-//
-//  Created by Daniel Koster on 1/21/20.
-//  Copyright © 2020 Daniel Koster. All rights reserved.
-//
-//
-
 import Foundation
 import CoreData
 import PelicanProtocols
@@ -22,7 +13,7 @@ public struct TestModelEntity: CoreDataEntity {
         self.age = age
     }
     
-    public var id: (key: String, value: NSObject) { (key: "name", value: name as NSObject) }
+    public var identifier: (key: String, value: NSObject) { (key: "name", value: name as NSObject) }
     
     let name: String
     let age: Double
@@ -39,6 +30,7 @@ public struct TestModelEntity: CoreDataEntity {
         name = fromManagedObject.value(forKey: "name") as? String ?? ""
         age = fromManagedObject.value(forKey: "age") as? Double ?? -1
     }
+    
     public static func == (lhs: TestModelEntity, rhs: TestModelEntity) -> Bool {
         return lhs.name == rhs.name
     }

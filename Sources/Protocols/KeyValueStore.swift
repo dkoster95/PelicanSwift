@@ -8,6 +8,13 @@ public protocol KeyValueStore {
     func fetch(key: String) -> Data?
 }
 
+public protocol CodableKeyValueStore {
+    func save<Element: Encodable>(element: Element, key: String) throws -> Bool
+    func update<Element: Encodable>(element: Element, key: String) throws -> Bool
+    func delete(key: String) -> Bool
+    func fetch<Element: Decodable>(key: String, type: Element.Type) throws -> Element?
+}
+
 public extension KeyValueStore {
     subscript(key: String) -> Data? {
         get {
