@@ -39,7 +39,8 @@ let package = Package(
         .testTarget(
             name: "PelicanRepositoriesTests",
             dependencies: ["PelicanProtocols", "PelicanRepositories"],
-            path: "Tests/Repositories"),
+            path: "Tests/Repositories",
+            resources: [.process("Resources")]),
         .target(
             name: "PelicanKeychain",
             dependencies: ["PelicanProtocols"],
