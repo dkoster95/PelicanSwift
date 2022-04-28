@@ -139,7 +139,7 @@ if you want your own repository implementation you just need to make your class 
 No Package manager? no problem, you can use Pelican as a git submodule
 
 ## Swift Package Manager
-QuickHatch has support for SPM, you just need to go to Xcode in the menu File/Swift Packages/Add package dependency
+Pelican has support for SPM, you just need to go to Xcode in the menu File/Swift Packages/Add package dependency
 and you select the version of Pelican.
 
 #### Embedded Framework
