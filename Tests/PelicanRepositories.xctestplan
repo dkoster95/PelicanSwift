@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "8DF9198B-E8AA-41B4-BBD4-8069A24AC2AD",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PelicanRepositoriesTests",
+        "name" : "PelicanRepositoriesTests"
+      }
+    }
+  ],
+  "version" : 1
+}

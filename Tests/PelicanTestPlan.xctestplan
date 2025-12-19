@@ -1,0 +1,38 @@
+{
+  "configurations" : [
+    {
+      "id" : "EDDB5A5E-9655-404F-A518-D03DCB3377A8",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PelicanProtocolsTests",
+        "name" : "PelicanProtocolsTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PelicanKeychainTests",
+        "name" : "PelicanKeychainTests"
+      }
+    },
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PelicanRepositoriesTests",
+        "name" : "PelicanRepositoriesTests"
+      }
+    }
+  ],
+  "version" : 1
+}

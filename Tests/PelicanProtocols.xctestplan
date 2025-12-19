@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "632CF32B-CCAC-41C0-AC25-4CB7CC3DFA85",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PelicanProtocolsTests",
+        "name" : "PelicanProtocolsTests"
+      }
+    }
+  ],
+  "version" : 1
+}

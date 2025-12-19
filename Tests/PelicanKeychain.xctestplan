@@ -1,0 +1,24 @@
+{
+  "configurations" : [
+    {
+      "id" : "4F31B518-4E6E-46DF-821C-35A7542D9A70",
+      "name" : "Configuration 1",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+
+  },
+  "testTargets" : [
+    {
+      "target" : {
+        "containerPath" : "container:",
+        "identifier" : "PelicanKeychainTests",
+        "name" : "PelicanKeychainTests"
+      }
+    }
+  ],
+  "version" : 1
+}
