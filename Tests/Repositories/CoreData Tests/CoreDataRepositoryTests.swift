@@ -4,6 +4,7 @@ import PelicanProtocols
 import CoreData
 import Combine
 
+// swiftlint:disable file_length type_body_length
 final class CoreDataRepositoryTests: XCTestCase {
     
     private var sut: CoreDataRepository<TestModelEntity>!
