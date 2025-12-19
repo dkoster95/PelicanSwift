@@ -87,10 +87,10 @@ class FakeJSONEncoder: JSONEncoder {
     }
 }
 
-class FakeJSONDecoder<T>: JSONDecoder {
-    private let decodedData: T?
+class FakeJSONDecoder<Element>: JSONDecoder {
+    private let decodedData: Element?
     
-    public init(decodedData: T? = nil) {
+    public init(decodedData: Element? = nil) {
         self.decodedData = decodedData
     }
     
