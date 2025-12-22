@@ -23,6 +23,8 @@ jobs:
       run: brew install swiftlint
     - name: Check Linting
       run: swiftlint
+    - name: Build xcdataModel
+      run: xcrun momc Tests/Repositories/Resources/TestModel.xcdatamodeld Tests/Repositories/Resources/TestModel.momd
     - name: Build
       run: swift build -v
     - name: Run tests

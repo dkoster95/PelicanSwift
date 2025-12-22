@@ -68,7 +68,7 @@ struct Log: Logger {
     }
 }
 
-class FakeJSONEncoder: JSONEncoder {
+class FakeJSONEncoder: JSONEncoder, @unchecked Sendable {
     private let encodedData: Data?
     
     public init(encodedData: Data? = nil) {
@@ -87,7 +87,7 @@ class FakeJSONEncoder: JSONEncoder {
     }
 }
 
-class FakeJSONDecoder<Element>: JSONDecoder {
+class FakeJSONDecoder<Element>: JSONDecoder, @unchecked Sendable {
     private let decodedData: Element?
     
     public init(decodedData: Element? = nil) {

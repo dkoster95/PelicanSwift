@@ -31,19 +31,19 @@ class AnyRepositoryTests: XCTestCase {
     }
     
     func test_all() throws {
-        mockRepository.getAllValue = [1]
-        let result = sut.getAll
+        mockRepository.findResult = [1]
+        let result = sut.find()
         
-        XCTAssertTrue(mockRepository.getAllCalled)
+        XCTAssertTrue(mockRepository.didFind)
         XCTAssertEqual([1], result)
     }
     
     func test_filter() throws {
-        mockRepository.filterResult = [1, 2, 3]
-        let result = sut.filter { _ in true }
+        mockRepository.findResult = [1, 2, 3]
+        let result = sut.find { _ in true }
         
         XCTAssertEqual([1, 2, 3], result)
-        XCTAssertTrue(mockRepository.didFilter)
+        XCTAssertTrue(mockRepository.didFind)
     }
     
     func test_firstWithCondition() throws {
@@ -106,11 +106,11 @@ private class MockRepository<Element: Equatable>: Repository {
         deleteCalled = true
     }
     
-    var didFilter = false
-    var filterResult: [Element] = []
-    func filter(query: (Element) -> Bool) -> [Element] {
-        didFilter = true
-        return filterResult
+    var didFind = false
+    var findResult: [Element] = []
+    func find(query: ((Element) -> Bool)?) -> [Element] {
+        didFind = true
+        return findResult
     }
     
     var firstCalled = false
@@ -139,13 +139,6 @@ private class MockRepository<Element: Equatable>: Repository {
     var isEmpty: Bool {
         isEmptyCalled = true
         return isEmptyValue
-    }
-    
-    var getAllCalled = false
-    var getAllValue: [Element] = []
-    var getAll: [Element] {
-        getAllCalled = true
-        return getAllValue
     }
     
     var deleteAllCalled = false

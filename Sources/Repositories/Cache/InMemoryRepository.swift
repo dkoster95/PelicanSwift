@@ -8,10 +8,6 @@ public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
     
     public init() {}
     
-    public var getAll: [PersistibleObject] {
-        return elements
-    }
-    
     public func add(element: PersistibleObject) throws -> PersistibleObject {
         guard !contains(element: element) else { throw RepositoryError.duplicatedData }
         elements.append(element)
@@ -29,8 +25,9 @@ public class InMemoryRepository<PersistibleObject: Equatable>: Repository {
         elements.remove(at: index)
     }
     
-    public func filter(query: (PersistibleObject) -> Bool) -> [PersistibleObject] {
-        elements.filter(query)
+    public func find(query: ((PersistibleObject) -> Bool)?) -> [PersistibleObject] {
+        guard let query = query else { return elements }
+        return elements.filter(query)
     }
     
     public func first(where: (PersistibleObject) -> Bool) -> PersistibleObject? {
