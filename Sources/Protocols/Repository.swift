@@ -1,19 +1,44 @@
 import Foundation
 import Combine
 
+public protocol BatchRepository<Element> {
+    associatedtype Element: Equatable
+    func add(elements: [Element]) throws
+}
 
-public protocol Repository {
+
+public protocol ExpressionFilterableRepository<Element> {
+    associatedtype Element: Equatable
+    func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) -> [Element]
+}
+
+extension ExpressionFilterableRepository {
+    func contain(predicate: NSPredicate) -> Bool {
+        return find(predicate: predicate, limit: nil, sortDescriptor: nil).count > 0
+    }
+    
+    func findFirst(predicate: NSPredicate) -> Element? {
+        return find(predicate: predicate, limit: 1, sortDescriptor: nil).first
+    }
+}
+
+public protocol Repository<Element> {
     associatedtype Element: Equatable
     func add(element: Element) throws -> Element
     func update(element: Element) throws -> Element
     func delete(element: Element) throws
-    func filter(query: (Element) -> Bool) -> [Element]
+    func find(query: ((Element) -> Bool)?) -> [Element]
     func first(where: @escaping (Element) -> Bool) -> Element?
     func contains(condition: (Element) -> Bool) -> Bool
     func contains(element: Element) -> Bool
     var isEmpty: Bool { get }
-    var getAll: [Element] { get }
     func deleteAll() throws
+}
+
+public extension Repository {
+    func find() -> [Element] {
+        return find(query: nil)
+    }
 }
 
 public extension Repository {
@@ -41,8 +66,7 @@ public extension Repository {
     
     func fetch<FetchTransaction: Transaction>(where: ((Element) -> Bool)?) throws -> FetchTransaction where FetchTransaction.Result == [Element] {
         guard let transaction = AnyTransaction<[Element]> (transactionClosure: {
-            guard let query = `where` else { return getAll }
-            return filter(query: query)
+            return find(query: `where`)
         }) as? FetchTransaction else {
             throw RepositoryError.transactionError
         }

@@ -10,4 +10,5 @@ public protocol CoreDataEntity: Equatable, CDEntityIdentifiable {
     func asManagedObject(entityName: String,
                          with context: NSManagedObjectContext) throws -> NSManagedObject
     func merge(into: NSManagedObject)
+    static var entityName: String { get }
 }

@@ -8,19 +8,19 @@ class InMemoryRepositoryTests: XCTestCase {
 
     func test_save() throws {
         XCTAssertEqual(2, try subject.add(element: 2))
-        XCTAssertEqual(subject.getAll[0], 2)
+        XCTAssertEqual(subject.find()[0], 2)
         XCTAssertFalse(subject.isEmpty)
     }
     
     func test_getAll() throws {
         XCTAssertEqual(2, try subject.add(element: 2))
-        XCTAssertEqual(subject.getAll[0], 2)
+        XCTAssertEqual(subject.find()[0], 2)
         XCTAssertFalse(subject.isEmpty)
     }
     
     func test_delete() throws {
         XCTAssertEqual(2, try subject.add(element: 2))
-        XCTAssertEqual(subject.getAll[0], 2)
+        XCTAssertEqual(subject.find()[0], 2)
         XCTAssertFalse(subject.isEmpty)
         try subject.delete(element: 2)
         XCTAssertTrue(subject.isEmpty)
@@ -28,7 +28,7 @@ class InMemoryRepositoryTests: XCTestCase {
     
     func test_update() throws {
         XCTAssertEqual(2, try subject.add(element: 2))
-        XCTAssertEqual(subject.getAll[0], 2)
+        XCTAssertEqual(subject.find()[0], 2)
         XCTAssertFalse(subject.isEmpty)
         XCTAssertEqual(3, try subject.update(element: 3))
     }

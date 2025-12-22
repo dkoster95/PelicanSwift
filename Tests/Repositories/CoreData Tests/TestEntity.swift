@@ -31,6 +31,10 @@ public struct TestModelEntity: CoreDataEntity {
         age = fromManagedObject.value(forKey: "age") as? Double ?? -1
     }
     
+    public static var entityName: String {
+        "TestEntity"
+    }
+    
     public static func == (lhs: TestModelEntity, rhs: TestModelEntity) -> Bool {
         return lhs.name == rhs.name
     }

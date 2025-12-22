@@ -19,7 +19,7 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
         self.jsonDecoder = jsonDecoder
     }
     
-    public var getAll: [CodableEntity] {
+    private var getAll: [CodableEntity] {
         guard let storeData = store.fetch(key: key) else { return [] }
         if let decodedArray = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
             return decodedArray
@@ -50,8 +50,11 @@ public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository
         _ = store.delete(key: key)
     }
     
-    public func filter(query: (CodableEntity) -> Bool) -> [CodableEntity] {
+    public func find(query: ((CodableEntity) -> Bool)?) -> [CodableEntity] {
         guard let storeData = store.fetch(key: key) else { return [] }
+        guard let query = query else {
+            return getAll
+        }
         if let decodedData = try? jsonDecoder.decode([CodableEntity].self, from: storeData) {
             return decodedData.filter(query)
         }

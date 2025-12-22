@@ -4,20 +4,16 @@ public struct AnyRepository<Entity: Equatable>: Repository {
     public typealias Element = Entity
     
     public init<AnyStorage: Repository> (storage: AnyStorage) where AnyStorage.Element == Entity {
-        self.allGenerator = { storage.getAll }
         self.addClosure = storage.add
         self.updateClosure = storage.update
         self.deleteClosure = storage.delete
-        self.filterClosure = storage.filter
+        self.findClosure = storage.find
         self.firstClosure = storage.first
         self.containsClosure = storage.contains
         self.containsElement = { element in storage.contains(element: element) }
         self.isEmptyClosure = { storage.isEmpty }
         self.deleteAllClosure = storage.deleteAll
     }
-    
-    private let allGenerator: () -> [Entity]
-    public var getAll: [Element] { allGenerator() }
     
     private let addClosure: (Entity) throws -> Entity
     public func add(element: Entity) throws -> Entity {
@@ -34,9 +30,9 @@ public struct AnyRepository<Entity: Equatable>: Repository {
         try deleteClosure(element)
     }
     
-    private let filterClosure: ((Entity) -> Bool) -> [Entity]
-    public func filter(query: (Entity) -> Bool) -> [Entity] {
-        return filterClosure(query)
+    private let findClosure: (((Entity) -> Bool)?) -> [Entity]
+    public func find(query: ((Entity) -> Bool)?) -> [Entity] {
+        return findClosure(query)
     }
     
     private let firstClosure: (@escaping (Entity) -> Bool) -> Entity?

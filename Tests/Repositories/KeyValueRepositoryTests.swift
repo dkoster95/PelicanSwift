@@ -40,7 +40,7 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_getAll() throws {
         mockStore.data = try JSONEncoder().encode(MockEntity(parameter: "param", number: 12))
         
-        let result = sut.getAll
+        let result = sut.find()
         
         XCTAssertEqual([MockEntity(parameter: "param", number: 12)], result)
     }
@@ -48,13 +48,13 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_getAll_whenArray_expectCorrectResult() throws {
         mockStore.data = try JSONEncoder().encode([MockEntity(parameter: "param", number: 12)])
         
-        let result = sut.getAll
+        let result = sut.find()
         
         XCTAssertEqual([MockEntity(parameter: "param", number: 12)], result)
     }
     
     func test_getAll_whenNoValuesInStore_expectEmptyResult() throws {
-        let result = sut.getAll
+        let result = sut.find()
         
         XCTAssertEqual([], result)
     }
@@ -62,7 +62,7 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_getAll_whenCorruptedData_expectEmptyResult() throws {
         mockStore.data = Data()
         
-        let result = sut.getAll
+        let result = sut.find()
         
         XCTAssertEqual([], result)
     }
@@ -177,7 +177,7 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_filter_whenValue_expectNotNil() throws {
         let value = MockEntity(parameter: "param", number: 2)
         mockStore.data = try JSONEncoder().encode(value)
-        let result = sut.filter { $0.parameter == "param" }
+        let result = sut.find { $0.parameter == "param" }
         
         XCTAssertEqual([value], result)
     }
@@ -185,7 +185,7 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_filter_whenValueNotMatchesCondition_expectNil() throws {
         let value = MockEntity(parameter: "param", number: 2)
         mockStore.data = try JSONEncoder().encode(value)
-        let result = sut.filter { $0.parameter == "param1" }
+        let result = sut.find { $0.parameter == "param1" }
         
         XCTAssertTrue(result.isEmpty)
     }
@@ -193,20 +193,20 @@ class KeyValueRepositoryTests: XCTestCase {
     func test_filter_whenArrayValue_expectNotNil() throws {
         let value = MockEntity(parameter: "param", number: 2)
         mockStore.data = try JSONEncoder().encode([value])
-        let result = sut.filter { $0.parameter == "param" }
+        let result = sut.find { $0.parameter == "param" }
         
         XCTAssertEqual([value], result)
     }
     
     func test_filter_whenValue_expectNNil() throws {
-        let result = sut.filter { $0.parameter == "param" }
+        let result = sut.find { $0.parameter == "param" }
         
         XCTAssertTrue(result.isEmpty)
     }
     
     func test_filter_whenCorruptedData_expectNNil() throws {
         mockStore.data = Data()
-        let result = sut.filter { $0.parameter == "param" }
+        let result = sut.find { $0.parameter == "param" }
         
         XCTAssertTrue(result.isEmpty)
     }

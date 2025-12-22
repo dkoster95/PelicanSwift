@@ -9,6 +9,7 @@ public protocol Context {
     func rollback() throws
     func create<Entity: CoreDataEntity>(from: Entity, entityName: String) throws -> NSManagedObject
     func fetch<Result>(_ request: NSFetchRequest<Result>) throws -> [Result]
+    func execute(_ request: NSPersistentStoreRequest) throws -> NSPersistentStoreResult
     func delete(_ object: NSManagedObject) throws
 }
 
@@ -43,6 +44,10 @@ public struct CDContext: Context {
         } catch let error {
             throw RepositoryError.queryError(innerError: error)
         }
+    }
+    
+    public func execute(_ request: NSPersistentStoreRequest) throws -> NSPersistentStoreResult {
+        try context.execute(request)
     }
     
     public func perform<Result>(block: @escaping () throws -> Result) async rethrows -> Result {

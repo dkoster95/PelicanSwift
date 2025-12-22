@@ -14,8 +14,7 @@ final class CoreDataRepositoryTests: XCTestCase {
         let model = NSManagedObjectModel.mergedModel(from: [Bundle.module])
         let cdContext: CoreDataContext = CoreDataContext(modelName: "TestModel", managedObjectModel: model)
         let context = CDContext(context: cdContext.persistentContainer.viewContext)
-        sut = CoreDataRepository<TestModelEntity>(entityName: "TestEntity",
-                                                  context: context)
+        sut = CoreDataRepository<TestModelEntity>(context: context)
     }
     
     func testIsEmpty() {
@@ -26,7 +25,7 @@ final class CoreDataRepositoryTests: XCTestCase {
         let test = TestModelEntity(name: "name", age: 21)
         
         let result = try sut.add(element: test)
-        let savedResult = sut.getAll[0]
+        let savedResult = sut.find()[0]
         
         XCTAssertNotNil(savedResult)
         XCTAssertEqual(test, savedResult)
@@ -52,7 +51,7 @@ final class CoreDataRepositoryTests: XCTestCase {
         let updatedRecord = TestModelEntity(name: "name", age: 24)
         
         let resultTransaction = try sut.update(element: updatedRecord)
-        let result = sut.getAll[0]
+        let result = sut.find()[0]
         
         XCTAssertEqual(24, result.age)
         XCTAssertNotEqual(savedResult.age, resultTransaction.age)
@@ -70,7 +69,7 @@ final class CoreDataRepositoryTests: XCTestCase {
         let test = TestModelEntity(name: "name", age: 21)
         _ = try sut.add(element: test)
         
-        let recordSaved = sut.getAll[0]
+        let recordSaved = sut.find()[0]
         try sut.delete(element: test)
         let result = sut.isEmpty
         
@@ -78,29 +77,29 @@ final class CoreDataRepositoryTests: XCTestCase {
         XCTAssertTrue(result)
     }
     
-    func test_getAll_whenNoRecords_expectEmpty() {
-        let result = sut.getAll
+    func test_find_whenNoRecords_expectEmpty() {
+        let result = sut.find()
         
         XCTAssertTrue(result.isEmpty)
     }
     
-    func test_getAll_whenRecords_expectListOfRecords() throws {
+    func test_find_whenRecords_expectListOfRecords() throws {
         try loadRecords()
-        let result = sut.getAll
+        let result = sut.find()
         
         XCTAssertEqual(4, result.count)
     }
     
-    func test_filter_whenRecords_expectListOfRecordsFiltered() throws {
+    func test_findWithQuery_whenRecords_expectListOfRecordsFiltered() throws {
         try loadRecords()
-        let result = sut.filter { $0.age.truncatingRemainder(dividingBy: 2) == 0 }
+        let result = sut.find { $0.age.truncatingRemainder(dividingBy: 2) == 0 }
         
         XCTAssertEqual(2, result.count)
     }
     
-    func test_filter_whenNoRecords_expectEmptyResult() throws {
+    func test_findWithQuery_whenNoRecords_expectEmptyResult() throws {
         try loadRecords()
-        let result = sut.filter { $0.age > 20 }
+        let result = sut.find { $0.age > 20 }
         
         XCTAssertTrue(result.isEmpty)
     }
@@ -110,6 +109,23 @@ final class CoreDataRepositoryTests: XCTestCase {
         let result = sut.first { $0.age < 14 }
         
         XCTAssertEqual(12, result?.age)
+    }
+    
+    func test_findWithPredicate_whenPredicateMatches_expectCorrectResults() throws {
+        try loadRecords()
+        
+        let result = sut.find(predicate: NSPredicate(format: "age > %i", 12), limit: nil, sortDescriptor: nil)
+        
+        XCTAssertEqual(result.count, 2)
+    }
+    
+    func test_findWithPredicate_whenPredicateMatchesSorted_expectCorrectResults() throws {
+        try loadRecords()
+        
+        let result = sut.find(predicate: NSPredicate(format: "age > %i", 12), limit: 1, sortDescriptor: NSSortDescriptor(key: "name", ascending: false))
+        
+        XCTAssertEqual("record4", result[0].name)
+        XCTAssertEqual(result.count, 1)
     }
     
     func test_first_whenNoRecordsMatchCondition_expectNil() throws {
@@ -305,6 +321,15 @@ final class CoreDataRepositoryTests: XCTestCase {
         _ = try sut.add(element: record2)
         _ = try sut.add(element: record3)
         _ = try sut.add(element: record4)
+    }
+    
+    private func loadRecordsBatch() throws {
+        let record1 = TestModelEntity(name: "record1", age: 1)
+        let record2 = TestModelEntity(name: "record2", age: 12)
+        let record3 = TestModelEntity(name: "record3", age: 14)
+        let record4 = TestModelEntity(name: "record4", age: 17)
+        try sut.add(elements: [record1, record2, record3, record4])
+        
     }
     
 }
