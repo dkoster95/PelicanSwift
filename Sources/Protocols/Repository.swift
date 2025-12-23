@@ -1,82 +1,74 @@
 import Foundation
-import Combine
 
 public protocol BatchRepository<Element> {
     associatedtype Element: Equatable
     func add(elements: [Element]) throws
+    func add(elements: [Element]) async throws
 }
 
+public typealias CRUDRepository<Element> = InsertableRepository<Element> & UpdatableRepository<Element> & DeleteableRepository<Element> & ReadableRepository<Element>
 
-public protocol ExpressionFilterableRepository<Element> {
+public typealias Repository<Element> = CRUDRepository<Element> & PredicateReadableRepository<Element> & BatchRepository<Element>
+
+public protocol InsertableRepository<Element> {
     associatedtype Element: Equatable
+    func add(element: Element) throws -> Element
+    func add(element: Element) async throws -> Element
+}
+
+public protocol UpdatableRepository<Element> {
+    associatedtype Element: Equatable
+    func update(element: Element) throws -> Element
+    func update(element: Element) async throws -> Element
+}
+
+public protocol DeleteableRepository<Element> {
+    associatedtype Element: Equatable
+    func delete(element: Element) throws
+    func delete(element: Element) async throws
+    func deleteAll() throws
+    func deleteAll() async throws
+}
+
+public protocol PredicateReadableRepository<Element> {
+    associatedtype Element: Equatable
+    func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) async -> [Element]
     func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) -> [Element]
 }
 
-extension ExpressionFilterableRepository {
+extension PredicateReadableRepository {
+    func contain(predicate: NSPredicate) async -> Bool {
+        return await find(predicate: predicate, limit: nil, sortDescriptor: nil).count > 0
+    }
+    
+    func first(predicate: NSPredicate) async -> Element? {
+        return await find(predicate: predicate, limit: 1, sortDescriptor: nil).first
+    }
+    
     func contain(predicate: NSPredicate) -> Bool {
         return find(predicate: predicate, limit: nil, sortDescriptor: nil).count > 0
     }
     
-    func findFirst(predicate: NSPredicate) -> Element? {
+    func first(predicate: NSPredicate) -> Element? {
         return find(predicate: predicate, limit: 1, sortDescriptor: nil).first
     }
 }
 
-public protocol Repository<Element> {
+public protocol ReadableRepository<Element> {
     associatedtype Element: Equatable
-    func add(element: Element) throws -> Element
-    func update(element: Element) throws -> Element
-    func delete(element: Element) throws
-    func find(query: ((Element) -> Bool)?) -> [Element]
-    func first(where: @escaping (Element) -> Bool) -> Element?
-    func contains(condition: (Element) -> Bool) -> Bool
-    func contains(element: Element) -> Bool
     var isEmpty: Bool { get }
-    func deleteAll() throws
+    func find(query: ((Element) -> Bool)?) -> [Element]
+    func find(query: ((Element) -> Bool)?) async -> [Element]
+    func contains(element: Element) -> Bool
+    func contains(element: Element) async -> Bool
 }
 
-public extension Repository {
+public extension ReadableRepository {
     func find() -> [Element] {
         return find(query: nil)
     }
-}
-
-public extension Repository {
     
-    func add<AddTransaction: Transaction>(_ element: Element) throws -> AddTransaction where AddTransaction.Result == Element {
-        guard let transaction = AnyTransaction<Element>(transactionClosure: { return try add(element: element) }) as? AddTransaction else {
-            throw RepositoryError.transactionError
-        }
-        return transaction
-    }
-    
-    func update<UpdateTransaction: Transaction>(_ element: Element) throws -> UpdateTransaction where UpdateTransaction.Result == Element {
-        guard let transaction = AnyTransaction<Element>(transactionClosure: { return try update(element: element) }) as? UpdateTransaction else {
-            throw RepositoryError.transactionError
-        }
-        return transaction
-    }
-    
-    func delete<DeleteTransaction: Transaction>(_ element: Element) throws -> DeleteTransaction where DeleteTransaction.Result == Void {
-        guard let transaction =  AnyTransaction<Void>(transactionClosure: { try delete(element: element) }) as? DeleteTransaction else {
-            throw RepositoryError.transactionError
-        }
-        return transaction
-    }
-    
-    func fetch<FetchTransaction: Transaction>(where: ((Element) -> Bool)?) throws -> FetchTransaction where FetchTransaction.Result == [Element] {
-        guard let transaction = AnyTransaction<[Element]> (transactionClosure: {
-            return find(query: `where`)
-        }) as? FetchTransaction else {
-            throw RepositoryError.transactionError
-        }
-        return transaction
-    }
-    
-    func first<FetchTransaction: Transaction>(where: @escaping ((Element) -> Bool)) throws -> FetchTransaction where FetchTransaction.Result == Element? {
-        guard let transaction = AnyTransaction<Element?> (transactionClosure: { return first(where: `where`) }) as? FetchTransaction else {
-            throw RepositoryError.transactionError
-        }
-        return transaction
+    func find() async -> [Element] {
+        return await find(query: nil)
     }
 }

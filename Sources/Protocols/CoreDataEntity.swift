@@ -5,7 +5,7 @@ public protocol CDEntityIdentifiable {
     var identifier: (key: String, value: NSObject) { get }
 }
 
-public protocol CoreDataEntity: Equatable, CDEntityIdentifiable {
+public protocol CoreDataEntity: Equatable, CDEntityIdentifiable, Sendable {
     init(fromManagedObject: NSManagedObject) throws
     func asManagedObject(entityName: String,
                          with context: NSManagedObjectContext) throws -> NSManagedObject

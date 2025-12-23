@@ -1,7 +1,7 @@
 import Foundation
 import PelicanProtocols
 
-public struct KeyValueRepository<CodableEntity: Codable & Equatable>: Repository {
+public struct KeyValueRepository<CodableEntity: Codable & Equatable & Sendable>: InsertableRepository, DeleteableRepository, UpdatableRepository, ReadableRepository {
     
     public typealias Element = CodableEntity
     private let key: String
