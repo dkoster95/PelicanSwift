@@ -39,14 +39,14 @@ public extension WriteElementTransaction {
     init(repository: any InsertableRepository<Element>,
          element: Element) {
         self.init(executeHandler: repository.add,
-                  executeAsyncHandler: repository.add,
+                  executeAsyncHandler: { try await repository.add(element: $0) },
                   element: element)
     }
     
     init(repository: any UpdatableRepository<Element>,
          element: Element) {
         self.init(executeHandler: repository.update,
-                  executeAsyncHandler: repository.update,
+                  executeAsyncHandler: { try await repository.update(element: $0) },
                   element: element)
     }
 }
