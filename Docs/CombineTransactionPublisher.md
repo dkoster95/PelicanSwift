@@ -7,10 +7,11 @@ Thats why it provides a custom publisher to be used with other Publishers.
 This Publisher is bound to the Transaction protocol:
 
 ```swift
-public protocol Transaction {
-    associatedtype Result
+public protocol Transaction<Result> {
+    associatedtype Result: Equatable & Sendable
     var publisher: TransactionPublisher<Result> { get }
-    func perform() throws -> Result
+    func execute() throws -> Result
+    func execute() async throws -> Result
 }
 ....
 ....
@@ -29,10 +30,10 @@ Lets see an example of its use:
 
 ```swift
 // Initialize a Repository
-let repository = CDRepository<String>(.....)
+let transaction = WriteElementTransaction<Element>(...., element: recordToAdd)
 
 let recordToAdd = "New Record"
-let publisher = repository.add(recordToAdd).publisher
+let publisher = transaction.publisher
 
 let cancelSet = Set<AnyCancelable>()
 publisher.map { $0 + "Mapped into a new string" }
