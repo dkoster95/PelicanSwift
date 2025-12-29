@@ -6,10 +6,11 @@
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux_Windows_Android-green)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_vision_OS_Linux_Windows_Android-Green)
 [![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-green)](https://img.shields.io/badge/Swift_Package_Manager-compatible-green)
 
-[![macOS](https://img.shields.io/badge/macOS-12.0-green)
-[![iOS](https://img.shields.io/badge/iOS-15.0-green)
-[![watchOS](https://img.shields.io/badge/watchOS-7.0-green)
-[![tvOS](https://img.shields.io/badge/tvOS-14.0-green)
+[![macOS](https://img.shields.io/badge/macOS-12.0-green)]((https://img.shields.io/badge/macOS-12.0-green))
+[![iOS](https://img.shields.io/badge/iOS-15.0-green)]
+[![watchOS](https://img.shields.io/badge/watchOS-7.0-green)]
+[![tvOS](https://img.shields.io/badge/tvOS-14.0-green)]
+
 - **Simple Way to manage your local storage**
 - **Persistence Module**
 - **Keep local storage simple**
