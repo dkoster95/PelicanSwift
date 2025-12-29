@@ -135,15 +135,15 @@ Those are all the features a Repository should have: add, removing, empty, and t
 if you want your own repository implementation you just need to make your class implement this repository protocol!
 
 ## Transactions & Combine
- - [Sync and Async Transactions](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/Transactions.md)
- - [Transaction Publisher](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/CombineTransactionPublisher.md)
+ - [Sync and Async Transactions](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/Transactions.md)
+ - [Transaction Publisher](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/CombineTransactionPublisher.md)
  
 ## KeyValue Stores
-- [Keychain Store](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/KeychainStore.md)
-- [UserDefaults Store](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/UserDefaultsStore.md)
+- [Keychain Store](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/KeychainStore.md)
+- [UserDefaults Store](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/UserDefaultsStore.md)
 
 ## Repositories
-- [CoreDataRepository](https://github.com/dkoster95/PelicanSwift/blob/master/Docs/CoreDataRepository.md)
+- [CoreDataRepository](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/CoreDataRepository.md)
 
 ---
 
