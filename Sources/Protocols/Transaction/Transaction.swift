@@ -1,14 +1,9 @@
 import Foundation
 import Combine
 
-public protocol Transaction {
-    associatedtype Result
+public protocol Transaction<Result> {
+    associatedtype Result: Equatable & Sendable
     var publisher: TransactionPublisher<Result> { get }
-    func perform() throws -> Result
-}
-
-public extension Transaction {
-    func performAsync() async throws -> Result {
-        return try perform()
-    }
+    func execute() throws -> Result
+    func execute() async throws -> Result
 }
