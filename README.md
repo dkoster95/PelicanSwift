@@ -1,6 +1,6 @@
 
 
-![Logo](https://github.com/dkoster95/PelicanSwift/blob/main/logo.png)](https://github.com/dkoster95/PelicanSwift/blob/main/logo.png)
+![](https://github.com/dkoster95/PelicanSwift/blob/main/logo.png)
 
 [![Swift](https://img.shields.io/badge/Swift-6.0-green)](https://img.shields.io/badge/Swift-6.0-green)
 [![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux_Windows_Android-green)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_vision_OS_Linux_Windows_Android-Green)
