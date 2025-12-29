@@ -1,6 +1,15 @@
 
 
 ![](https://github.com/dkoster95/PelicanSwift/blob/master/logo.png)
+
+[![Swift](https://img.shields.io/badge/Swift-6.0-green)](https://img.shields.io/badge/Swift-6.0-green)
+[![Platforms](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_visionOS_Linux_Windows_Android-green)](https://img.shields.io/badge/Platforms-macOS_iOS_tvOS_watchOS_vision_OS_Linux_Windows_Android-Green)
+[![Swift Package Manager](https://img.shields.io/badge/Swift_Package_Manager-compatible-green)](https://img.shields.io/badge/Swift_Package_Manager-compatible-green)
+
+[![macOS](https://img.shields.io/badge/macOS-12.0-green)
+[![iOS](https://img.shields.io/badge/iOS-15.0-green)
+[![watchOS](https://img.shields.io/badge/watchOS-7.0-green)
+[![tvOS](https://img.shields.io/badge/tvOS-14.0-green)
 - **Simple Way to manage your local storage**
 - **Persistence Module**
 - **Keep local storage simple**
@@ -82,29 +91,45 @@ So when we ask why a persistence module, those concepts are basically the answer
 **low coupling**: Core Data is an old objc framework that is outdated if you compare it with other ORM's so, it makes sense that Apple could launch a new ORM soon, or a new Keychain Implentation, you dont want your app to be coupled to any of this when that happens.
 ---
 ```swift
-public protocol Repository {
+public protocol InsertableRepository<Element> {
     associatedtype Element: Equatable
     func add(element: Element) throws -> Element
+    func add(element: Element) async throws -> Element
+}
+
+public protocol UpdatableRepository<Element> {
+    associatedtype Element: Equatable
     func update(element: Element) throws -> Element
+    func update(element: Element) async throws -> Element
+}
+
+public protocol DeleteableRepository<Element> {
+    associatedtype Element: Equatable
     func delete(element: Element) throws
-    func filter(query: (Element) -> Bool) -> [Element]
-    func first(where: @escaping (Element) -> Bool) -> Element?
-    func contains(condition: (Element) -> Bool) -> Bool
-    func contains(element: Element) -> Bool
-    var isEmpty: Bool { get }
-    var getAll: [Element] { get }
+    func delete(element: Element) async throws
     func deleteAll() throws
+    func deleteAll() async throws
 }
+
+public protocol PredicateReadableRepository<Element> {
+    associatedtype Element: Equatable
+    func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) async -> [Element]
+    func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) -> [Element]
+}
+
+public protocol ReadableRepository<Element> {
+    associatedtype Element: Equatable
+    var isEmpty: Bool { get }
+    func find(query: ((Element) -> Bool)?) -> [Element]
+    func find(query: ((Element) -> Bool)?) async -> [Element]
+    func contains(element: Element) -> Bool
+    func contains(element: Element) async -> Bool
+}
+
 ```
-Here you have the Repository protocol definition, yeah I know generic protocols are not easy to handle in Swift but there is also an Erasure Type to make it easier to operate.
+
 ---
-```swift 
-public extension Repository {
-    func eraseToAnyRepository() -> AnyRepository<Element> {
-        return AnyRepository<Element>(storage: self)
-    }
-}
-```
+
 Those are all the features a Repository should have: add, removing, empty, and the fetching options.  
 if you want your own repository implementation you just need to make your class implement this repository protocol!
 
@@ -121,48 +146,11 @@ if you want your own repository implementation you just need to make your class 
 
 ---
 
-## Requirements
-
-- iOS 13.0+ 
-- WatchOS 6.0+
-- TvOS 13.0+
-- MacOS 12.0+
-- Xcode 10.2+
-- Swift 5+
-
----
-
 ## Installation
 
-### Manually
 
-No Package manager? no problem, you can use Pelican as a git submodule
-
-## Swift Package Manager
+### Swift Package Manager
 Pelican has support for SPM, you just need to go to Xcode in the menu File/Swift Packages/Add package dependency
 and you select the version of Pelican.
 
-#### Embedded Framework
-
-- Open up Terminal, `cd` into your top-level project directory, and run the following command "if" your project is not initialized as a git repository:
-
-  ```bash
-  $ git init
-  ```
-
-- Add Pelican as a git [submodule](https://git-scm.com/docs/git-submodule) by running the following command:
-
-  ```bash
-  $ git submodule add https://github.com/dkoster95/PelicanSwift.git
-  ```
-
-- Open the new `PelicanSwift` folder, and drag the `PelicanSwift.xcodeproj` into the Project Navigator of your application's Xcode project.
-
-    > It should appear nested underneath your application's blue project icon. Whether it is above or below all the other Xcode groups does not matter.
-
-- Select the `PelicanSwift.xcodeproj` in the Project Navigator and verify the deployment target matches that of your application target.
-
-
-- And that's it!
----
 
