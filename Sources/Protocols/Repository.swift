@@ -6,11 +6,14 @@ public protocol BatchRepository<Element> {
     func add(elements: [Element]) async throws
 }
 
-public typealias CRUDRepository<Element:Equatable & Sendable> = InsertableRepository<Element> & UpdatableRepository<Element> & DeleteableRepository<Element> & ReadableRepository<Element>
+//public typealias CRUDRepository<Element:Equatable & Sendable> = InsertableRepository<Element> & UpdatableRepository<Element> & DeleteableRepository<Element> & ReadableRepository<Element>
+//
+//public typealias Repository<Element: Equatable & Sendable> = CRUDRepository<Element> & PredicateReadableRepository<Element> & BatchRepository<Element>
 
-public typealias Repository<Element: Equatable & Sendable> = CRUDRepository<Element> & PredicateReadableRepository<Element> & BatchRepository<Element>
+public protocol InsertableRepository<Element>: SyncInsertableRepository, AsyncInsertableRepository {
+    associatedtype T: Equatable, Sendable
+}
 
-public typealias InsertableRepository<Element: Equatable & Sendable> = SyncInsertableRepository<Element> & AsyncInsertableRepository<Element>
 
 public protocol SyncInsertableRepository<Element> {
     associatedtype Element: Equatable, Sendable

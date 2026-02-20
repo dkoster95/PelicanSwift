@@ -126,7 +126,7 @@ class ReadableRepositoryMock<T:Equatable & Sendable>: ReadableRepository {
     
 }
 
-class InsertableRepositoryMock<T: Equatable & Sendable>: SyncInsertableRepository, AsyncInsertableRepository {
+class InsertableRepositoryMock<T: Equatable & Sendable>: InsertableRepository {
     
     private(set) var addCount = 0
     var addReturn: T!
