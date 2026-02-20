@@ -6,13 +6,17 @@ public protocol BatchRepository<Element> {
     func add(elements: [Element]) async throws
 }
 
-public typealias CRUDRepository<Element> = InsertableRepository<Element> & UpdatableRepository<Element> & DeleteableRepository<Element> & ReadableRepository<Element>
+public protocol InsertableRepository<Element>: SyncInsertableRepository, AsyncInsertableRepository where Element: Equatable, Element: Sendable {
+}
 
-public typealias Repository<Element> = CRUDRepository<Element> & PredicateReadableRepository<Element> & BatchRepository<Element>
 
-public protocol InsertableRepository<Element> {
-    associatedtype Element: Equatable
+public protocol SyncInsertableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func add(element: Element) throws -> Element
+}
+
+public protocol AsyncInsertableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func add(element: Element) async throws -> Element
 }
 
@@ -61,6 +65,18 @@ public protocol ReadableRepository<Element> {
     func find(query: ((Element) -> Bool)?) async -> [Element]
     func contains(element: Element) -> Bool
     func contains(element: Element) async -> Bool
+}
+
+public protocol AsyncReadableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func find(query: (@Sendable (Element) -> Bool)?) async -> [Element]
+    func contains(element: Element) async -> Bool
+}
+
+public extension AsyncReadableRepository {
+    func find() async -> [Element] {
+        return await find(query: nil)
+    }
 }
 
 public extension ReadableRepository {

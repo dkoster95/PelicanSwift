@@ -1,7 +1,7 @@
 import Foundation
 import PelicanProtocols
 
-public class InMemoryRepository<PersistibleObject: Equatable & Sendable>: InsertableRepository, DeleteableRepository, UpdatableRepository, ReadableRepository {
+public final class InMemoryRepository<PersistibleObject: Equatable & Sendable>: SyncInsertableRepository, AsyncInsertableRepository, DeleteableRepository, UpdatableRepository, ReadableRepository {
     public typealias Element = PersistibleObject
     
     private var elements: [PersistibleObject] = []
