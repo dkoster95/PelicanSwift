@@ -12,4 +12,5 @@ public protocol PersistenModelConvertible: Equatable, Sendable {
     init(from: SwiftDataEntity)
     func asEntity() -> SwiftDataEntity
     func merge(into: SwiftDataEntity)
+    var identifiablePredicate: Predicate<SwiftDataEntity> { get }
 }

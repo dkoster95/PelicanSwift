@@ -37,3 +37,28 @@ extension SwiftDataRepository: AsyncReadableRepository {
         }.isEmpty
     }
 }
+
+extension SwiftDataRepository: AsyncUpdatableRepository {
+    public func update(element: Element) async throws -> Element {
+        let descriptor = FetchDescriptor<Element.SwiftDataEntity>(predicate: element.identifiablePredicate)
+        guard let results = try? modelContext.fetch(descriptor),
+              let elementFound = results.first else { throw RepositoryError.nonExistingData }
+        element.merge(into: elementFound)
+        try modelContext.save()
+        return element
+    }
+}
+
+extension SwiftDataRepository: AsyncDeleteableRepository {
+    
+    public func delete(element: Element) async throws {
+        let descriptor = FetchDescriptor<Element.SwiftDataEntity>(predicate: element.identifiablePredicate)
+        guard let results = try? modelContext.fetch(descriptor),
+              let elementFound = results.first else { throw RepositoryError.nonExistingData }
+        modelContext.delete(elementFound)
+    }
+    
+    public func deleteAll() async throws {
+        try modelContext.delete(model: Element.SwiftDataEntity.self)
+    }
+}
