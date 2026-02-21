@@ -46,6 +46,42 @@ struct SwiftDataRepositoryTests {
         #expect(result == true)
     }
     
+    @Test func test_update_whenElementFound_expectUpdateCorrect() async throws {
+        let (sut, _) = try makeSUT()
+        let objectToInsert = TestEntityV2(id: UUID(), name: "some name", createdAt: Date())
+        _ = try await sut.add(element: objectToInsert)
+        let objectToUpdate = TestEntityV2(id: objectToInsert.id, name: "updated Name", createdAt: Date())
+        
+        _ = try await sut.update(element: objectToUpdate)
+        let find = await sut.find()
+        
+        #expect(find[0].name == "updated Name")
+    }
+    
+    @Test func test_delete_whenElementFound_expectUpdateCorrect() async throws {
+        let (sut, _) = try makeSUT()
+        let objectToInsert = TestEntityV2(id: UUID(), name: "some name", createdAt: Date())
+        _ = try await sut.add(element: objectToInsert)
+        
+        try await sut.delete(element: objectToInsert)
+        let find = await sut.find()
+        
+        #expect(find.isEmpty)
+    }
+    
+    @Test func test_deleteAll_expectNoValues() async throws {
+        let (sut, _) = try makeSUT()
+        let objectToInsert = TestEntityV2(id: UUID(), name: "some name", createdAt: Date())
+        let objectToInsert2 = TestEntityV2(id: UUID(), name: "some name 2", createdAt: Date())
+        _ = try await sut.add(element: objectToInsert)
+        _ = try await sut.add(element: objectToInsert2)
+        
+        try await sut.deleteAll()
+        let find = await sut.find()
+        
+        #expect(find.isEmpty)
+    }
+    
     func makeSUT() throws -> (SwiftDataRepository<TestEntityV2>, ModelContainer) {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: TestSwiftDataEntity.self, configurations: config)
@@ -61,14 +97,21 @@ struct TestEntityV2: Equatable {
 }
 
 extension TestEntityV2: PersistenModelConvertible {
+    var identifiablePredicate: Predicate<TestSwiftDataEntity> {
+        let uuid = self.id
+        return #Predicate { element in
+            element.uuid == uuid
+        }
+    }
+    
     init(from: TestSwiftDataEntity) {
-        id = from.id
+        id = from.uuid
         name = from.name
         createdAt = from.createdAt
     }
     
     func asEntity() -> TestSwiftDataEntity {
-        TestSwiftDataEntity(id: id, name: name, createdAt: createdAt)
+        TestSwiftDataEntity(uuid: id, name: name, createdAt: createdAt)
     }
     
     func merge(into: TestSwiftDataEntity) {
@@ -82,14 +125,14 @@ extension TestEntityV2: PersistenModelConvertible {
 
 @Model
 final class TestSwiftDataEntity {
-    @Attribute(.unique) var id: UUID
+    @Attribute(.unique) var uuid: UUID
     var name: String
     var createdAt: Date
     
-    init(id: UUID,
+    init(uuid: UUID,
          name: String,
          createdAt: Date) {
-        self.id = id
+        self.uuid = uuid
         self.name = name
         self.createdAt = createdAt
     }

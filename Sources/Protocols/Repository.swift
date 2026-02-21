@@ -20,18 +20,32 @@ public protocol AsyncInsertableRepository<Element> {
     func add(element: Element) async throws -> Element
 }
 
-public protocol UpdatableRepository<Element> {
-    associatedtype Element: Equatable
-    func update(element: Element) throws -> Element
+public protocol AsyncUpdatableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func update(element: Element) async throws -> Element
 }
 
-public protocol DeleteableRepository<Element> {
-    associatedtype Element: Equatable
-    func delete(element: Element) throws
+public protocol SyncUpdatableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func update(element: Element) throws -> Element
+}
+
+public protocol UpdatableRepository<Element>: AsyncUpdatableRepository, SyncUpdatableRepository where Element: Equatable, Element: Sendable {
+}
+
+public protocol AsyncDeleteableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func delete(element: Element) async throws
-    func deleteAll() throws
     func deleteAll() async throws
+}
+
+public protocol SyncDeleteableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func delete(element: Element) throws
+    func deleteAll() throws
+}
+
+public protocol DeleteableRepository<Element>: AsyncDeleteableRepository, SyncDeleteableRepository where Element: Equatable, Element: Sendable {
 }
 
 public protocol PredicateReadableRepository<Element> {
