@@ -62,3 +62,14 @@ extension SwiftDataRepository: AsyncDeleteableRepository {
         try modelContext.delete(model: Element.SwiftDataEntity.self)
     }
 }
+
+extension SwiftDataRepository: AsyncBatchRepository {
+    public func add(elements: [Element]) async throws {
+        let models = elements.map { $0.asEntity() }
+        for model in models {
+            modelContext.insert(model)
+        }
+        try modelContext.save()
+    }
+    
+}

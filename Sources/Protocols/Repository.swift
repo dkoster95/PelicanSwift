@@ -1,9 +1,16 @@
 import Foundation
 
-public protocol BatchRepository<Element> {
-    associatedtype Element: Equatable
-    func add(elements: [Element]) throws
+public protocol BatchRepository<Element>: AsyncBatchRepository, SyncBatchRepository where Element: Equatable, Element: Sendable {
+}
+
+public protocol AsyncBatchRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func add(elements: [Element]) async throws
+}
+
+public protocol SyncBatchRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func add(elements: [Element]) throws
 }
 
 public protocol InsertableRepository<Element>: SyncInsertableRepository, AsyncInsertableRepository where Element: Equatable, Element: Sendable {

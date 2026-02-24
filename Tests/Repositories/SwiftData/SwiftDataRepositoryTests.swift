@@ -82,6 +82,20 @@ struct SwiftDataRepositoryTests {
         #expect(find.isEmpty)
     }
     
+    @Test func test_addBatch_expectAllElementsInserted() async throws {
+        let (sut, _) = try makeSUT()
+        let elements = [TestEntityV2(id: UUID(), name: "some name", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 2", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 3", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 4", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 5", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 6", createdAt: Date())]
+        try await sut.add(elements: elements)
+        let result = await sut.find().sorted { $0.name < $1.name }
+        
+        #expect(result == elements)
+    }
+    
     func makeSUT() throws -> (SwiftDataRepository<TestEntityV2>, ModelContainer) {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: TestSwiftDataEntity.self, configurations: config)
