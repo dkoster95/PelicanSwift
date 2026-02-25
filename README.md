@@ -92,24 +92,59 @@ So when we ask why a persistence module, those concepts are basically the answer
 **low coupling**: Core Data is an old objc framework that is outdated if you compare it with other ORM's so, it makes sense that Apple could launch a new ORM soon, or a new Keychain Implentation, you dont want your app to be coupled to any of this when that happens.
 ---
 ```swift
-public protocol InsertableRepository<Element> {
-    associatedtype Element: Equatable
+public protocol BatchRepository<Element>: AsyncBatchRepository, SyncBatchRepository where Element: Equatable, Element: Sendable {
+}
+
+public protocol AsyncBatchRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func add(elements: [Element]) async throws
+}
+
+public protocol SyncBatchRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func add(elements: [Element]) throws
+}
+
+public protocol InsertableRepository<Element>: SyncInsertableRepository, AsyncInsertableRepository where Element: Equatable, Element: Sendable {
+}
+
+
+public protocol SyncInsertableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func add(element: Element) throws -> Element
+}
+
+public protocol AsyncInsertableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func add(element: Element) async throws -> Element
 }
 
-public protocol UpdatableRepository<Element> {
-    associatedtype Element: Equatable
-    func update(element: Element) throws -> Element
+public protocol AsyncUpdatableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func update(element: Element) async throws -> Element
 }
 
-public protocol DeleteableRepository<Element> {
-    associatedtype Element: Equatable
-    func delete(element: Element) throws
+public protocol SyncUpdatableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func update(element: Element) throws -> Element
+}
+
+public protocol UpdatableRepository<Element>: AsyncUpdatableRepository, SyncUpdatableRepository where Element: Equatable, Element: Sendable {
+}
+
+public protocol AsyncDeleteableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
     func delete(element: Element) async throws
-    func deleteAll() throws
     func deleteAll() async throws
+}
+
+public protocol SyncDeleteableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func delete(element: Element) throws
+    func deleteAll() throws
+}
+
+public protocol DeleteableRepository<Element>: AsyncDeleteableRepository, SyncDeleteableRepository where Element: Equatable, Element: Sendable {
 }
 
 public protocol PredicateReadableRepository<Element> {
@@ -118,13 +153,38 @@ public protocol PredicateReadableRepository<Element> {
     func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) -> [Element]
 }
 
-public protocol ReadableRepository<Element> {
-    associatedtype Element: Equatable
-    var isEmpty: Bool { get }
-    func find(query: ((Element) -> Bool)?) -> [Element]
-    func find(query: ((Element) -> Bool)?) async -> [Element]
-    func contains(element: Element) -> Bool
+public protocol AsyncPredicableReadableRepository<PersistibleElement, ResultElement> {
+    associatedtype PersistibleElement: Equatable
+    associatedtype ResultElement: Equatable, Sendable
+    func find(predicate: Predicate<PersistibleElement>, sortBy: SortDescriptor<PersistibleElement>?) async -> [ResultElement]
+}
+
+public protocol ReadableRepository<Element>: AsyncReadableRepository, SyncReadableRepository where Element: Sendable, Element: Equatable  {
+}
+
+public protocol AsyncReadableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func find(query: (@Sendable (Element) -> Bool)?) async -> [Element]
     func contains(element: Element) async -> Bool
+}
+
+public protocol SyncReadableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    var isEmpty: Bool { get }
+    func find(query: (@Sendable (Element) -> Bool)?) -> [Element]
+    func contains(element: Element) -> Bool
+}
+
+public extension AsyncReadableRepository {
+    func find() async -> [Element] {
+        return await find(query: nil)
+    }
+}
+
+public extension SyncReadableRepository {
+    func find() -> [Element] {
+        return find(query: nil)
+    }
 }
 
 ```
@@ -144,6 +204,7 @@ if you want your own repository implementation you just need to make your class 
 
 ## Repositories
 - [CoreDataRepository](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/CoreDataRepository.md)
+- [SwiftDataRepository](Docs/SwiftDataRepository.md)
 
 ---
 
