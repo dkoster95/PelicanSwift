@@ -105,6 +105,25 @@ struct SwiftDataRepositoryTests {
         #expect(result == elements)
     }
     
+    @Test func test_findWithPredicate_expectCorrectResult() async throws {
+        let (sut, _) = try makeSUT()
+        let elements = [TestEntityV2(id: UUID(), name: "some name", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 2", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 3", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 4", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 5", createdAt: Date()),
+                        TestEntityV2(id: UUID(), name: "some name 6", createdAt: Date())]
+        try await sut.add(elements: elements)
+        
+        let predicate = #Predicate<TestSwiftDataEntity> { record in
+            record.name == "some name 5"
+        }
+        let sortBy = SortDescriptor<TestSwiftDataEntity>(\.name, order: .forward)
+        let result = await sut.find(predicate: predicate, sortBy: sortBy)
+        
+        #expect(result.count == 1)
+    }
+    
     func makeSUT() throws -> (SwiftDataRepository<TestEntityV2>, ModelContainer) {
         let config = ModelConfiguration(isStoredInMemoryOnly: true)
         let container = try ModelContainer(for: TestSwiftDataEntity.self, configurations: config)

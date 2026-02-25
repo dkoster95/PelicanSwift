@@ -41,10 +41,10 @@ public struct ReadPredicateElementTransaction<Element: Equatable & Sendable>: Tr
 public struct ReadElementTransaction<Element: Equatable & Sendable>: Transaction {
     public typealias Result = [Element]
     private let repository: any ReadableRepository<Element>
-    private let query: ((Element) -> Bool)?
+    private let query: (@Sendable (Element) -> Bool)?
     
     public init(repository: any ReadableRepository<Element>,
-                query: ( (Element) -> Bool)?) {
+                query: (@Sendable (Element) -> Bool)?) {
         self.repository = repository
         self.query = query
     }
