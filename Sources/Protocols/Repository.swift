@@ -61,6 +61,12 @@ public protocol PredicateReadableRepository<Element> {
     func find(predicate: NSPredicate, limit: Int?, sortDescriptor: NSSortDescriptor?) -> [Element]
 }
 
+public protocol AsyncPredicableReadableRepository<PersistibleElement, ResultElement> {
+    associatedtype PersistibleElement: Equatable
+    associatedtype ResultElement: Equatable, Sendable
+    func find(predicate: Predicate<PersistibleElement>, sortBy: SortDescriptor<PersistibleElement>?) async -> [ResultElement]
+}
+
 extension PredicateReadableRepository {
     func contain(predicate: NSPredicate) async -> Bool {
         return await find(predicate: predicate, limit: nil, sortDescriptor: nil).count > 0
@@ -79,13 +85,7 @@ extension PredicateReadableRepository {
     }
 }
 
-public protocol ReadableRepository<Element> {
-    associatedtype Element: Equatable
-    var isEmpty: Bool { get }
-    func find(query: ((Element) -> Bool)?) -> [Element]
-    func find(query: ((Element) -> Bool)?) async -> [Element]
-    func contains(element: Element) -> Bool
-    func contains(element: Element) async -> Bool
+public protocol ReadableRepository<Element>: AsyncReadableRepository, SyncReadableRepository where Element: Sendable, Element: Equatable  {
 }
 
 public protocol AsyncReadableRepository<Element> {
@@ -94,18 +94,21 @@ public protocol AsyncReadableRepository<Element> {
     func contains(element: Element) async -> Bool
 }
 
+public protocol SyncReadableRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    var isEmpty: Bool { get }
+    func find(query: (@Sendable (Element) -> Bool)?) -> [Element]
+    func contains(element: Element) -> Bool
+}
+
 public extension AsyncReadableRepository {
     func find() async -> [Element] {
         return await find(query: nil)
     }
 }
 
-public extension ReadableRepository {
+public extension SyncReadableRepository {
     func find() -> [Element] {
         return find(query: nil)
-    }
-    
-    func find() async -> [Element] {
-        return await find(query: nil)
     }
 }

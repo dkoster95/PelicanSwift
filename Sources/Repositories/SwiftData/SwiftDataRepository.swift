@@ -73,3 +73,18 @@ extension SwiftDataRepository: AsyncBatchRepository {
     }
     
 }
+
+extension SwiftDataRepository: AsyncPredicableReadableRepository {
+    public typealias PersistibleElement = Element.SwiftDataEntity
+    public typealias ResultElement = Element
+    
+    public func find(predicate: Predicate<Element.SwiftDataEntity>, sortBy: SortDescriptor<Element.SwiftDataEntity>?) async -> [Element] {
+        var descriptor = FetchDescriptor<Element.SwiftDataEntity>.init(predicate: predicate)
+        if let sortBy = sortBy {
+            descriptor.sortBy = [sortBy]
+        }
+        guard let results = try? modelContext.fetch(descriptor) else { return [] }
+        let mappedResults = results.map { Element(from: $0) }
+        return mappedResults
+    }
+}
