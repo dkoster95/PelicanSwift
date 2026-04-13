@@ -56,10 +56,12 @@ extension SwiftDataRepository: AsyncDeleteableRepository {
         guard let results = try? modelContext.fetch(descriptor),
               let elementFound = results.first else { throw RepositoryError.nonExistingData }
         modelContext.delete(elementFound)
+        try modelContext.save()
     }
     
     public func deleteAll() async throws {
         try modelContext.delete(model: Element.SwiftDataEntity.self)
+        try modelContext.save()
     }
 }
 
