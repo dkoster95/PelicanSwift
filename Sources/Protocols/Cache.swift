@@ -31,7 +31,7 @@ public protocol Cache: Sendable {
     func save(_ data: CacheData) async throws
     func remove(_ data: CacheData) async throws
     func find(_ byName: String) async -> CacheData?
-    func removeAll() async
+    func removeAll() async throws
 }
 
 public enum CacheError: Error, Sendable {

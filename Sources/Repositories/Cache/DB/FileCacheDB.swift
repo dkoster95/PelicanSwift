@@ -11,13 +11,14 @@ import Foundation
 import SwiftData
 
 @MainActor
-class DataController {
-    static let shared = DataController()
+public class DataController {
+    public static let shared = DataController()
     
-    let container: ModelContainer
+    public let container: ModelContainer
     
     private init() {
         do {
+            try FileManager.default.createDirectory(at: FileCacheDirectory.baseURL, withIntermediateDirectories: true, attributes: nil)
             let schema = Schema(versionedSchema: CacheSchemaV1.self)
             let config = ModelConfiguration(
                 "ProductionStore",
