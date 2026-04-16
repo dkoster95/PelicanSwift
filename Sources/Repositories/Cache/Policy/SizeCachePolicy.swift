@@ -26,3 +26,27 @@ public struct SizeCachePolicy: CachePolicy {
         return true
     }
 }
+
+/*
+ func calculateDirectorySize(at url: URL) -> Int64 {
+     let fileManager = FileManager.default
+     // Pre-fetch fileSizeKey for better performance
+     guard let enumerator = fileManager.enumerator(at: url, includingPropertiesForKeys: [.fileSizeKey], options: []) else {
+         return 0
+     }
+     
+     var totalSize: Int64 = 0
+     for case let fileURL as URL in enumerator {
+         do {
+             let resourceValues = try fileURL.resourceValues(forKeys: [.fileSizeKey])
+             // Only add size if it's a regular file (skips directories themselves)
+             if let fileSize = resourceValues.fileSize {
+                 totalSize += Int64(fileSize)
+             }
+         } catch {
+             print("Error reading file size: \(error)")
+         }
+     }
+     return totalSize
+ }
+ */

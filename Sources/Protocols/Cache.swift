@@ -23,20 +23,6 @@ public struct CacheData: Sendable {
     }
 }
 
-public struct FileCacheRecord: Sendable {
-    public let contentURL: URL
-    public let name: String
-    public let id: UUID
-    public let createdAt: Date
-    
-    public init(contentURL: URL, name: String, id: UUID, createdAt: Date) {
-        self.contentURL = contentURL
-        self.name = name
-        self.id = id
-        self.createdAt = createdAt
-    }
-}
-
 public protocol CachePolicy: Sendable {
     func isValid(_ data: CacheData) throws -> Bool
 }
