@@ -52,6 +52,15 @@ public extension FileCache {
             SwiftDataRepository<FileCacheRecord>(modelContainer: modelContainer)
         }
     }
+    
+    init(policies: [CachePolicy]) {
+        let container = CacheDB.shared.container
+        self.init(fileManager: .default,
+                  policies: policies,
+                  logger: PelicanLogger(subsystem: "Pelican.Cache", category: "FileCache")) {
+            SwiftDataRepository<FileCacheRecord>(modelContainer: container)
+        }
+    }
 }
 
 typealias FileCacheRepository = AsyncInsertableRepository<FileCacheRecord> & AsyncPredicableReadableRepository<FileCacheRecordEntity, FileCacheRecord> & AsyncDeleteableRepository<FileCacheRecord>
@@ -103,9 +112,6 @@ public actor FileCache: Cache, @unchecked Sendable {
         for content in contents {
             logger.debug("Found content: \(content.lastPathComponent)")
         }
-        // create record in db
-        // save data to file in cache dir
-        
     }
     
     public func remove(_ data: CacheData) async throws {

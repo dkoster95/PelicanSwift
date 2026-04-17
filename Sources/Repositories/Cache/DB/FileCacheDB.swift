@@ -10,9 +10,9 @@ import PelicanProtocols
 import Foundation
 import SwiftData
 
-@MainActor
-public class DataController {
-    public static let shared = DataController()
+
+public final class CacheDB: Sendable {
+    public static let shared = CacheDB()
     
     public let container: ModelContainer
     

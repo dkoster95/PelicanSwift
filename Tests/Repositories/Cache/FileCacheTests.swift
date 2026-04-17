@@ -13,8 +13,9 @@ class FileCacheTests {
     
     @Test func addFileToCache() async throws {
         try removeCacheDirectory()
-        let modelContainer = await DataController.shared.container
-        let sut = FileCache(fileManager: .default, policies: [], modelContainer: modelContainer)
+        let sut = FileCache(policies: [])
+//        let modelContainer = CacheDB.shared.container
+//        let sut = FileCache(fileManager: .default, policies: [], modelContainer: modelContainer)
         let imagePath = URL(fileURLWithPath: Bundle.module.path(forResource: "swifticon", ofType: "png")!)
         let imageData = try Data(contentsOf: imagePath)
         let cacheData = CacheData(content: imageData, name: "swifticon")
