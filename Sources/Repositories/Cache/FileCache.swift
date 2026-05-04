@@ -63,7 +63,11 @@ public extension FileCache {
     }
 }
 
-typealias FileCacheRepository = AsyncInsertableRepository<FileCacheRecord> & AsyncPredicableReadableRepository<FileCacheRecordEntity, FileCacheRecord> & AsyncDeleteableRepository<FileCacheRecord>
+extension SwiftDataRepository<FileCacheRecord>: FileCacheRepository {}
+
+//typealias FileCacheRepository = AsyncInsertableRepository<FileCacheRecord> & AsyncPredicableReadableRepository<FileCacheRecordEntity, FileCacheRecord> & AsyncDeleteableRepository<FileCacheRecord>
+
+protocol FileCacheRepository: AsyncInsertableRepository, AsyncPredicableReadableRepository, AsyncDeleteableRepository where Element == FileCacheRecord, PersistibleElement ==  FileCacheRecordEntity, ResultElement == FileCacheRecord {}
 
 public actor FileCache: Cache, @unchecked Sendable {
     private let fileManager: FileManager
