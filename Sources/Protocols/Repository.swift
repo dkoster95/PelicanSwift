@@ -22,7 +22,7 @@ public protocol SyncInsertableRepository<Element> {
     func add(element: Element) throws -> Element
 }
 
-public protocol AsyncInsertableRepository<Element> {
+public protocol AsyncInsertableRepository<Element>: Sendable {
     associatedtype Element: Equatable, Sendable
     func add(element: Element) async throws -> Element
 }

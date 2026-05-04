@@ -2,7 +2,7 @@ import Foundation
 import CoreData
 import PelicanProtocols
 
-public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: SyncInsertableRepository, AsyncInsertableRepository {
+public struct CoreDataRepository<PersistibleElement: CoreDataEntity>: @unchecked Sendable, SyncInsertableRepository, AsyncInsertableRepository {
     public typealias Element = PersistibleElement
     private let context: Context
     

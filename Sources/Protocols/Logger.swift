@@ -1,6 +1,6 @@
 import Foundation
 
-public protocol Logger {
+public protocol Logger: Sendable {
     func debug(_ msg: String)
     func error(_ msg: String)
     func info(_ msg: String)
