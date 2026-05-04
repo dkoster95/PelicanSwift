@@ -74,4 +74,48 @@ class FileCacheTests {
         
         try await sut.removeAll()
     }
+    
+    @Test func expirationCachePolicy_whenExpired_expectException() async throws {
+        let expirationPolicy = ExpirationCachePolicy { date in
+            let calendar = Calendar.current
+            if let yesterday = calendar.date(byAdding: .day, value: -1, to: date) {
+                return yesterday
+            }
+            return date
+        }
+        let sut = FileCache(policies: [expirationPolicy])
+        try await sut.removeAll()
+        let imagePath = URL(fileURLWithPath: Bundle.module.path(forResource: "swifticon", ofType: "png")!)
+        let imageData = try Data(contentsOf: imagePath)
+        let cacheData = CacheData(content: imageData, name: "swifticon")
+        
+        await #expect(throws: CacheError.expired) {
+            try await sut.save(cacheData)
+        }
+        
+        try await sut.removeAll()
+    }
+    
+    @Test func expirationCachePolicy() async throws {
+        let expirationPolicy = ExpirationCachePolicy { date in
+            let calendar = Calendar.current
+            if let tomorrow = calendar.date(byAdding: .day, value: 1, to: date) {
+                return tomorrow
+            }
+            return date
+        }
+        let sut = FileCache(policies: [expirationPolicy])
+        try await sut.removeAll()
+        let imagePath = URL(fileURLWithPath: Bundle.module.path(forResource: "swifticon", ofType: "png")!)
+        let imageData = try Data(contentsOf: imagePath)
+        let cacheData = CacheData(content: imageData, name: "swifticon")
+        
+        try await sut.save(cacheData)
+        let cachedDataSaved = try #require(await sut.find(cacheData.name))
+        
+        #expect(cachedDataSaved.name == "swifticon")
+        
+        try await sut.removeAll()
+    }
+    
 }
