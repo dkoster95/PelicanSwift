@@ -8,13 +8,14 @@ import Foundation
 import PelicanProtocols
 
 public struct ExpirationCachePolicy: CachePolicy {
-    private let dateOfExpiration: Date
+    private let dateOfExpirationBuilder: @Sendable (Date) -> Date
     
-    public init(dateOfExpiration: Date) {
-        self.dateOfExpiration = dateOfExpiration
+    public init(dateOfExpirationBuilder: @Sendable @escaping (Date) -> Date) {
+        self.dateOfExpirationBuilder = dateOfExpirationBuilder
     }
     
     public func isValid(_ data: PelicanProtocols.CacheData) throws -> Bool {
+        let dateOfExpiration = dateOfExpirationBuilder(data.createdAt)
         if data.createdAt > dateOfExpiration {
             throw CacheError.expired
         }

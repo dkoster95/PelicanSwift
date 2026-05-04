@@ -10,20 +10,39 @@ import PelicanProtocols
 public struct SizeCachePolicy: CachePolicy {
     private let maxSize: Int
     private let totalSizeCalculator: @Sendable () -> Int
+    private let logger: Logger
     
-    public init(maxSize: Int, totalSizeCalculator: @escaping @Sendable () -> Int) {
+    public init(maxSize: Int,
+                logger: Logger,
+                totalSizeCalculator: @escaping @Sendable () -> Int) {
         self.maxSize = maxSize
         self.totalSizeCalculator = totalSizeCalculator
+        self.logger = logger
     }
     
     public func isValid(_ data: CacheData) throws -> Bool {
-        let totalSizeUsed = totalSizeCalculator()
-        let potentialSizedUsed = data.content.count + maxSize
+        logger.debug("Checking cache size")
         
-        if potentialSizedUsed > totalSizeUsed {
+        let totalSizeUsed = totalSizeCalculator()
+        logger.debug("cache size: \(totalSizeUsed)")
+        logger.debug("data size: \(data.content.count)")
+        let potentialSizeUsed = data.content.count + totalSizeUsed
+        
+        if potentialSizeUsed > maxSize {
+            logger.error("Cache size limit reached")
             throw CacheError.sizeLimit
         }
         return true
+    }
+}
+
+extension FileManager: @unchecked @retroactive Sendable {}
+
+public extension SizeCachePolicy {
+    init(maxSize: Int, fileManager: FileManager) {
+        self.init(maxSize: maxSize, logger: PelicanLogger(subsystem: "FileSizeCachePolicty", category: "Cache Policies")) {
+            Int(fileManager.calculateDirectorySize(at: FileCacheDirectory.filesURL))
+        }
     }
 }
 

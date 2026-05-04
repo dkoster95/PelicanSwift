@@ -94,6 +94,7 @@ public actor FileCache: Cache, @unchecked Sendable {
         try fileManager.createDirectory(at: FileCacheDirectory.filesURL, withIntermediateDirectories: true, attributes: nil)
         let contentURL = FileCacheDirectory.filesURL.appending(component: data.id.uuidString)
         logger.debug("Content url for file \(contentURL)")
+        logger.debug("File size: \(data.content.count) bytes")
 
         let record = FileCacheRecord(contentURL: contentURL,
                                      name: data.name,
@@ -104,14 +105,6 @@ public actor FileCache: Cache, @unchecked Sendable {
         logger.debug("record added to DB \(result.name)")
         try data.content.write(to: contentURL, options: [.atomic, .completeFileProtection])
         logger.debug("data saved to file")
-        let contents = try FileManager.default.contentsOfDirectory(
-            at: URL.cachesDirectory.pelican,
-            includingPropertiesForKeys: nil,
-            options: [.skipsHiddenFiles]
-        )
-        for content in contents {
-            logger.debug("Found content: \(content.lastPathComponent)")
-        }
     }
     
     public func remove(_ data: CacheData) async throws {
@@ -121,12 +114,14 @@ public actor FileCache: Cache, @unchecked Sendable {
             element.name == name
         }
         if let result = await repository.find(predicate: predicate, sortBy: nil).first {
+            logger.debug("record found: proceeding to delete cache record")
             try await repository.delete(element: result)
             try fileManager.removeItem(at: result.contentURL)
         }
     }
     
     public func find(_ byName: String) async -> CacheData? {
+        logger.debug("Finding cache record")
         let repository = repositoryBuilder()
         let predicate = #Predicate<FileCacheRecordEntity> { element in
             element.name == byName
@@ -134,14 +129,21 @@ public actor FileCache: Cache, @unchecked Sendable {
         if let result = await repository.find(predicate: predicate,
                                               sortBy: nil).first,
            let content = try? Data(contentsOf: result.contentURL, options: .mappedIfSafe) {
+            logger.debug("cache recourd found")
             return CacheData(content: content, name: result.name, id: result.id, createdAt: result.createdAt)
         }
+        logger.debug("cache recourd not found")
         return nil
     }
     
     public func removeAll() async throws {
+        logger.debug("Removing all cache in file")
+        var isDirectory: ObjCBool = true
+        guard fileManager.fileExists(atPath: FileCacheDirectory.filesURL.path(), isDirectory: &isDirectory) else { return }
+        logger.debug("Files folder detected, proceeding to delete all")
         try fileManager.removeItem(at: FileCacheDirectory.filesURL)
         let repository = repositoryBuilder()
+        logger.debug("Files folder deleted, proceeding to delete all records in DB")
         try await repository.deleteAll()
     }
     
