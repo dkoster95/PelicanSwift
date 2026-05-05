@@ -50,7 +50,7 @@ public extension SizeCachePolicy {
 public extension SizeCachePolicy {
     init(maxSize: Int, inMemoryRepository: InMemoryRepository<CacheData>) {
         self.init(maxSize: maxSize,
-                  logger: PelicanLogger(subsystem: "Memory Cache", category: "Cache Policies")) {
+                  logger: PelicanLogger(subsystem: "MemoryCacheSizeCachePolicty", category: "Cache Policies")) {
             inMemoryRepository.find().map { $0.content.count }.reduce(0, +)
         }
     }
