@@ -206,6 +206,10 @@ if you want your own repository implementation you just need to make your class 
 - [CoreDataRepository](https://github.com/dkoster95/PelicanSwift/blob/main/Docs/CoreDataRepository.md)
 - [SwiftDataRepository](Docs/SwiftDataRepository.md)
 
+## Cache
+- [FileCache](Docs/FileCache.md)
+- [MemoryCache](Docs/MemoryCache.md)
+- [Policies](Docs/CachePolicies.md)
 ---
 
 ## Installation
