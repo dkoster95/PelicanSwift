@@ -6,7 +6,7 @@
 //
 import Foundation
 
-public struct CacheData: Sendable {
+public struct CacheData: Sendable, Equatable {
     public let content: Data
     public let name: String
     public let id: UUID
