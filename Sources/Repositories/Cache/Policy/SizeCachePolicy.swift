@@ -39,9 +39,19 @@ public struct SizeCachePolicy: CachePolicy {
 extension FileManager: @unchecked @retroactive Sendable {}
 
 public extension SizeCachePolicy {
-    init(maxSize: Int, fileManager: FileManager) {
+    init(maxSize: Int,
+         fileManager: FileManager) {
         self.init(maxSize: maxSize, logger: PelicanLogger(subsystem: "FileSizeCachePolicty", category: "Cache Policies")) {
             Int(fileManager.calculateDirectorySize(at: FileCacheDirectory.filesURL))
+        }
+    }
+}
+
+public extension SizeCachePolicy {
+    init(maxSize: Int, inMemoryRepository: InMemoryRepository<CacheData>) {
+        self.init(maxSize: maxSize,
+                  logger: PelicanLogger(subsystem: "Memory Cache", category: "Cache Policies")) {
+            inMemoryRepository.find().map { $0.content.count }.reduce(0, +)
         }
     }
 }
