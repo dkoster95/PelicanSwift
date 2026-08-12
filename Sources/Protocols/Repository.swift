@@ -65,6 +65,7 @@ public protocol AsyncPredicableReadableRepository<PersistibleElement, ResultElem
     associatedtype PersistibleElement: Equatable
     associatedtype ResultElement: Equatable, Sendable
     func find(predicate: Predicate<PersistibleElement>, sortBy: SortDescriptor<PersistibleElement>?) async -> [ResultElement]
+    func findFirst(predicate: Predicate<PersistibleElement>, sortBy: SortDescriptor<PersistibleElement>?) async -> ResultElement?
 }
 
 extension PredicateReadableRepository {
@@ -99,6 +100,12 @@ public protocol SyncReadableRepository<Element> {
     var isEmpty: Bool { get }
     func find(query: (@Sendable (Element) -> Bool)?) -> [Element]
     func contains(element: Element) -> Bool
+}
+
+public protocol AsyncCheckRepository<Element> {
+    associatedtype Element: Equatable, Sendable
+    func isEmpty() async throws -> Bool
+    func count() async throws -> Int
 }
 
 public extension AsyncReadableRepository {
