@@ -73,7 +73,6 @@ extension SwiftDataRepository: AsyncBatchRepository {
         }
         try modelContext.save()
     }
-    
 }
 
 extension SwiftDataRepository: AsyncPredicableReadableRepository {
@@ -88,5 +87,27 @@ extension SwiftDataRepository: AsyncPredicableReadableRepository {
         guard let results = try? modelContext.fetch(descriptor) else { return [] }
         let mappedResults = results.map { Element(from: $0) }
         return mappedResults
+    }
+    
+    public func findFirst(predicate: Predicate<Element.SwiftDataEntity>, sortBy: SortDescriptor<Element.SwiftDataEntity>?) async -> Element? {
+        var descriptor = FetchDescriptor<Element.SwiftDataEntity>.init(predicate: predicate)
+        if let sortBy = sortBy {
+            descriptor.sortBy = [sortBy]
+        }
+        descriptor.fetchLimit = 1
+        guard let results = try? modelContext.fetch(descriptor) else { return nil }
+        let mappedResults = results.map { Element(from: $0) }
+        return mappedResults.count > 0 ? mappedResults[0] : nil
+    }
+}
+
+extension SwiftDataRepository: AsyncCheckRepository {
+    public func isEmpty() async throws -> Bool {
+        return try await count() == 0
+    }
+    
+    public func count() async throws -> Int {
+        let descriptor = FetchDescriptor<Element.SwiftDataEntity>()
+        return try modelContext.fetchCount(descriptor)
     }
 }
