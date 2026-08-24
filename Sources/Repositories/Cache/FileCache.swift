@@ -123,7 +123,7 @@ public actor FileCache: Cache {
         if let result = await repository.find(predicate: predicate, sortBy: nil).first {
             logger.debug("record found: proceeding to delete cache record")
             let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
-            try await fileManager.remove(at: result.contentURL)
+            try await fileManager.remove(at: contentURL)
             try await repository.delete(element: result)
         }
     }
@@ -143,9 +143,8 @@ public actor FileCache: Cache {
         }
         guard !activeMutations.contains(byName) else { return nil }
         do {
-//            let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
-//            let content = try Data(contentsOf: result.contentURL, options: .mappedIfSafe)
-            guard let content = try await Data.read(from: result.contentURL) else {
+            let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
+            guard let content = try await Data.read(from: contentURL) else {
                 logger.error("Cache record exists in database, but file data failed to read")
                 return nil
             }
