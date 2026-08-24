@@ -128,19 +128,33 @@ public actor FileCache: Cache, @unchecked Sendable {
     }
     
     public func find(_ byName: String) async -> CacheData? {
-        logger.debug("Finding cache record")
-        let repository = repositoryBuilder()
+        logger.debug("Finding cache record...")
         let predicate = #Predicate<FileCacheRecordEntity> { element in
             element.name == byName
         }
-        if let result = await repository.find(predicate: predicate,
-                                              sortBy: nil).first,
-           let content = try? Data(contentsOf: result.contentURL, options: .mappedIfSafe) {
+        if activeMutations.contains(byName) {
+            return nil
+        }
+        guard let result = await repository.find(predicate: predicate,
+                                                 sortBy: nil).first else {
+            logger.debug("Cache record not found in repository")
+            return nil
+        }
+        guard !activeMutations.contains(byName) else { return nil }
+        do {
+            guard let content = try await Data.read(from: result.contentURL) else {
+                logger.error("Cache record exists in database, but file data failed to read")
+                return nil
+            }
             logger.debug("cache recourd found")
             return CacheData(content: content, name: result.name, id: result.id, createdAt: result.createdAt)
+        } catch CocoaError.fileReadNoSuchFile {
+            logger.debug("File was removed by concurrent task")
+            return nil
+        } catch {
+            logger.error("Unexpected error while reading the file")
+            return nil
         }
-        logger.debug("cache recourd not found")
-        return nil
     }
     
     public func removeAll() async throws {
@@ -149,7 +163,6 @@ public actor FileCache: Cache, @unchecked Sendable {
         guard fileManager.fileExists(atPath: FileCacheDirectory.filesURL.path(), isDirectory: &isDirectory) else { return }
         logger.debug("Files folder detected, proceeding to delete all")
         try fileManager.removeItem(at: FileCacheDirectory.filesURL)
-        let repository = repositoryBuilder()
         logger.debug("Files folder deleted, proceeding to delete all records in DB")
         try await repository.deleteAll()
     }
