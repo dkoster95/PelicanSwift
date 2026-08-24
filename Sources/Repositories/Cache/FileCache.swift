@@ -104,7 +104,7 @@ public actor FileCache: Cache {
                                      name: data.name,
                                      id: data.id,
                                      createdAt: data.createdAt)
-        try await data.content.writeAsync(to: contentURL, options: [.atomic, .completeFileProtection])
+        try data.content.write(to: contentURL, options: [.atomic, .completeFileProtection])
         logger.debug("data saved to file")
         let result = try await repository.add(element: record)
         logger.debug("record added to DB \(result.name)")
