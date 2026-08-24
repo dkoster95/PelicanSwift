@@ -63,8 +63,6 @@ public extension FileCache {
 
 extension SwiftDataRepository<FileCacheRecord>: FileCacheRepository {}
 
-//typealias FileCacheRepository = AsyncInsertableRepository<FileCacheRecord> & AsyncPredicableReadableRepository<FileCacheRecordEntity, FileCacheRecord> & AsyncDeleteableRepository<FileCacheRecord>
-
 protocol FileCacheRepository: AsyncInsertableRepository, AsyncPredicableReadableRepository, AsyncDeleteableRepository where Element == FileCacheRecord, PersistibleElement ==  FileCacheRecordEntity, ResultElement == FileCacheRecord {}
 
 public actor FileCache: Cache, @unchecked Sendable {
@@ -86,6 +84,7 @@ public actor FileCache: Cache, @unchecked Sendable {
     
     public func save(_ data: PelicanProtocols.CacheData) async throws {
         logger.debug("checking policies")
+        guard !activeMutations.contains(data.name) else { return }
         for policy in policies {
             do {
                 _ = try policy.isValid(data)
@@ -94,7 +93,9 @@ public actor FileCache: Cache, @unchecked Sendable {
                 throw error
             }
         }
-        try fileManager.createDirectory(at: FileCacheDirectory.filesURL, withIntermediateDirectories: true, attributes: nil)
+        activeMutations.insert(data.name)
+        defer { activeMutations.remove(data.name) }
+        try await fileManager.createDirectoryAsync(at: FileCacheDirectory.filesURL, withIntermediateDirectories: true, attributes: nil)
         let contentURL = FileCacheDirectory.filesURL.appending(component: data.id.uuidString)
         logger.debug("Content url for file \(contentURL)")
         logger.debug("File size: \(data.content.count) bytes")
@@ -103,11 +104,10 @@ public actor FileCache: Cache, @unchecked Sendable {
                                      name: data.name,
                                      id: data.id,
                                      createdAt: data.createdAt)
-        let repository = repositoryBuilder()
+        try await data.content.writeAsync(to: contentURL, options: [.atomic, .completeFileProtection])
+        logger.debug("data saved to file")
         let result = try await repository.add(element: record)
         logger.debug("record added to DB \(result.name)")
-        try data.content.write(to: contentURL, options: [.atomic, .completeFileProtection])
-        logger.debug("data saved to file")
     }
     
     public func remove(_ data: CacheData) async throws {
