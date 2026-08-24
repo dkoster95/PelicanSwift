@@ -48,18 +48,16 @@ public extension FileCache {
          modelContainer: ModelContainer) {
         self.init(fileManager: fileManager,
                   policies: policies,
-                  logger: PelicanLogger(subsystem: "Pelican.Cache", category: "FileCache")) {
-            SwiftDataRepository<FileCacheRecord>(modelContainer: modelContainer)
-        }
+                  logger: PelicanLogger(subsystem: "Pelican.Cache", category: "FileCache"),
+                  repository: SwiftDataRepository<FileCacheRecord>(modelContainer: modelContainer))
     }
     
     init(policies: [CachePolicy]) {
         let container = CacheDB.shared.container
         self.init(fileManager: .default,
                   policies: policies,
-                  logger: PelicanLogger(subsystem: "Pelican.Cache", category: "FileCache")) {
-            SwiftDataRepository<FileCacheRecord>(modelContainer: container)
-        }
+                  logger: PelicanLogger(subsystem: "Pelican.Cache", category: "FileCache"),
+                  repository: SwiftDataRepository<FileCacheRecord>(modelContainer: container))
     }
 }
 
@@ -73,15 +71,16 @@ public actor FileCache: Cache, @unchecked Sendable {
     private let fileManager: FileManager
     private let policies: [CachePolicy]
     private let logger: Logger
-    private let repositoryBuilder: () -> any FileCacheRepository
+    private let repository: any FileCacheRepository
+    private var activeMutations = Set<String>()
     
     init(fileManager: FileManager,
          policies: [CachePolicy],
          logger: Logger,
-         repositoryBuilder: @escaping () -> any FileCacheRepository) {
+         repository: any FileCacheRepository) {
         self.fileManager = fileManager
         self.policies = policies
-        self.repositoryBuilder = repositoryBuilder
+        self.repository = repository
         self.logger = logger
     }
     
@@ -112,15 +111,19 @@ public actor FileCache: Cache, @unchecked Sendable {
     }
     
     public func remove(_ data: CacheData) async throws {
-        let repository = repositoryBuilder()
+        guard !activeMutations.contains(data.name) else { return }
         let name = data.name
+        activeMutations.insert(name)
+        defer {
+            activeMutations.remove(name)
+        }
         let predicate = #Predicate<FileCacheRecordEntity> { element in
             element.name == name
         }
         if let result = await repository.find(predicate: predicate, sortBy: nil).first {
             logger.debug("record found: proceeding to delete cache record")
+            try await fileManager.remove(at: result.contentURL)
             try await repository.delete(element: result)
-            try fileManager.removeItem(at: result.contentURL)
         }
     }
     
@@ -151,4 +154,30 @@ public actor FileCache: Cache, @unchecked Sendable {
         try await repository.deleteAll()
     }
     
+}
+
+extension Data {
+    nonisolated static func read(from url: URL) async throws -> Data? {
+        return try? Data(contentsOf: url, options: .mappedIfSafe)
+    }
+    
+    nonisolated func writeAsync(to url: URL, options: Data.WritingOptions = []) async throws {
+        try write(to: url, options: options)
+    }
+}
+
+extension FileManager {
+    nonisolated func remove(at: URL) async throws {
+        if fileExists(atPath: at.path) {
+            try removeItem(at: at)
+        }
+    }
+    
+    nonisolated func exists(at: URL) async throws -> Bool {
+        fileExists(atPath: at.path)
+    }
+    
+    nonisolated func createDirectoryAsync(at url: URL, withIntermediateDirectories createIntermediates: Bool, attributes: [FileAttributeKey : Any]? = nil) async throws {
+        try createDirectory(at: url, withIntermediateDirectories: createIntermediates, attributes: attributes)
+    }
 }
