@@ -104,6 +104,14 @@ public actor FileCache: Cache {
                                      name: data.name,
                                      id: data.id,
                                      createdAt: data.createdAt)
+        let name = data.name
+        let predicate = #Predicate<FileCacheRecordEntity> { element in
+            element.name == name
+        }
+        if let record = await repository.findFirst(predicate: predicate, sortBy: nil),
+           fileManager.fileExists(atPath: FileCacheDirectory.filesURL.appending(component: record.id.uuidString).path) {
+            return
+        }
         try await data.content.writeAsync(to: contentURL, options: [.atomic, .completeFileProtection])
         logger.debug("data saved to file")
         let result = try await repository.add(element: record)
