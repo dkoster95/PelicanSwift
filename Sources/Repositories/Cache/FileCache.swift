@@ -144,7 +144,7 @@ public actor FileCache: Cache {
         guard !activeMutations.contains(byName) else { return nil }
         do {
             let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
-            let content = try Data(contentsOf: contentURL, options: .mappedIfSafe)
+            let content = try Data(contentsOf: result.contentURL, options: .mappedIfSafe)
 //            guard let content = try await Data.read(from: contentURL) else {
 //                logger.error("Cache record exists in database, but file data failed to read")
 //                return nil
