@@ -65,7 +65,7 @@ extension SwiftDataRepository<FileCacheRecord>: FileCacheRepository {}
 
 protocol FileCacheRepository: AsyncInsertableRepository, AsyncPredicableReadableRepository, AsyncDeleteableRepository where Element == FileCacheRecord, PersistibleElement ==  FileCacheRecordEntity, ResultElement == FileCacheRecord {}
 
-public actor FileCache: Cache, @unchecked Sendable {
+public actor FileCache: Cache {
     private let fileManager: FileManager
     private let policies: [CachePolicy]
     private let logger: Logger
@@ -122,7 +122,8 @@ public actor FileCache: Cache, @unchecked Sendable {
         }
         if let result = await repository.find(predicate: predicate, sortBy: nil).first {
             logger.debug("record found: proceeding to delete cache record")
-            try await fileManager.remove(at: result.contentURL)
+            let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
+            try await fileManager.remove(at: contentURL)
             try await repository.delete(element: result)
         }
     }
@@ -142,7 +143,8 @@ public actor FileCache: Cache, @unchecked Sendable {
         }
         guard !activeMutations.contains(byName) else { return nil }
         do {
-            guard let content = try await Data.read(from: result.contentURL) else {
+            let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
+            guard let content = try await Data.read(from: contentURL) else {
                 logger.error("Cache record exists in database, but file data failed to read")
                 return nil
             }
