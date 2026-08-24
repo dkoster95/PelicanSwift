@@ -144,10 +144,11 @@ public actor FileCache: Cache {
         guard !activeMutations.contains(byName) else { return nil }
         do {
             let contentURL = FileCacheDirectory.filesURL.appending(component: result.id.uuidString)
-            guard let content = try await Data.read(from: contentURL) else {
-                logger.error("Cache record exists in database, but file data failed to read")
-                return nil
-            }
+            let content = try Data(contentsOf: contentURL, options: .mappedIfSafe)
+//            guard let content = try await Data.read(from: contentURL) else {
+//                logger.error("Cache record exists in database, but file data failed to read")
+//                return nil
+//            }
             logger.debug("cache recourd found")
             return CacheData(content: content, name: result.name, id: result.id, createdAt: result.createdAt)
         } catch CocoaError.fileReadNoSuchFile {
