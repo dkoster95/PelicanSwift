@@ -11,7 +11,7 @@ extension CacheSchemaV1 {
     @Model
     class FileCacheRecordEntity {
         @Attribute(.unique) var uuid: UUID
-        var name: String
+        @Attribute(.unique) var name: String
         var contentURL: URL
         var createdAt: Date
         
